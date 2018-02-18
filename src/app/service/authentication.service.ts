@@ -5,9 +5,13 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 
 @Injectable()
 export class AuthenticationService {
-    public user: CognitoUser = null;
+    private user: CognitoUser = null;
 
     constructor(private cognitoService: CognitoService) { }
+
+    clearAuthenticatedUser(): void {
+        this.user = null;
+    }
 
     getAuthenticatedUser(cb: (err: string, user: CognitoUser) => void): void {
         if (this.user) {
