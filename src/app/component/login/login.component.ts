@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
     public email: string;
     public password: string;
     public error = '';
+    public submitting = false;
 
     constructor(private loginService: LoginService, private router: Router) { }
 
@@ -18,6 +19,8 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(): void {
+        this.submitting = true;
+
         this.loginService.authenticate(this.email, this.password, (err, result) => {
             if (err) {
                 this.error = err;
@@ -26,6 +29,8 @@ export class LoginComponent implements OnInit {
             else {
                 this.router.navigateByUrl('/home');
             }
+
+            this.submitting = false;
         });
     }
 

@@ -2,7 +2,10 @@
 <div *ngIf="error" class="alert alert-danger" role="alert">
     {{ error }}
 </div>
-<form (ngSubmit)="onSubmit()">
+<div *ngIf="success" class="alert alert-success" role="alert">
+    Successfully signed up.
+</div>
+<form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
     <div class="form-group">
         <label for="emailInput">Email</label>
         <input type="email" class="form-control" id="emailInput" 
@@ -28,6 +31,6 @@
         <input type="password" class="form-control" id="passwordInput" 
             [(ngModel)]="password" name="password" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="submitting" type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-secondary" routerLink="/">Cancel</a>
 </form>

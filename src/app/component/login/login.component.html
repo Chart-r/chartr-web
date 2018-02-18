@@ -11,6 +11,6 @@
         <label for="passwordInput">Password</label>
         <input type="password" class="form-control" id="passwordInput" [(ngModel)]="password" name="password" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="submitting" type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-secondary" routerLink="/">Cancel</a>
 </form>
