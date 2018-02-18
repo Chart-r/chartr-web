@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../../service/login.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
     public password: string;
     public error = '';
 
-    constructor(private loginService: LoginService) { }
+    constructor(private loginService: LoginService, private router: Router) { }
 
     ngOnInit() {
     }
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
             }
 
             else {
-                alert('Login successful!');
+                this.router.navigateByUrl('/home');
             }
         });
     }

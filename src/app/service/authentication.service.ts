@@ -1,36 +1,49 @@
 import { Injectable } from '@angular/core';
 import { CognitoService } from './cognito.service';
 import { User } from '../model/user';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 @Injectable()
 export class AuthenticationService {
+    public user: CognitoUser = null;
 
     constructor(private cognitoService: CognitoService) { }
 
-    isAuthenticated(cb: (err: string, result: boolean) => void): void {
-        const cognitoUser = this.cognitoService.getCurrentUser();
-
-        if (cognitoUser) {
-            cognitoUser.getSession((err, session) => {
-                if (err) {
-                    cb(err.message, false);
-                }
-
-                else {
-                    cb(null, session.isValid());
-                }
-            });
+    getAuthenticatedUser(cb: (err: string, user: CognitoUser) => void): void {
+        if (this.user) {
+            cb(null, this.user);
         }
 
         else {
-            cb(null, false);
-        }
+            const cognitoUser = this.cognitoService.getCurrentUser();
+            if (cognitoUser) {
+                cognitoUser.getSession((err, session) => {
+                    if (err) {
+                        cb(err.message, null);
+                    }
+    
+                    else {
+                        if (session.isValid()) {
+                            this.user = cognitoUser
+                            cb(null, cognitoUser);
+                        }
+
+                        else {
+                            cb(null, null);
+                        }
+                    }
+                });
+            }
+    
+            else {
+                cb(null, null);
+            }
+        }  
     }
 
-    getCurrentUser(cb: (err:string, user: User) => void): void {
-        const cognitoUser = this.cognitoService.getCurrentUser();
+    getUserAttributes(cognitoUser: CognitoUser, cb: (err:string, user: User) => void): void {
         let user = new User();
-
+        
         cognitoUser.getUserAttributes((err, result) => {
             if (err) {
                 cb(err.message, null);

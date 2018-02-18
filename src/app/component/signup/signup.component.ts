@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../model/user';
 import { SignupService } from '../../service/signup.service';
 
@@ -12,7 +13,7 @@ export class SignupComponent implements OnInit {
     public password: string;
     public error: string;
 
-    constructor(private signUpService: SignupService) { }
+    constructor(private signUpService: SignupService, private router: Router) { }
 
     ngOnInit() {
     }
@@ -24,7 +25,7 @@ export class SignupComponent implements OnInit {
             }
 
             else {
-                alert('Sign up successful!');
+                this.router.navigateByUrl('/');
             }
         });
     }
