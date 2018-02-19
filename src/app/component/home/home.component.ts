@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
                     else {
                         this.user = user;
                     }
-                })
+                });
             }
 
             else {

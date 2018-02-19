@@ -1,3 +1,3 @@
 export class RouterStub {
-    navigateByUrl(url: string): string { return url; };
+    navigateByUrl(url: string): string { return url; }
 }

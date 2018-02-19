@@ -28,7 +28,7 @@ export class AuthenticationService {
     
                     else {
                         if (session.isValid()) {
-                            this.user = cognitoUser
+                            this.user = cognitoUser;
                             cb(null, cognitoUser);
                         }
 
@@ -45,8 +45,8 @@ export class AuthenticationService {
         }  
     }
 
-    getUserAttributes(cognitoUser: CognitoUser, cb: (err:string, user: User) => void): void {
-        let user = new User();
+    getUserAttributes(cognitoUser: CognitoUser, cb: (err: string, user: User) => void): void {
+        const user = new User();
         
         cognitoUser.getUserAttributes((err, result) => {
             if (err) {
@@ -54,7 +54,7 @@ export class AuthenticationService {
             }
             
             else {
-                for (let attribute of result) {
+                for (const attribute of result) {
                     switch (attribute.getName()) {
                         case 'email':
                             user.email = attribute.getValue();

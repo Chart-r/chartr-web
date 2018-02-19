@@ -9,7 +9,7 @@ export class SignupService {
     constructor(private cognitoService: CognitoService) { }
 
     register(user: User, password: string, cb: (err: string, result: any) => void) {
-        let attributes = [];
+        const attributes = [];
 
         const dataEmail = {
             Name: 'email',
