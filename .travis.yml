@@ -1,24 +1,27 @@
 sudo: required
 dist: trusty
 language: node_js
+
 node_js:
-- 8.9.4
-addons: 
+- "node"
+
 apt:
   sources:
   - google-chrome
   packages:
   - google-chrome-stable
   - google-chrome-beta
+
 before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+
 before_script:
 - npm install -g @angular/cli
-- npm install -g karma
-- npm install
-script: ng test --single-run
+
+script: ng lint && ng test --single-run && ng e2e
+
 notifications:
   slack:
     secure: QGO6qm8nhbbQxug6iIxaFzplo82biWSCOepNfjMPrfXrtiuB3MBlKxOZRCUfOTrk9Kg1aOQ4N5LRxbRHYNRw2OXLyBcYSTaIKDXFg7NZ9GdRLPDXZ+q8oROEkHJgOYBmN6sNYSM6l6vNsVAKDrlG2wzysCISR13RFynpMZGiIgAfnw5WVAAao+OUj+n/bbK7wrDeKCTbNRihsB8UFv0vxnOfBMgOoiunyoBQ1DNUJcv2wpaZL8JBOrcxmYT+OQqFbgN55VGRnSByts6M4Y7dW3JBi6Ifn+kYlxTnU1D5NPjJDOQue8976qKAIwmIT0I9Wnywdo4w2GoKJizGO6/6I77fXDWfBmBG7FnSpxZbVmdiDO11j4qU5pPcgZEHBptg/BwdL7pL1cr1LVE1+c9GRPtNGwsJZHK4U0s51pKuRQVhiIkFjjTIoJBRZ8gVmDntiC5D3IJXVDFM5Ezjz7deMxwiH/Gu+4nI885RhFdXPfHsk8N33mM/FL8GdtsPyXOdH5tDG2YaLdVkXPjz5oLdt6xbq1Mqbm8yUJx+1yPG8yiHoOAJgWPnPDpbPIV5JgFLA7M7dbWjxW5AWLP2F4bP210f6T7aee0CzzkrXbO4gPkEwhoeVcRaXNYXbhq+YFUPl1c6RlT4briSJuKfz0tHxqKkkLDq8BaRtrUB8Hfq/yc=
