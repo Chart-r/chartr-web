@@ -24,18 +24,25 @@ export class SignupComponent implements OnInit {
     onSubmit(signUpForm: NgForm) {
         this.submitting = true;
 
-        this.signUpService.register(this.user, this.password, (err, result) => {
-            if (err) {
-                this.error = err;
-            }
+        if (signUpForm.form.valid) {
+            this.signUpService.register(this.user, this.password, (err, result) => {
+                if (err) {
+                    this.error = err;
+                }
+    
+                else {
+                    this.success = true;
+                    this.error = null;
+                    signUpForm.reset();
+                }
+    
+                this.submitting = false;
+            });  
+        }
 
-            else {
-                this.success = true;
-                signUpForm.reset();
-            }
-
+        else {
+            this.error = 'Please complete all fields.';
             this.submitting = false;
-        });
+        }
     }
-
 }

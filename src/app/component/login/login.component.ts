@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../service/login.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
@@ -18,20 +19,26 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
-    onSubmit(): void {
+    onSubmit(loginForm: NgForm): void {
         this.submitting = true;
 
-        this.loginService.authenticate(this.email, this.password, (err, result) => {
-            if (err) {
-                this.error = err;
-            }
+        if (loginForm.form.valid) {
+            this.loginService.authenticate(this.email, this.password, (err, result) => {
+                if (err) {
+                    this.error = err;
+                }
+    
+                else {
+                    this.router.navigateByUrl('/home');
+                }
+    
+                this.submitting = false;
+            });
+        }
 
-            else {
-                this.router.navigateByUrl('/home');
-            }
-
+        else {
+            this.error = 'Please complete all fields.';
             this.submitting = false;
-        });
+        }
     }
-
 }
