@@ -75,7 +75,7 @@ describe('SignupComponent', () => {
 
         fixture.detectChanges();
 
-        expect(component.error).toBe('Please complete all fields.');
+        expect(component.error).toBe('Please complete all fields correctly.');
         expect(component.submitting).toBeFalsy();
     });
 });
