@@ -21,4 +21,10 @@ describe('IndexComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should display Chartr header', () => {
+        fixture.detectChanges();
+        const h1: HTMLElement = fixture.nativeElement.querySelector('h1');
+        expect(h1.textContent).toBe('Chartr');
+    })
 });

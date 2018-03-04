@@ -17,12 +17,14 @@ export class HomeComponent implements OnInit {
         this.authenticationService.getAuthenticatedUser((err, cognitoUser) => {
             if (err) {
                 console.error(err);
+                this.router.navigateByUrl('/');
             }
 
             else if (cognitoUser) {
                 this.authenticationService.getUserAttributes(cognitoUser, (err, user) => {
                     if (err) {
                         console.error(err);
+                        this.router.navigateByUrl('/');
                     }
 
                     else {

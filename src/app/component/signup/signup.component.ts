@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
     public success = false;
     public submitting = false;
 
-    constructor(private signUpService: SignupService, private router: Router) { }
+    constructor(private signUpService: SignupService) { }
 
     ngOnInit() {
     }
