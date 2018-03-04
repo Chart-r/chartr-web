@@ -25,7 +25,7 @@ describe('AuthenticationService', () => {
     it('should return authenticated user', inject([AuthenticationService], (service: AuthenticationService) => {
         const mockUser = {
             getSession: cb => {
-                let mockSession = {
+                const mockSession = {
                     isValid: () => true
                 };
 
@@ -38,13 +38,13 @@ describe('AuthenticationService', () => {
         service.getAuthenticatedUser((err, user) => {
             expect(err).toBeNull();
             expect(user).toBeTruthy();
-        })
+        });
     }));
 
     it('should return null for invalid session', inject([AuthenticationService], (service: AuthenticationService) => {
         const mockUser = {
             getSession: cb => {
-                let mockSession = {
+                const mockSession = {
                     isValid: () => false
                 };
 
@@ -57,7 +57,7 @@ describe('AuthenticationService', () => {
         service.getAuthenticatedUser((err, user) => {
             expect(err).toBeNull();
             expect(user).toBeNull();
-        })
+        });
     }));
 
     it('should return error message on get user failure', inject([AuthenticationService], (service: AuthenticationService) => {
@@ -73,7 +73,7 @@ describe('AuthenticationService', () => {
         service.getAuthenticatedUser((err, user) => {
             expect(err).toBe(errorMessage);
             expect(user).toBeNull();
-        })
+        });
     }));
 
     it('should return null if there is no current user', inject([AuthenticationService], (service: AuthenticationService) => {
@@ -82,7 +82,7 @@ describe('AuthenticationService', () => {
         service.getAuthenticatedUser((err, user) => {
             expect(err).toBeNull();
             expect(user).toBeNull();
-        })
+        });
     }));
 
     it('should get user attributes', inject([AuthenticationService], (service: AuthenticationService) => {
