@@ -77,5 +77,5 @@ describe('SignupComponent', () => {
 
         expect(component.error).toBe('Please complete all fields.');
         expect(component.submitting).toBeFalsy();
-    })
+    });
 });

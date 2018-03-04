@@ -26,5 +26,5 @@ describe('IndexComponent', () => {
         fixture.detectChanges();
         const h1: HTMLElement = fixture.nativeElement.querySelector('h1');
         expect(h1.textContent).toBe('Chartr');
-    })
+    });
 });

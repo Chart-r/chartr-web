@@ -1,5 +1,5 @@
-import { CognitoUser } from "amazon-cognito-identity-js";
-import { User } from "../model/user";
+import { CognitoUser } from 'amazon-cognito-identity-js';
+import { User } from '../model/user';
 
 export class AuthenticationServiceStub {
     public getUserShouldFail = false;

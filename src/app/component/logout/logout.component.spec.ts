@@ -38,5 +38,5 @@ describe('LogoutComponent', () => {
         fixture.detectChanges();
         expect(authenticationServiceSpy.clearAuthenticatedUser.calls.count()).toBe(1);
         expect(loginServiceSpy.logout.calls.count()).toBe(1);
-    })
+    });
 });
