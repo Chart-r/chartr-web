@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
     public success = false;
     public submitting = false;
 
-    constructor(private signUpService: SignupService, private router: Router) { }
+    constructor(private signUpService: SignupService) { }
 
     ngOnInit() {
     }
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
         }
 
         else {
-            this.error = 'Please complete all fields.';
+            this.error = 'Please complete all fields correctly.';
             this.submitting = false;
         }
     }
