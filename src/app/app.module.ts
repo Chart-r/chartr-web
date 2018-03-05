@@ -1,18 +1,47 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
+import { LoginComponent } from './component/login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { IndexComponent } from './component/index/index.component';
+
+import { CognitoService } from './service/cognito.service';
+import { LoginService } from './service/login.service';
+import { SignupComponent } from './component/signup/signup.component';
+import { SignupService } from './service/signup.service';
+import { AuthenticationService } from './service/authentication.service';
+import { LogoutComponent } from './component/logout/logout.component';
+import { HomeComponent } from './component/home/home.component';
+import { TripsComponent } from './component/trips/trips.component';
+import { TripService } from './service/trip.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        IndexComponent,
+        SignupComponent,
+        LogoutComponent,
+        HomeComponent,
+        TripsComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        HttpClientModule
+    ],
+    providers: [
+        CognitoService,
+        LoginService,
+        SignupService,
+        AuthenticationService,
+        TripService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

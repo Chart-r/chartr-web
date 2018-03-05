@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Source</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Driver</th>
+            <th scope="col">Seats</th>
+            <th scope="col">Smoking</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let trip of trips">
+            <td>{{ trip.source }}</td>
+            <td>{{ trip.dest }}</td>
+            <td>{{ trip.driver }}</td>
+            <td>{{ trip.seats }}</td>
+            <td>{{ trip.smoking ? 'Y' : 'N' }}</td>
+        </tr>
+    </tbody>
+</table>
