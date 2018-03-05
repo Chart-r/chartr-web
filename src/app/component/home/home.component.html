@@ -1,3 +1,6 @@
-<h1 class="display-4">Welcome</h1>
+<h1 class="display-4">Trips</h1>
 <p class="lead" *ngIf="user">Hello, {{ user.name }}</p>
-<a class="btn btn-primary btn-lg" routerLink="/logout" role="button">Log Out</a>
+<div *ngIf="user">
+    <app-trips></app-trips>
+</div>
+<a class="btn btn-primary" routerLink="/logout" role="button">Log Out</a>

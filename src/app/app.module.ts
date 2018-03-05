@@ -14,6 +14,9 @@ import { SignupService } from './service/signup.service';
 import { AuthenticationService } from './service/authentication.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { HomeComponent } from './component/home/home.component';
+import { TripsComponent } from './component/trips/trips.component';
+import { TripService } from './service/trip.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,18 +26,21 @@ import { HomeComponent } from './component/home/home.component';
         IndexComponent,
         SignupComponent,
         LogoutComponent,
-        HomeComponent
+        HomeComponent,
+        TripsComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule
     ],
     providers: [
         CognitoService,
         LoginService,
         SignupService,
-        AuthenticationService
+        AuthenticationService,
+        TripService
     ],
     bootstrap: [AppComponent]
 })
