@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { HomeComponent } from './home.component';
 import { AuthenticationService } from '../../service/authentication.service';
@@ -6,6 +7,8 @@ import { CognitoService } from '../../service/cognito.service';
 import { Router } from '@angular/router';
 import { RouterStub } from '../../testing/router-stubs';
 import { AuthenticationServiceStub } from '../../testing/authentication-service-stub';
+import { TripsComponent } from '../trips/trips.component';
+import { TripService } from '../../service/trip.service';
 
 
 
@@ -18,10 +21,12 @@ describe('HomeComponent', () => {
     beforeEach(async(() => {
         routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
         TestBed.configureTestingModule({
-            declarations: [ HomeComponent ],
+            imports: [ HttpClientTestingModule ],
+            declarations: [ HomeComponent, TripsComponent ],
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
-                { provide: Router, useValue: routerSpy }
+                { provide: Router, useValue: routerSpy },
+                TripService
             ]
         })
         .compileComponents();

@@ -6,6 +6,7 @@ import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { HomeComponent } from './component/home/home.component';
+import { TripsComponent } from './component/trips/trips.component';
 
 const routes = [
     { path: '', component: IndexComponent },
