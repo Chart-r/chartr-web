@@ -4,6 +4,16 @@ import { SignupService } from './signup.service';
 import { CognitoService } from './cognito.service';
 import { User } from '../model/user';
 
+import {
+  HttpModule,
+  Http,
+  Response,
+  ResponseOptions,
+  XHRBackend
+} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MockBackend } from '@angular/http/testing';
+
 describe('SignupService', () => {
     let cognitoServiceSpy: jasmine.SpyObj<CognitoService>;
     let user: User;
@@ -17,9 +27,11 @@ describe('SignupService', () => {
         user.phone = '+19999999999';
 
         TestBed.configureTestingModule({
+            imports: [HttpModule, HttpClientModule],
             providers: [
                 SignupService,
-                { provide: CognitoService, useValue: cognitoServiceSpy }
+                { provide: CognitoService, useValue: cognitoServiceSpy },
+                { provide: XHRBackend, useClass: MockBackend }
             ]
         });
     });
@@ -39,6 +51,21 @@ describe('SignupService', () => {
         service.register(user, 'password', (err, result) => {
             expect(err).toBeNull();
             expect(result).toBeDefined();
+        });
+    }));
+
+    it('should save to dynamo db', inject([SignupService, XHRBackend], (service: SignupService, http: MockBackend) => {
+        const simulatedSuccess = 'Successfully created user!';
+        http.connections.subscribe((connection) => {
+            expect(connection.request.headers.get('Content-Type')).toBe('application/json');
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: simulatedSuccess
+            })));
+        });
+
+        service.addToDB(user, (err, result) => {
+            expect(err).toBeNull();
+            expect(result).toBe(simulatedSuccess);
         });
     }));
 
