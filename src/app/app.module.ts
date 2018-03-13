@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AgmCoreModule } from '@agm/core';
+import { CalendarModule } from 'primeng/calendar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -17,6 +21,7 @@ import { HomeComponent } from './component/home/home.component';
 import { TripsComponent } from './component/trips/trips.component';
 import { TripService } from './service/trip.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PostTripComponent } from './component/post-trip/post-trip.component';
 
 
 @NgModule({
@@ -27,13 +32,20 @@ import { HttpClientModule } from '@angular/common/http';
         SignupComponent,
         LogoutComponent,
         HomeComponent,
-        TripsComponent
+        TripsComponent,
+        PostTripComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAWckaSoMi4tF4ZO8ontykqEGjWi-yn7ng',
+            libraries: ['places']
+        }),
+        CalendarModule,
+        BrowserAnimationsModule
     ],
     providers: [
         CognitoService,
