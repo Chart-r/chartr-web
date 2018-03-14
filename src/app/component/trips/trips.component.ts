@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TripService } from '../../service/trip.service';
+import { Trip } from '../../model/trip';
 
 @Component({
     selector: 'app-trips',
@@ -7,16 +8,47 @@ import { TripService } from '../../service/trip.service';
     styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
-    public trips = [
-        { source: 'Champaign, IL', dest: 'Chicago, IL', driver: 'Bob Smith', seats: 4, smoking: false },
-        { source: 'Indianapolis, IN', dest: 'Dayton, OH', driver: 'Brian Kurek', seats: 2, smoking: false },
-        { source: 'Orlando, FL', dest: 'Champaign, IL', driver: 'Christian Cygnus', seats: 3, smoking: false}
-    ];
+    public trips: Trip[];
 
     constructor(private tripService: TripService) { }
 
     ngOnInit() {
+        this.trips = [];
+        this.tripService.getAllTrips().subscribe(
+            trips => {
+                this.parseTrips(trips);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    parseTrips(trips) {
+        let jsTrip;
+        let users;
         
+        for (const trip of trips) {
+            jsTrip = new Trip();
+            users = trip['users'];
+            jsTrip.startLat = trip['start_lat'];
+            jsTrip.startLong = trip['start_lng'];
+            jsTrip.endLat = trip['end_lat'];
+            jsTrip.endLong = trip['end_lng'];
+            jsTrip.startTime = new Date(trip['start_time']);
+            jsTrip.seats = trip['seats'];
+            jsTrip.smoking = trip['smoking'];
+            jsTrip.price = trip['price'];
+
+            for (const email in users) {
+                if (users[email] === 'Driver') {
+                    jsTrip.driver = email.toString();
+                    break;
+                }
+            }
+
+            this.trips.push(jsTrip);
+        }
     }
 
 }

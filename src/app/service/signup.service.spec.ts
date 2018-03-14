@@ -4,18 +4,14 @@ import { SignupService } from './signup.service';
 import { CognitoService } from './cognito.service';
 import { User } from '../model/user';
 
-import {
-  HttpModule,
-  Http,
-  Response,
-  ResponseOptions,
-  XHRBackend
-} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MockBackend } from '@angular/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '../../environments/environment';
 
 describe('SignupService', () => {
     let cognitoServiceSpy: jasmine.SpyObj<CognitoService>;
+    let httpTestingController: HttpTestingController;
     let user: User;
 
     beforeEach(() => {
@@ -27,13 +23,14 @@ describe('SignupService', () => {
         user.phone = '+19999999999';
 
         TestBed.configureTestingModule({
-            imports: [HttpModule, HttpClientModule],
+            imports: [ HttpClientTestingModule ],
             providers: [
                 SignupService,
-                { provide: CognitoService, useValue: cognitoServiceSpy },
-                { provide: XHRBackend, useClass: MockBackend }
+                { provide: CognitoService, useValue: cognitoServiceSpy }
             ]
         });
+
+        httpTestingController = TestBed.get(HttpTestingController);
     });
 
     it('should be created', inject([SignupService], (service: SignupService) => {
@@ -54,19 +51,17 @@ describe('SignupService', () => {
         });
     }));
 
-    it('should save to dynamo db', inject([SignupService, XHRBackend], (service: SignupService, http: MockBackend) => {
-        const simulatedSuccess = 'Successfully created user!';
-        http.connections.subscribe((connection) => {
-            expect(connection.request.headers.get('Content-Type')).toBe('application/json');
-            connection.mockRespond(new Response(new ResponseOptions({
-                body: simulatedSuccess
-            })));
-        });
+    it('should save to dynamo db', inject([SignupService], (service: SignupService) => {
+        const mockResponse = { message: 'response' };
 
-        service.addToDB(user, (err, result) => {
-            expect(err).toBeNull();
-            expect(result).toBe(simulatedSuccess);
-        });
+        service.addToDB(user, () => null);
+
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/*`);
+
+        expect(req.request.headers.get('Content-Type')).toBe('application/json');
+        expect(req.request.method).toBe('POST');
+        req.flush(mockResponse);
+        httpTestingController.verify();
     }));
 
     it('should return error message on failure', inject([SignupService], (service: SignupService) => {
