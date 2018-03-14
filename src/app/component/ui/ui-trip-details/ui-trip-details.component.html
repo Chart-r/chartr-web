@@ -1,0 +1,30 @@
+<div class="{{className}} trip-details">
+	<div class="container fluid">
+		<div class="trip-meta col-5">
+			<p class="muted">{{totalseats - seatsfilled}}/{{totalseats}}</p>
+			<p class="caption">Seats Available</p>
+		</div>
+		<div class="car-meta col-5">
+			<img src="nonsmoking.png" />
+			<p class="caption">Non-smoking only</p>
+		</div>
+		<div class="price-meta col-2">
+			<p class="muted">{{fee}}</p>
+			<p class="caption">Fee</p>
+		</div>
+	</div>
+	<hr />
+	<div class="route">
+		<div class="location depart">
+			<p class="caption time">{{departtime}}</p>
+			<p class="location-short">{{departdest}}</p>
+		</div>
+		<div class="location arrive">
+			<p class="caption time">{{arrivetime}}</p>
+			<p class="location-short">{{arrivedest}}</p>
+		</div>
+	</div>
+	<hr />
+	<div class="container fluid reserve-seats">
+	</div>
+</div>
