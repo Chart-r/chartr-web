@@ -43,8 +43,7 @@ export class SignupService {
             }
 
             else {
-                this.addToDB(user, null);
-                cb(null, result);
+                this.addToDB(user, cb);
             }
         });
 
@@ -58,7 +57,7 @@ export class SignupService {
         }).toPromise().then((res) => {
             cb(null, res);
         }).catch((err) => {
-            cb(err, null);
+            cb(err.error, null);
         });
     }
 }

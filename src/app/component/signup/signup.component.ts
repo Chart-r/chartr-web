@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-    public user = new User();
+    public user: User;
     public password: string;
     public error: string;
     public success = false;
@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
     constructor(private signUpService: SignupService) { }
 
     ngOnInit() {
+        this.user = new User();
     }
 
     onSubmit(signUpForm: NgForm) {

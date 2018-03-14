@@ -40,8 +40,8 @@ describe('SignupComponent', () => {
             reset: () => null
         } as NgForm;
 
+        fixture.detectChanges();
         component.onSubmit(mockForm);
-
         fixture.detectChanges();
 
         expect(component.success).toBeTruthy();
@@ -57,8 +57,8 @@ describe('SignupComponent', () => {
 
         signupService.signUpShouldFail = true;
 
+        fixture.detectChanges();
         component.onSubmit(mockForm);
-
         fixture.detectChanges();
 
         expect(component.error).toBe('simulated failure');
@@ -71,8 +71,8 @@ describe('SignupComponent', () => {
             reset: () => null
         } as NgForm;
 
+        fixture.detectChanges();
         component.onSubmit(mockForm);
-
         fixture.detectChanges();
 
         expect(component.error).toBe('Please complete all fields correctly.');
