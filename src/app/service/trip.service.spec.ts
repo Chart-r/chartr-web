@@ -40,4 +40,18 @@ describe('TripService', () => {
         req.flush(mockResponse);
         httpTestingController.verify();
     }));
+
+    it('should GET trips', inject([TripService], (service: TripService) => {
+        const mockResponse = { message: 'response' };
+
+        service.getAllTrips().subscribe(data => {
+            expect(data).toEqual(mockResponse);
+        });
+
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/trip/*`);
+
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+        httpTestingController.verify();
+    }));
 });

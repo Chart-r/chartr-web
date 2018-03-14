@@ -22,6 +22,10 @@ export class TripService {
         return this.http.post(TRIP_URL, reqBody, httpOptions);
     }
 
+    getAllTrips() {        
+        return this.http.get(TRIP_URL);
+    }
+
     buildGoReqeustBody(user: User, trip: Trip) {
         const goBody = {};
 
