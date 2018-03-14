@@ -27,12 +27,12 @@ describe('UiMessageComponent', () => {
     });
 
     it('should have the message class', () => {
-        let message = fixture.debugElement.nativeElement.querySelector('div');
+        const message = fixture.debugElement.nativeElement.querySelector('div');
         expect(message.classList.contains('message')).toEqual(true);
     });
 
     it('should accept a className', () => {
-        let message = fixture.debugElement.nativeElement.querySelector('div');
+        const message = fixture.debugElement.nativeElement.querySelector('div');
         expect(message.classList.contains(TEST_CLASS_NAME)).toEqual(true);
     });
 });

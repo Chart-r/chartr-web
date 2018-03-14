@@ -31,17 +31,17 @@ describe('UiUserDetailsSmallComponent', () => {
     });
 
     it('should accept a driver name', () => {
-        let drivername = fixture.debugElement.nativeElement.querySelector('.user-meta p');
+        const drivername = fixture.debugElement.nativeElement.querySelector('.user-meta p');
         expect(drivername.innerHTML).toEqual(TEST_DRIVER_NAME);
     });
 
     it('should accept a driver avatar', () => {
-        let avatar = fixture.debugElement.nativeElement.querySelector('.user-meta .avatar');
+        const avatar = fixture.debugElement.nativeElement.querySelector('.user-meta .avatar');
         expect(avatar.src).toContain(TEST_DRIVER_AVATAR);
     });
 
     it('should accept a rating', () => {
-        let rating = fixture.debugElement.nativeElement.querySelector('.user-meta .rating');
+        const rating = fixture.debugElement.nativeElement.querySelector('.user-meta .rating');
         expect(rating.innerHTML).toEqual(TEST_RATING);
     });
 });

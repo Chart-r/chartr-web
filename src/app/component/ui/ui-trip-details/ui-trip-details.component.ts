@@ -7,14 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UiTripDetailsComponent implements OnInit {
 
-    @Input() className: string = '';
-    @Input() seatsfilled: number = 0;
-    @Input() totalseats: number = 0;
-    @Input() fee: string = 'FREE';
-    @Input() departtime: string = 'TBD';
-    @Input() departdest: string = 'TBD';
-    @Input() arrivetime: string = 'TBD';
-    @Input() arrivedest: string = 'TBD';
+    @Input() className: string;
+    @Input() seatsfilled = 0;
+    @Input() totalseats = 0;
+    @Input() fee = 'FREE';
+    @Input() departtime = 'TBD';
+    @Input() departdest = 'TBD';
+    @Input() arrivetime = 'TBD';
+    @Input() arrivedest = 'TBD';
 
     constructor() { }
 

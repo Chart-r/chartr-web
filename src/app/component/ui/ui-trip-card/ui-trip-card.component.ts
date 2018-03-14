@@ -7,16 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UiTripCardComponent implements OnInit {
 
-    @Input() className: string = '';
-    @Input() driverName: string = '';
-    @Input() rating: string = 'No rating';
-    @Input() seatsfilled: number = 0;
-    @Input() totalseats: number = 0;
-    @Input() departtime: string = 'TBD';
-    @Input() departdest: string = 'TBD';
-    @Input() arrivetime: string = 'TBD';
-    @Input() arrivedest: string = 'TBD';
-    @Input() avatar: string = 'http://via.placeholder.com/50x50';
+    @Input() className: string;
+    @Input() driverName: string;
+    @Input() rating = 'No rating';
+    @Input() seatsfilled = 0;
+    @Input() totalseats = 0;
+    @Input() departtime = 'TBD';
+    @Input() departdest = 'TBD';
+    @Input() arrivetime = 'TBD';
+    @Input() arrivedest = 'TBD';
+    @Input() avatar = 'http://via.placeholder.com/50x50';
 
     constructor() { }
 

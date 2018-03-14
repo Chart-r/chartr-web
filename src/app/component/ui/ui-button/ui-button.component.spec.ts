@@ -8,7 +8,6 @@ const TEST_CLASS_NAME = 'mytestbtnclass';
 describe('UiButtonComponent', () => {
     let component: UiButtonComponent;
     let fixture: ComponentFixture<UiButtonComponent>;
-    let spy: any;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -30,19 +29,19 @@ describe('UiButtonComponent', () => {
     });
 
     it('should trigger click', fakeAsync(() => {
-        let btn = fixture.debugElement.nativeElement.querySelector('button');
+        const btn = fixture.debugElement.nativeElement.querySelector('button');
         btn.click();
         tick();
         expect(component.onClick.emit).toHaveBeenCalled();
     }));
 
     it('should have the btn class', () => {
-        let btn = fixture.debugElement.nativeElement.querySelector('button');
+        const btn = fixture.debugElement.nativeElement.querySelector('button');
         expect(btn.classList.contains('btn')).toEqual(true);
     });
 
     it('should accept a className', () => {
-        let btn = fixture.debugElement.nativeElement.querySelector('button');
+        const btn = fixture.debugElement.nativeElement.querySelector('button');
         expect(btn.classList.contains(TEST_CLASS_NAME)).toEqual(true);
-    })
+    });
 });

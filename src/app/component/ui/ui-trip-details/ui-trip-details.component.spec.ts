@@ -41,28 +41,28 @@ describe('UiTripDetailsComponent', () => {
     });
 
     it('should have the trip-details class', () => {
-        let card = fixture.debugElement.nativeElement.querySelector('div');
+        const card = fixture.debugElement.nativeElement.querySelector('div');
         expect(card.classList.contains('trip-details')).toEqual(true);
     });
 
     it('should accept a className', () => {
-        let card = fixture.debugElement.nativeElement.querySelector('div');
+        const card = fixture.debugElement.nativeElement.querySelector('div');
         expect(card.classList.contains(TEST_CLASS_NAME)).toEqual(true);
     });
 
     it('should display seats available', () => {
-        let seats = fixture.debugElement.nativeElement.querySelector('.trip-meta p');
+        const seats = fixture.debugElement.nativeElement.querySelector('.trip-meta p');
         expect(seats.innerHTML).toEqual(`${TEST_SEATS - TEST_SEATS_FILLED}/${TEST_SEATS}`);
     });
 
     it('should display fee', () => {
-        let fee = fixture.debugElement.nativeElement.querySelector('.price-meta p');
+        const fee = fixture.debugElement.nativeElement.querySelector('.price-meta p');
         expect(fee.innerHTML).toEqual(TEST_FEE);
     });
 
     it('should display trip details', () => {
-        let depart = fixture.debugElement.nativeElement.querySelector('.route .depart');
-        let arrive = fixture.debugElement.nativeElement.querySelector('.route .arrive');
+        const depart = fixture.debugElement.nativeElement.querySelector('.route .depart');
+        const arrive = fixture.debugElement.nativeElement.querySelector('.route .arrive');
         expect(depart.querySelector('.time').innerHTML).toEqual(TEST_DEPART_TIME);
         expect(depart.querySelector('.location-short').innerHTML).toEqual(TEST_DEPART_LOC);
         expect(arrive.querySelector('.time').innerHTML).toEqual(TEST_ARRIVE_TIME);

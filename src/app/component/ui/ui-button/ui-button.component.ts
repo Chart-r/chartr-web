@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
     styleUrls: ['./ui-button.component.css']
 })
 export class UiButtonComponent implements OnInit {
-    @Input() className: string = '';
+    @Input() className: string;
     @Input() onClick: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() { }

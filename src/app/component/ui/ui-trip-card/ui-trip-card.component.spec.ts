@@ -45,38 +45,38 @@ describe('UiTripCardComponent', () => {
     });
 
     it('should have the trip-card class', () => {
-        let card = fixture.debugElement.nativeElement.querySelector('div');
+        const card = fixture.debugElement.nativeElement.querySelector('div');
         expect(card.classList.contains('trip-card')).toEqual(true);
     });
 
     it('should accept a className', () => {
-        let card = fixture.debugElement.nativeElement.querySelector('div');
+        const card = fixture.debugElement.nativeElement.querySelector('div');
         expect(card.classList.contains(TEST_CLASS_NAME)).toEqual(true);
     });
 
     it('should accept a driver name', () => {
-        let drivername = fixture.debugElement.nativeElement.querySelector('.user-meta p');
+        const drivername = fixture.debugElement.nativeElement.querySelector('.user-meta p');
         expect(drivername.innerHTML).toEqual(TEST_DRIVER_NAME);
     });
 
     it('should accept a driver avatar', () => {
-        let avatar = fixture.debugElement.nativeElement.querySelector('.user-meta .avatar');
+        const avatar = fixture.debugElement.nativeElement.querySelector('.user-meta .avatar');
         expect(avatar.src).toContain(TEST_DRIVER_AVATAR);
     });
 
     it('should accept a rating', () => {
-        let rating = fixture.debugElement.nativeElement.querySelector('.user-meta .rating');
+        const rating = fixture.debugElement.nativeElement.querySelector('.user-meta .rating');
         expect(rating.innerHTML).toEqual(TEST_RATING);
     });
 
     it('should display seats remaining', () => {
-        let seatsremaining = fixture.debugElement.nativeElement.querySelector('.trip-meta p');
+        const seatsremaining = fixture.debugElement.nativeElement.querySelector('.trip-meta p');
         expect(seatsremaining.innerHTML).toEqual(`${TEST_SEATS_FILLED}/${TEST_SEATS}`);
     });
 
     it('should display trip details', () => {
-        let depart = fixture.debugElement.nativeElement.querySelector('.route .depart');
-        let arrive = fixture.debugElement.nativeElement.querySelector('.route .arrive');
+        const depart = fixture.debugElement.nativeElement.querySelector('.route .depart');
+        const arrive = fixture.debugElement.nativeElement.querySelector('.route .arrive');
         expect(depart.querySelector('.time').innerHTML).toEqual(TEST_DEPART_TIME);
         expect(depart.querySelector('.location-short').innerHTML).toEqual(TEST_DEPART_LOC);
         expect(arrive.querySelector('.time').innerHTML).toEqual(TEST_ARRIVE_TIME);
