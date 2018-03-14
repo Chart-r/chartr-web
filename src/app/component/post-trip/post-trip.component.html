@@ -8,13 +8,13 @@
 <form #postTripForm="ngForm" (ngSubmit)="onSubmit(postTripForm)">
     <div class="form-group">
         <label for="startInput">Start</label>
-        <input type="text" class="form-control" id="startInput" 
+        <input type="text" class="form-control" id="startInput" name="start"
             required #start>
         <agm-map [latitude]="startLat" [longitude]="startLong" [scrollwheel]="false" [zoom]="4"></agm-map>
     </div>
     <div class="form-group">
         <label for="endInput">End</label>
-        <input type="text" class="form-control" id="endInput" 
+        <input type="text" class="form-control" id="endInput" name="end"
             required #end>
         <agm-map [latitude]="endLat" [longitude]="endLong" [scrollwheel]="false" [zoom]="4"></agm-map>
     </div>
@@ -37,5 +37,5 @@
         <input type="checkbox" class="form-check-input" id="smokingInput" name="smoking" [(ngModel)]="trip.smoking">
         <label class="form-check-label" for="smokingInput">Smoking</label>
     </div>
-    <button [disabled]="!postTripForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="submitting || !postTripForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
 </form>

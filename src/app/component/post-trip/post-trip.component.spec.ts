@@ -77,6 +77,7 @@ describe('PostTripComponent', () => {
 
         expect(component.error).toBe('Please complete all fields.');
         expect(component.success).toBeNull();
+        expect(component.submitting).toBeFalsy();
     });
 
     it('should display error message for invalid locations', () => {
@@ -92,6 +93,7 @@ describe('PostTripComponent', () => {
         expect(component.trip.validLocations()).toBeFalsy();
         expect(component.error).toBe('Please complete all fields.');
         expect(component.success).toBeNull();
+        expect(component.submitting).toBeFalsy();
     });
 
     it('should display success message and clear form on success', () => {
@@ -111,6 +113,7 @@ describe('PostTripComponent', () => {
 
         expect(component.error).toBeNull();
         expect(component.success).toBe('Successfully created trip.');
+        expect(component.submitting).toBeFalsy();
     });
 
     it('should display error message on server failure', () => {
@@ -132,6 +135,7 @@ describe('PostTripComponent', () => {
 
         expect(component.error).toBe('Error creating trip. Please try again.');
         expect(component.success).toBeNull();
+        expect(component.submitting).toBeFalsy();
     });
 
     it('should redirect if user attributes cannot be fetched', () => {

@@ -19,6 +19,7 @@ export class PostTripComponent implements OnInit {
 
     public error: string;
     public success: string;
+    public submitting = false;
 
 
     @ViewChild('start')
@@ -64,17 +65,20 @@ export class PostTripComponent implements OnInit {
     }
 
     onSubmit(postTripForm: NgForm) {
+        this.submitting = true;
         if (this.trip.validLocations() && postTripForm.form.valid) {
             this.tripService.createTrip(this.user, this.trip).subscribe(
                 response => {
                     this.error = null;
                     this.success = 'Successfully created trip.';
                     postTripForm.reset();
+                    this.submitting = false;
                 },
                 err => {
                     console.error(err);
                     this.error = 'Error creating trip. Please try again.';
                     this.success = null;
+                    this.submitting = false;
                 }
             );
         }
@@ -82,6 +86,7 @@ export class PostTripComponent implements OnInit {
         else {
             this.error = 'Please complete all fields.';
             this.success = null;
+            this.submitting = false;
         }
     }
 
