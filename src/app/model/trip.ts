@@ -7,6 +7,7 @@ export class Trip {
     public price: number;
     public seats: number;
     public smoking: boolean;
+    public driver: string;
 
     constructor() {
         this.startLat = null;
@@ -17,6 +18,7 @@ export class Trip {
         this.price = null;
         this.seats = null;
         this.smoking = false;
+        this.driver = null;
     }
 
     validLocations() {
