@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { CognitoService } from './cognito.service';
 import { User } from '../model/user';
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
+const CREATE_USER_URL = `${environment.apiGatewayUrl}/user/*`;
 
 @Injectable()
 export class SignupService {
 
-    constructor(private cognitoService: CognitoService) { }
+    constructor(private cognitoService: CognitoService, private http: HttpClient) { }
 
     register(user: User, password: string, cb: (err: string, result: any) => void) {
         const attributes = [];
@@ -39,10 +43,21 @@ export class SignupService {
             }
 
             else {
-                cb(null, result);
+                this.addToDB(user, cb);
             }
         });
 
     }
 
+    addToDB(user: User, cb: (err: string, result: any) => void) {
+        return this.http.post(CREATE_USER_URL, JSON.stringify(user), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).toPromise().then((res) => {
+            cb(null, res);
+        }).catch((err) => {
+            cb(err.error, null);
+        });
+    }
 }

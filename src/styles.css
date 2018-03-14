@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 *, *:after, *:before {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -220,4 +219,8 @@ input[type=tel]:focus {
 
 label {
 	display: block;
+}
+
+.ui-calendar {
+    display: block;
 }

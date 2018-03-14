@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AgmCoreModule } from '@agm/core';
+import { CalendarModule } from 'primeng/calendar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -22,6 +26,7 @@ import { UiButtonComponent } from './component/ui/ui-button/ui-button.component'
 import { UiTripCardComponent } from './component/ui/ui-trip-card/ui-trip-card.component';
 import { UiTripDetailsComponent } from './component/ui/ui-trip-details/ui-trip-details.component';
 import { UiUserDetailsSmallComponent } from './component/ui/ui-user-details-small/ui-user-details-small.component';
+import { PostTripComponent } from './component/post-trip/post-trip.component';
 
 
 @NgModule({
@@ -37,13 +42,20 @@ import { UiUserDetailsSmallComponent } from './component/ui/ui-user-details-smal
         UiButtonComponent,
         UiTripCardComponent,
         UiTripDetailsComponent,
-        UiUserDetailsSmallComponent
+        UiUserDetailsSmallComponent,
+        PostTripComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAWckaSoMi4tF4ZO8ontykqEGjWi-yn7ng',
+            libraries: ['places']
+        }),
+        CalendarModule,
+        BrowserAnimationsModule
     ],
     providers: [
         CognitoService,

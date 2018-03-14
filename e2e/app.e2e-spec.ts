@@ -45,8 +45,8 @@ describe('chartr-web App', () => {
         emailInput.sendKeys('invalid-email');
         passwordInput.sendKeys('password');
 
-        errorMessage = element(by.css('.alert-danger'));
-        expect(errorMessage.getText()).toBe('Please complete all fields.');
+        errorMessage = element(by.css('.alert-danger')).getText();
+        expect(errorMessage).toBe('Please complete all fields.');
     });
 
     it('should redirect to home page on valid login', () => {
@@ -67,6 +67,24 @@ describe('chartr-web App', () => {
         expect(paragraph.getText()).toContain('Test User');
     });
 
+    it('should display post trip form', () => {
+        browser.get('/post');
+
+        const headerText = element(by.css('.display-4')).getText();
+        expect(headerText).toBe('Post Trip');
+    });
+
+    it('should not allow invalid post trip form submissions', () => {
+        let errorMessage;
+        browser.get('/post');
+
+        const priceInput = element(by.name('price'));
+        priceInput.submit();
+
+        errorMessage = element(by.css('.alert-danger')).getText();
+        expect(errorMessage).toBe('Please complete all fields.');
+    });
+
     it('should log a user out', () => {
         browser.get('/logout');
 
@@ -75,6 +93,12 @@ describe('chartr-web App', () => {
 
         browser.get('/home');
 
+        const paragraphText = element(by.css('.lead')).getText();
+        expect(paragraphText).toBe('A new way to travel.');
+    });
+
+    it('should require login to view post trip form', () => {
+        browser.get('/post');
         const paragraphText = element(by.css('.lead')).getText();
         expect(paragraphText).toBe('A new way to travel.');
     });
