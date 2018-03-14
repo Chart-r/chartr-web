@@ -9,7 +9,7 @@ describe('chartr-web App', () => {
 
     it('should display login form', () => {
         browser.get('/login');
-        const headerText = element(by.css('.display-4')).getText();
+        const headerText = element(by.css('.content h1')).getText();
         expect(headerText).toBe('Log In');
     });
 
@@ -22,14 +22,14 @@ describe('chartr-web App', () => {
         // both fields empty
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields.');
 
         // password field empty
         emailInput.sendKeys('test@user.com');
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields.');
 
         // email field empty
@@ -37,7 +37,7 @@ describe('chartr-web App', () => {
         passwordInput.sendKeys('password');
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields.');
 
         // both filled, invalid email address
@@ -45,7 +45,7 @@ describe('chartr-web App', () => {
         emailInput.sendKeys('invalid-email');
         passwordInput.sendKeys('password');
 
-        errorMessage = element(by.css('.alert-danger')).getText();
+        errorMessage = element(by.css('.message.error .desc')).getText();
         expect(errorMessage).toBe('Please complete all fields.');
     });
 
@@ -130,7 +130,7 @@ describe('chartr-web App', () => {
 
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields correctly.');
 
         // invalid phone
@@ -140,7 +140,7 @@ describe('chartr-web App', () => {
 
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields correctly.');
 
         // invalid birthdate
@@ -151,7 +151,7 @@ describe('chartr-web App', () => {
 
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields correctly.');
 
         // invalid password
@@ -162,7 +162,7 @@ describe('chartr-web App', () => {
 
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields correctly.');
 
         // empty form
@@ -174,7 +174,7 @@ describe('chartr-web App', () => {
 
         passwordInput.submit();
 
-        errorMessage = element(by.css('.alert-danger'));
+        errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields correctly.');
     });
 });
