@@ -1,0 +1,26 @@
+<div class="{{className}} trip-card">
+	<div class="container fluid">
+		<div class="user-meta col-8">
+			<img src="{{avatar}}" class="avatar pull-left">
+			<div>
+				<p>{{driverName}}</p>
+				<p class="caption rating">{{rating}}</p>
+			</div>
+		</div>
+		<div class="trip-meta col-4">
+			<p class="muted">{{seatsfilled}}/{{totalseats}}</p>
+			<p class="caption">Seats Filled</p>
+		</div>
+	</div>
+	<hr />
+	<div class="route">
+		<div class="location depart">
+			<p class="caption time">{{departtime}}</p>
+			<p class="location-short">{{departdest}}</p>
+		</div>
+		<div class="location arrive">
+			<p class="caption time">{{arrivetime}}</p>
+			<p class="location-short">{{arrivedest}}</p>
+		</div>
+	</div>
+</div>

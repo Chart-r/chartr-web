@@ -7,6 +7,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterStub } from '../../testing/router-stubs';
 import { SignupServiceStub } from '../../testing/signup-service-stub';
+import { UiMessageComponent } from '../ui/ui-message/ui-message.component';
 
 describe('SignupComponent', () => {
     let component: SignupComponent;
@@ -16,7 +17,7 @@ describe('SignupComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ FormsModule ],
-            declarations: [ SignupComponent ],
+            declarations: [ SignupComponent, UiMessageComponent ],
             providers: [
                 { provide: SignupService, useClass: SignupServiceStub }
             ]

@@ -1,0 +1,52 @@
+.trip-card {
+	padding: 10px;
+	border: 1px solid #E6E6E6;
+	border-radius: 2px;
+
+	box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+	.trip-card .trip-meta p {
+		margin: 2px;
+		padding: 0;
+		line-height: 1em;
+	}
+
+	.trip-card .trip-meta p {
+		text-align: right;
+	}
+
+	.trip-card .route .location,
+	.trip-details .route .location {
+		padding: 5px 0 5px 20px;
+		margin-left: 20px;
+	}
+		.trip-card .route .location::before,
+		.trip-details .route .location::before {
+			margin-left: -40px;
+			margin-top: 1em;
+			width: 30px;
+			height: 20px;
+
+			content: "";
+			background: url('location.png');
+			background-size: 10px 14px;
+			background-repeat: no-repeat;
+			background-position: center center;
+
+			display: inline-block;
+			position: absolute;
+		}
+
+		.trip-card .route .time,
+		.trip-details .route .time {
+			line-height: 1em;
+			margin-bottom: 0;
+		}
+
+		.trip-card .route .location-short,
+		.trip-details .route .location-short {
+			margin-top: 2px;
+			margin-bottom: 5px;
+			line-height: 1em;
+		}

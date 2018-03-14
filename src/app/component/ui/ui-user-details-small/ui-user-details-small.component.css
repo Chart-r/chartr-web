@@ -1,0 +1,14 @@
+.user-meta .avatar {
+	border-radius: 50%;
+}
+
+.user-meta .avatar {
+	height: 30px;
+	margin-right: 10px;
+}
+
+.user-meta p {
+	margin: 2px;
+	padding: 0;
+	line-height: 1em;
+}

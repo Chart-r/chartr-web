@@ -21,6 +21,11 @@ import { HomeComponent } from './component/home/home.component';
 import { TripsComponent } from './component/trips/trips.component';
 import { TripService } from './service/trip.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UiMessageComponent } from './component/ui/ui-message/ui-message.component';
+import { UiButtonComponent } from './component/ui/ui-button/ui-button.component';
+import { UiTripCardComponent } from './component/ui/ui-trip-card/ui-trip-card.component';
+import { UiTripDetailsComponent } from './component/ui/ui-trip-details/ui-trip-details.component';
+import { UiUserDetailsSmallComponent } from './component/ui/ui-user-details-small/ui-user-details-small.component';
 import { PostTripComponent } from './component/post-trip/post-trip.component';
 
 
@@ -33,6 +38,11 @@ import { PostTripComponent } from './component/post-trip/post-trip.component';
         LogoutComponent,
         HomeComponent,
         TripsComponent,
+        UiMessageComponent,
+        UiButtonComponent,
+        UiTripCardComponent,
+        UiTripDetailsComponent,
+        UiUserDetailsSmallComponent,
         PostTripComponent
     ],
     imports: [

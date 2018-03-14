@@ -1,0 +1,44 @@
+.message {
+	background-color: #E6E6E6;
+	border-left: 5px solid #000;
+	padding: 5px 10px 5px 15px;
+	margin: 10px 0;
+}
+
+	.message >>> .title { font-weight: 700; }
+	.message >>> .desc { opacity: 0.9; }
+
+.message.error {
+	background-color: #ffebe9;
+	border-color: #e91000;
+	color: #e91000;
+}
+.message.alert {
+	background-color: #fffde8;
+	border-color: #ffef37;
+	color: #9d9000;
+}
+.message.info {
+	background-color: #e9fbff;
+	border-color: #00c2e9;
+	color: #00829d;
+}
+.message.success {
+	background-color: #faffe9;
+	border-color: #afe900;
+	color: #769d00;
+}
+
+.message.smaller {
+	background-color: transparent;
+	border-width: 2px;
+	padding: 2px 2px 2px 10px;
+	margin: 0 2px;
+
+	font-size: 0.9em;
+	line-height: 1.2em;
+}
+	.message.smaller >>> .title,
+	.message.smaller >>> p.desc {
+		margin: 2px;
+	}

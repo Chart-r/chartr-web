@@ -1,4 +1,226 @@
 /* You can add global styles to this file, and also import other style files */
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFF;
+}
+
+	body > .container {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		max-width: none;
+		min-width: none;
+	}
+
+/* makeshift grid */
+[class*='col-'] {
+	float: left;
+	padding-right: 20px; /* column-space */
+}
+
+.container {
+	width: 100%;
+	max-width: 980px;
+	min-width: 755px;
+	margin: 0 auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 0px;
+
+	overflow: visible;
+}
+
+	.container.fluid {
+		width: 100%;
+		min-width: 0;
+		margin: 0 auto;
+		padding: 0;
+		padding-right: 10px;
+	}
+
+		.container.fluid > [class*='col-'] {
+			padding-right: 0px;
+		}
+
+.container:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.col-12 { width: 100%; }
+.col-9 { width: 75%; }
+.col-8 { width: 66.667%; }
+.col-6 { width: 50%; }
+.col-5 { width: 41.667%; }
+.col-4 { width: 33.333%; }
+.col-3 { width: 25%; }
+.col-2 { width: 16.667%; }
+
+/* base typography */
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.4em;
+	color: #262626;
+}
+
+p, h1, h2, h3, h4 {
+	margin: 1em 0;
+	padding: 0;
+}
+
+a, a:visited {
+	color: #262626;
+	text-decoration: underline;
+}
+a:hover { color: #000; }
+a:active { color: #262626; }
+
+
+.inverted { color: #E6E6E6; }
+.inverted a, .inverted a:visited { color: #E6E6E6; }
+.inverted a:hover { color: #FFF; }
+.inverted a:active { color: #E6E6E6; }
+
+.navigation li a { text-decoration: none; }
+
+.muted {
+	opacity: 0.5;
+}
+
+.mini {
+	font-size: 0.8em;
+}
+
+.caption {
+	text-transform: uppercase;
+	font-size: 10px;
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+
+/* general styles */
+hr {
+	height: 1px;
+	width: 100%;
+	border: none;
+	margin: 10px 0;
+	padding: 0;
+
+	background: #E6E6E6;
+}
+ul.inline {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+	ul.inline > li,
+	ul.inline > li > a {
+		display: inline-block;
+	}
+
+.pull-left { float: left; }
+.pull-right { float: right; }
+
+.form-group {
+	margin: 1em 0;
+}
+
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=email],
+input[type=tel] {
+	width: 50%;
+	margin: 5px 0 20px;
+	padding: 10px;
+	border: 1px solid #E6E6E6;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+	border-radius: 2px;
+	transition: box-shadow linear 0.2s,
+		border-color linear 0.2s;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+input[type=email]:focus,
+input[type=tel]:focus {
+	outline: none;
+	border-color: #80bdff;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.15),
+		inset 0 0 0 2px #80bdff;
+}
+
+.btn, a.btn {
+	border: 2px solid #000;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px;
+
+	background: #000;
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+
+	color: #FFF;
+	text-align: center;
+	font-weight: 700;
+	text-decoration: none;
+	font-size: 1.2em;
+	line-height: 1.2em;
+
+	cursor: pointer;
+	display: inline-block;
+
+	transition: transform linear 0.2s,
+		box-shadow linear 0.2s,
+		opacity linear 0.2s;
+}
+
+.btn:hover, .btn:focus {
+	transform: translateY(-3px);
+	box-shadow: 0px 10px 15px rgba(0,0,0,0.2);
+	outline: none;
+}
+
+.btn:active {
+	transform: translateY(2px);
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+	opacity: 0.75;
+}
+
+
+.btn:disabled,
+.btn:disabled:hover {
+	transform: none;
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+	opacity: 0.5;
+}
+
+.btn.inverted {
+	border-color: #FFF;
+	background: #FFF;
+	color: #000;
+}
+.btn.ghost {
+	border-color: #000;
+	background: #FFF;
+	color: #000;
+}
+
+label {
+	display: block;
+}
+
 .ui-calendar {
     display: block;
 }
