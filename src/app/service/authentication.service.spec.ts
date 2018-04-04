@@ -3,6 +3,8 @@ import { TestBed, inject } from '@angular/core/testing';
 import { AuthenticationService } from './authentication.service';
 import { CognitoService } from './cognito.service';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import { UserService } from './user.service';
+import { UserServiceStub } from '../testing/user-service-stub';
 
 describe('AuthenticationService', () => {
     let cognitoServiceSpy: jasmine.SpyObj<CognitoService>;
@@ -13,7 +15,8 @@ describe('AuthenticationService', () => {
         TestBed.configureTestingModule({
             providers: [ 
                 AuthenticationService,
-                { provide: CognitoService, useValue: cognitoServiceSpy }
+                { provide: CognitoService, useValue: cognitoServiceSpy },
+                { provide: UserService, useClass: UserServiceStub }
             ]
         });
     });
@@ -103,6 +106,7 @@ describe('AuthenticationService', () => {
             expect(user.name).toBe('Test User');
             expect(user.birthdate).toBe('1996-01-01');
             expect(user.phone).toBe('+19999999999');
+            expect(user.uid).toBe('1');
         });
     }));
 

@@ -40,9 +40,9 @@ export class TripsComponent implements OnInit {
             jsTrip.smoking = trip['smoking'];
             jsTrip.price = trip['price'];
 
-            for (const email in users) {
-                if (users[email] === 'Driver') {
-                    jsTrip.driver = email.toString();
+            for (const uid in users) {
+                if (users[uid] === 'driving') {
+                    jsTrip.driver = uid.toString();
                     break;
                 }
             }

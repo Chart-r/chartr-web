@@ -10,6 +10,7 @@ import { AuthenticationServiceStub } from '../../testing/authentication-service-
 import { AuthenticationService } from '../../service/authentication.service';
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
+import { UiMessageComponent } from '../ui/ui-message/ui-message.component';
 
 describe('PostTripComponent', () => {
     let component: PostTripComponent;
@@ -31,7 +32,7 @@ describe('PostTripComponent', () => {
                 CalendarModule,
                 BrowserAnimationsModule
             ],
-            declarations: [ PostTripComponent ],
+            declarations: [ PostTripComponent, UiMessageComponent ],
             providers: [
                 { provide: TripService, useClass: TripServiceStub },
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub },

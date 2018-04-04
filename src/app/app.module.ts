@@ -27,6 +27,7 @@ import { UiTripCardComponent } from './component/ui/ui-trip-card/ui-trip-card.co
 import { UiTripDetailsComponent } from './component/ui/ui-trip-details/ui-trip-details.component';
 import { UiUserDetailsSmallComponent } from './component/ui/ui-user-details-small/ui-user-details-small.component';
 import { PostTripComponent } from './component/post-trip/post-trip.component';
+import { UserService } from './service/user.service';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { PostTripComponent } from './component/post-trip/post-trip.component';
         LoginService,
         SignupService,
         AuthenticationService,
-        TripService
+        TripService,
+        UserService
     ],
     bootstrap: [AppComponent]
 })

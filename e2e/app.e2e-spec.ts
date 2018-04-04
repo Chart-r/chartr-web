@@ -81,7 +81,7 @@ describe('chartr-web App', () => {
         const priceInput = element(by.name('price'));
         priceInput.submit();
 
-        errorMessage = element(by.css('.alert-danger')).getText();
+        errorMessage = element(by.css('.message.error .desc')).getText();
         expect(errorMessage).toBe('Please complete all fields.');
     });
 

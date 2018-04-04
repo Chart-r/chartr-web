@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { CognitoService } from './cognito.service';
 import { User } from '../model/user';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthenticationService {
     private user: CognitoUser = null;
 
-    constructor(private cognitoService: CognitoService) { }
+    constructor(private cognitoService: CognitoService, private userService: UserService) { }
 
     clearAuthenticatedUser(): void {
         this.user = null;
@@ -71,7 +72,15 @@ export class AuthenticationService {
                     }
                 }
 
-                cb(null, user);
+                this.userService.getUser(user.email).subscribe(
+                    (data: User) => {
+                        user.uid = data.uid;
+                        cb(null, user);
+                    },
+                    err => {
+                        cb('Something went wrong. Please try again.', null);
+                    }
+                );
             }    
         });
     }
