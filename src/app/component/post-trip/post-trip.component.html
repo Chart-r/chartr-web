@@ -1,10 +1,10 @@
 <h1 class="display-4">Post Trip</h1>
-<div *ngIf="error" class="alert alert-danger" role="alert">
-    {{ error }}
-</div>
-<div *ngIf="success" class="alert alert-success" role="alert">
-    {{ success }}
-</div>
+<app-ui-message *ngIf="error" [className]="'error'">
+    <p class="desc">{{ error }}</p>
+</app-ui-message>
+<app-ui-message *ngIf="success" [className]="'success'">
+    <p class="desc">{{ success }}</p>
+</app-ui-message>
 <form #postTripForm="ngForm" (ngSubmit)="onSubmit(postTripForm)">
     <div class="form-group">
         <label for="startInput">Start</label>

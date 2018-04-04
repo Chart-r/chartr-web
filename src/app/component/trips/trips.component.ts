@@ -17,6 +17,7 @@ export class TripsComponent implements OnInit {
         this.tripService.getAllTrips().subscribe(
             trips => {
                 this.parseTrips(trips);
+                console.log(this.trips);
             },
             err => {
                 console.error(err);
@@ -41,7 +42,7 @@ export class TripsComponent implements OnInit {
             jsTrip.price = trip['price'];
 
             for (const uid in users) {
-                if (users[uid] === 'Driver') {
+                if (users[uid] === 'driving') {
                     jsTrip.driver = uid.toString();
                     break;
                 }

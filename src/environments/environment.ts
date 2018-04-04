@@ -8,5 +8,7 @@ export const environment = {
     awsRegion: 'us-east-2',
     cognitoUserPoolId: 'us-east-2_OHZrHKLGQ',
     cognitoClientId: '6v1br4a8fhl3cgmlt8fu3j6foi',
-    apiGatewayUrl: 'https://99sepehum8.execute-api.us-east-2.amazonaws.com/prod'
+    apiGatewayUrl: 'https://6zvb3ngfyk.execute-api.us-east-2.amazonaws.com/prod'
 };
+
+// https://99sepehum8.execute-api.us-east-2.amazonaws.com/prod

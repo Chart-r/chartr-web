@@ -7,7 +7,7 @@ export class UserServiceStub {
         const mockUser = {
             email: 'test@user.com',
             name: 'Test User',
-            birthdate: '01-01-1996',
+            birthdate: '1996-01-01',
             phone: '+19999999999',
             uid: '1'
         };
@@ -33,7 +33,7 @@ export class UserServiceStub {
                 }
 
                 else {
-                    scb('simulated success');
+                    scb({ uid: '1' });
                 }
             }
         };
