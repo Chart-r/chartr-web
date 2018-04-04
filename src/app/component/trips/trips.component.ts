@@ -17,7 +17,6 @@ export class TripsComponent implements OnInit {
         this.tripService.getAllTrips().subscribe(
             trips => {
                 this.parseTrips(trips);
-                console.log(this.trips);
             },
             err => {
                 console.error(err);
