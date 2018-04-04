@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../model/user';
 import { Trip } from '../model/trip';
 
-const TRIP_URL = `${environment.apiGatewayUrl}/trip/*`;
+const TRIP_URL = `${environment.apiGatewayUrl}/trip`;
 
 @Injectable()
 export class TripService {
@@ -18,28 +18,29 @@ export class TripService {
                 'Content-Type':  'application/json',
             })
         };
-        const reqBody = this.buildGoReqeustBody(user, trip);
-        return this.http.post(TRIP_URL, reqBody, httpOptions);
+        const reqBody = this.buildReqeustBody(user, trip);
+        const createTripUrl = `${environment.apiGatewayUrl}/user/${user.uid}/trip`;
+        return this.http.post(createTripUrl, reqBody, httpOptions);
     }
 
     getAllTrips() {        
-        return this.http.get(TRIP_URL);
+        return this.http.get(`${TRIP_URL}/current`);
     }
 
-    buildGoReqeustBody(user: User, trip: Trip) {
-        const goBody = {};
+    buildReqeustBody(user: User, trip: Trip) {
+        const reqBody = {};
 
-        goBody['email'] = user.email;
-        goBody['start_lat'] = trip.startLat;
-        goBody['start_lng'] = trip.startLong;
-        goBody['end_lat'] = trip.endLat;
-        goBody['end_lng'] = trip.endLong;
-        goBody['start_time'] = trip.startTime.getTime();
-        goBody['end_time'] = 0;
-        goBody['seats'] = trip.seats;
-        goBody['price'] = trip.price;
-        goBody['smoking'] = trip.smoking;
+        reqBody['email'] = user.email;
+        reqBody['start_lat'] = trip.startLat;
+        reqBody['start_lng'] = trip.startLong;
+        reqBody['end_lat'] = trip.endLat;
+        reqBody['end_lng'] = trip.endLong;
+        reqBody['start_time'] = trip.startTime.getTime();
+        reqBody['end_time'] = 0;
+        reqBody['seats'] = trip.seats;
+        reqBody['price'] = trip.price;
+        reqBody['smoking'] = trip.smoking;
 
-        return JSON.stringify(goBody);
+        return JSON.stringify(reqBody);
     }
 }

@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MockBackend } from '@angular/http/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
+import { UserService } from './user.service';
+import { UserServiceStub } from '../testing/user-service-stub';
 
 describe('SignupService', () => {
     let cognitoServiceSpy: jasmine.SpyObj<CognitoService>;
@@ -26,7 +28,8 @@ describe('SignupService', () => {
             imports: [ HttpClientTestingModule ],
             providers: [
                 SignupService,
-                { provide: CognitoService, useValue: cognitoServiceSpy }
+                { provide: CognitoService, useValue: cognitoServiceSpy },
+                { provide: UserService, useClass: UserServiceStub }
             ]
         });
 
@@ -51,20 +54,7 @@ describe('SignupService', () => {
         });
     }));
 
-    it('should save to dynamo db', inject([SignupService], (service: SignupService) => {
-        const mockResponse = { message: 'response' };
-
-        service.addToDB(user, () => null);
-
-        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/*`);
-
-        expect(req.request.headers.get('Content-Type')).toBe('application/json');
-        expect(req.request.method).toBe('POST');
-        req.flush(mockResponse);
-        httpTestingController.verify();
-    }));
-
-    it('should return error message on failure', inject([SignupService], (service: SignupService) => {
+    it('should return error message on sign up failure', inject([SignupService], (service: SignupService) => {
         const simulatedError = 'simulated failure';
 
         cognitoServiceSpy.getUserPool.and.returnValue({

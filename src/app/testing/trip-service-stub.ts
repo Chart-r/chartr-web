@@ -31,8 +31,8 @@ export class TripServiceStub {
                     'smoking': false,
                     'price': 30,
                     'users': {
-                        'test@rider.com': 'Rider',
-                        'test@user.com': 'Driver'
+                        '2222': 'Rider',
+                        '1111': 'Driver'
                     }
                 };
 

@@ -31,6 +31,6 @@ describe('TripsComponent', () => {
     it('should load trips', () => {
         fixture.detectChanges();
         expect(component.trips.length).toBe(1);
-        expect(component.trips[0].driver).toBe('test@user.com');
+        expect(component.trips[0].driver).toBe('1111');
     });
 });
