@@ -1,18 +1,49 @@
 <app-ui-app-header [user]="user"></app-ui-app-header>
 <div class="container full-height-content">
     <h1 class="display-4">Search Trips</h1>
-    <app-ui-trip-card
-        *ngFor="let trip of results" 
-        className="col-4"
-        [driverUID]="trip.driver"
-        [seatsfilled]="trip.seatsfilled()"
-        [totalseats]="trip.seats"
-        [departtime]="trip.startTime"
-        [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
-        [arrivetime]="trip.endTime"
-        [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
-    </app-ui-trip-card>
+    <form #searchForm="ngForm" (ngSubmit)="filterTrips()">
+        <div class="form-group">
+            <label for="startLocFilter" class="caption">Start Location</label>
+            <input type="text" class="form-control" id="startLocFilter" 
+                [(ngModel)]="startLocationFilter" name="startLocationFilter">
+        </div>
+        <div class="form-group">
+            <label for="endLocFilter" class="caption">End Location</label>
+            <input type="text" class="form-control" id="endLocFilter" 
+                [(ngModel)]="endLocationFilter" name="endLocationFilter">
+        </div>
+        <div class="form-group">
+            <label for="prefEmailFilter" class="caption">Preferred Driver Email</label>
+            <input type="email" class="form-control" id="prefEmailFilter" 
+                [(ngModel)]="emailFilter" name="emailFilter">
+        </div>
+        <div class="form-group">
+            <label for="priceFromFilter" class="caption">Lowest Price</label>
+            <input type="number" class="form-control" id="priceFromFilter" 
+                [(ngModel)]="priceFromFilter" name="priceFromFilter">
+        </div>
+        <div class="form-group">
+            <label for="priceToFilter" class="caption">Highest Price</label>
+            <input type="number" class="form-control" id="priceToFilter" 
+                [(ngModel)]="priceToFilter" name="priceToFilter">
+        </div>
 
-    <p *ngIf="results.length == 0">No trips match your criteria.</p>
+        <button [disabled]="filtering || !searchForm.form.valid" type="submit" class="btn">Search</button>
+    </form>
+
+    <div class="container fluid">
+        <app-ui-trip-card
+            *ngFor="let trip of results" 
+            className="col-4"
+            [driverUID]="trip.driver"
+            [seatsfilled]="trip.seatsfilled()"
+            [totalseats]="trip.seats"
+            [departtime]="trip.startTime"
+            [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+            [arrivetime]="trip.endTime"
+            [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+        </app-ui-trip-card>
+        <p *ngIf="results.length == 0">No trips match your criteria.</p>
+    </div>
 </div>
 <app-ui-app-footer [user]="user"></app-ui-app-footer>

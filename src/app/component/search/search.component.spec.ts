@@ -13,7 +13,7 @@ import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.componen
 import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
-
+import { FormsModule, NgForm } from '@angular/forms';
 
 describe('SearchComponent', () => {
     let component: SearchComponent;
@@ -25,7 +25,7 @@ describe('SearchComponent', () => {
 
         routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
         TestBed.configureTestingModule({
-            imports: [ HttpClientTestingModule ],
+            imports: [ HttpClientTestingModule, FormsModule ],
             declarations: [ SearchComponent, TripsComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 

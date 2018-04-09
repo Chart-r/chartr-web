@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../service/authentication.service';
 import { User } from '../../model/user';
 import { TripService } from '../../service/trip.service';
 import { Trip } from '../../model/trip';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-search',
@@ -14,6 +15,12 @@ export class SearchComponent implements OnInit {
     public user: User = null;
     public results: Trip[];
     public trips: Trip[];
+    public startLocationFilter: string;
+    public endLocationFilter: string;
+    public emailFilter: string;
+    public priceFromFilter: string;
+    public priceToFilter: string;
+    public filtering = false;
 
     constructor(private authenticationService: AuthenticationService, private router: Router, private tripService: TripService) { }
 
@@ -61,7 +68,37 @@ export class SearchComponent implements OnInit {
     }
 
     filterTrips() {
-        this.results = this.trips.filter((e) => true);
+        this.filtering = true;
+        this.results = this.trips.filter((e) => {
+            let pass = true;
+
+            // filter by start location
+            if (this.startLocationFilter) {
+                pass = pass && this.reverseGeocode(e.endLat, e.endLong).indexOf(this.startLocationFilter) > -1;
+            }
+
+            // filter by end location
+            if (this.endLocationFilter) {
+                pass = pass && this.reverseGeocode(e.startLat, e.startLong).indexOf(this.endLocationFilter) > -1;
+            }
+
+            // filter email
+            if (this.emailFilter) {
+                pass = pass && e.driver === this.emailFilter;
+            }
+
+            // filter by price(s)
+            if (this.priceFromFilter) {
+                pass = pass && e.price >= parseFloat(this.priceFromFilter);
+            }
+
+            if (this.priceToFilter) {
+                pass = pass && e.price <= parseFloat(this.priceToFilter);
+            }
+
+            return pass;
+        });
+        this.filtering = false;
     }
 
     parseTrips(trips) {
