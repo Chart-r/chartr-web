@@ -4,8 +4,7 @@
     <p class="lead" *ngIf="user">Hello, {{ user.name }}</p>
     <a class="btn btn-primary" routerLink="/post" role="button">Post a Trip</a>
     <div *ngIf="user">
-        <app-trips></app-trips>
+        <app-trips [user]="user"></app-trips>
     </div>
-    <a class="btn btn-primary" routerLink="/logout" role="button">Log Out</a>
 </div>
 <app-ui-app-footer [user]="user"></app-ui-app-footer>
