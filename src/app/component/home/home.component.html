@@ -1,7 +1,11 @@
-<h1 class="display-4">Trips</h1>
-<p class="lead" *ngIf="user">Hello, {{ user.name }}</p>
-<a class="btn btn-primary" routerLink="/post" role="button">Post a Trip</a>
-<div *ngIf="user">
-    <app-trips></app-trips>
+<app-ui-app-header></app-ui-app-header>
+<div class="container full-height-content">
+    <h1 class="display-4">Trips</h1>
+    <p class="lead" *ngIf="user">Hello, {{ user.name }}</p>
+    <a class="btn btn-primary" routerLink="/post" role="button">Post a Trip</a>
+    <div *ngIf="user">
+        <app-trips></app-trips>
+    </div>
+    <a class="btn btn-primary" routerLink="/logout" role="button">Log Out</a>
 </div>
-<a class="btn btn-primary" routerLink="/logout" role="button">Log Out</a>
+<app-ui-app-footer></app-ui-app-footer>

@@ -8,6 +8,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CognitoService } from '../../service/cognito.service';
 import { LoginServiceStub } from '../../testing/login-service-stub';
 import { UiMessageComponent } from '../ui/ui-message/ui-message.component';
+import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -19,7 +21,7 @@ describe('LoginComponent', () => {
         routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
         TestBed.configureTestingModule({
             imports: [ FormsModule ],
-            declarations: [ LoginComponent, UiMessageComponent ],
+            declarations: [ LoginComponent, UiMessageComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [
                 { provide: LoginService, useClass: LoginServiceStub },
                 { provide: Router, useValue: routerSpy }

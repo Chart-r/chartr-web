@@ -70,6 +70,12 @@ body {
 .col-3 { width: 25%; }
 .col-2 { width: 16.667%; }
 
+.container.full-height-content {
+	padding-top: 50px;
+	padding-bottom: 200px;
+	min-height: 100vh;
+}
+
 /* base typography */
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

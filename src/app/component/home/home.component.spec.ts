@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { RouterStub } from '../../testing/router-stubs';
 import { AuthenticationServiceStub } from '../../testing/authentication-service-stub';
 import { TripsComponent } from '../trips/trips.component';
+import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 import { TripService } from '../../service/trip.service';
 
 
@@ -22,7 +24,7 @@ describe('HomeComponent', () => {
         routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
         TestBed.configureTestingModule({
             imports: [ HttpClientTestingModule ],
-            declarations: [ HomeComponent, TripsComponent ],
+            declarations: [ HomeComponent, TripsComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
