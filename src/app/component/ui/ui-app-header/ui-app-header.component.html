@@ -4,12 +4,16 @@
 			<h1 class="site-title"><a routerLink="/">Chartr</a></h1>
 		</div>
 		<div class="search col-4">
-			<input type="text" placeholder="Find trips to ..." />
+			<!-- <input type="text" placeholder="Find trips to ..." /> -->
 		</div>
 		<div class="navigation col-3">
 			<ul class="inline" *ngIf="user">
 				<li><p><a routerLink="/search">Search</a></p></li>
 				<li><p><a routerLink="/logout">Logout</a></p></li>
+			</ul>
+			<ul class="inline" *ngIf="!user">
+				<li><p><a routerLink="/login">Login</a></p></li>
+				<li><p><a routerLink="/signup">Sign Up</a></p></li>
 			</ul>
 		</div>
 		<div class="user-cta col-3 pull-right">
