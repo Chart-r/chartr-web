@@ -44,9 +44,10 @@ describe('chartr-web App', () => {
         passwordInput.clear();
         emailInput.sendKeys('invalid-email');
         passwordInput.sendKeys('password');
+        passwordInput.submit();
 
-        errorMessage = element(by.css('.message.error .desc')).getText();
-        expect(errorMessage).toBe('Please complete all fields.');
+        errorMessage = element(by.css('.message.error .desc'));
+        expect(errorMessage.getText()).toBe('Please complete all fields.');
     });
 
     it('should redirect to home page on valid login', () => {
