@@ -1,15 +1,11 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Source</th>
-            <th scope="col">Destination</th>
-            <th scope="col">Driver</th>
-            <th scope="col">Date</th>
-            <th scope="col">Price</th>
-            <th scope="col">Seats</th>
-            <th scope="col">Smoking</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<app-ui-trip-card
+    *ngFor="let trip of trips" 
+    className="col-4"
+    [driverName]="trip.driver"
+    [seatsfilled]="trip.seatstaken"
+    [totalseats]="trip.seats"
+    [departtime]="trip.startTime"
+    [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+    [arrivetime]="trip.endTime"
+    [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+</app-ui-trip-card>

@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TripsComponent } from './trips.component';
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
+import { UiTripCardComponent } from '../ui/ui-trip-card/ui-trip-card.component';
 
 describe('TripsComponent', () => {
     let component: TripsComponent;
@@ -11,7 +12,7 @@ describe('TripsComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ TripsComponent ],
+            declarations: [ TripsComponent, UiTripCardComponent ],
             providers: [
                 { provide: TripService, useClass: TripServiceStub }
             ]
