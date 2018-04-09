@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { AuthenticationService } from '../../service/authentication.service';
 import { CognitoService } from '../../service/cognito.service';
@@ -29,7 +30,8 @@ describe('HomeComponent', () => {
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
                 TripService
-            ]
+            ],
+            schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })
         .compileComponents();
     }));

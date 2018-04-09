@@ -8,9 +8,9 @@ const TEST_DRIVER_AVATAR = 'testimage.png';
 const TEST_RATING = '5.00';
 const TEST_SEATS = 10;
 const TEST_SEATS_FILLED = 2;
-const TEST_DEPART_TIME = 'TUESDAY, FEB 20, 2018 @ 3:15 PM';
+const TEST_DEPART_TIME = "FRI, APR 27, 2018, 3:28 PM";
 const TEST_DEPART_LOC = 'Champaign, IL';
-const TEST_ARRIVE_TIME = 'TUESDAY, FEB 20, 2018 @ 6:15 PM';
+const TEST_ARRIVE_TIME = "WED, DEC 31, 1969, 6:00 PM";
 const TEST_ARRIVE_LOC = 'Chicago, IL';
 
 describe('UiTripCardComponent', () => {
@@ -32,9 +32,9 @@ describe('UiTripCardComponent', () => {
         component.rating = TEST_RATING;
         component.seatsfilled = TEST_SEATS_FILLED;
         component.totalseats = TEST_SEATS;
-        component.departtime = TEST_DEPART_TIME;
+        component.departtime = new Date(TEST_DEPART_TIME);
         component.departdest = TEST_DEPART_LOC;
-        component.arrivetime = TEST_ARRIVE_TIME;
+        component.arrivetime = new Date(TEST_ARRIVE_TIME);
         component.arrivedest = TEST_ARRIVE_LOC;
         component.avatar = TEST_DRIVER_AVATAR;
         fixture.detectChanges();
