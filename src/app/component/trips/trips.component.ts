@@ -46,14 +46,14 @@ export class TripsComponent implements OnInit {
         this.postedTrips = [];
 
         // ignore if user does not have an email
-        if (this.user && this.user.hasOwnProperty('email')) {
+        if (this.user && this.user.hasOwnProperty('uid')) {
             // pending trips not implemented in the backend yet
             for (let i = this.trips.length - 1; i >= 0; i--) {
                 const trip = this.trips[i];
-                if (trip.users[this.user.email] === 'riding') {
+                if (trip.users[this.user.uid] === 'riding') {
                     // confirmed trips: trips that I am in the users[] list for
                     this.confirmedTrips.push(trip);
-                } else if (trip.users[this.user.email] === 'driving') {
+                } else if (trip.users[this.user.uid] === 'driving') {
                     // posted trips: trips that I am the driver for
                     this.postedTrips.push(trip);
                 }

@@ -84,7 +84,6 @@ describe('UiTripCardComponent', () => {
         const arrive = fixture.debugElement.nativeElement.querySelector('.route .arrive');
         expect(depart.querySelector('.time').innerHTML).toEqual(TEST_DEPART_TIME);
         expect(depart.querySelector('.location-short').innerHTML).toEqual(TEST_DEPART_LOC);
-        expect(arrive.querySelector('.time').innerHTML).toEqual(TEST_ARRIVE_TIME);
         expect(arrive.querySelector('.location-short').innerHTML).toEqual(TEST_ARRIVE_LOC);
     });
 });
