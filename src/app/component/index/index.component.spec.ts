@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
+
 import { IndexComponent } from './index.component';
 
 describe('IndexComponent', () => {
@@ -8,7 +11,7 @@ describe('IndexComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ IndexComponent ]
+            declarations: [ IndexComponent, UiAppFooterComponent, UiAppHeaderComponent ]
         })
         .compileComponents();
     }));

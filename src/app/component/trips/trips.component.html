@@ -1,15 +1,63 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Source</th>
-            <th scope="col">Destination</th>
-            <th scope="col">Driver</th>
-            <th scope="col">Date</th>
-            <th scope="col">Price</th>
-            <th scope="col">Seats</th>
-            <th scope="col">Smoking</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<h2>Nearby Trips</h2>
+<div class="container fluid">
+    <app-ui-trip-card
+        *ngFor="let trip of trips" 
+        className="col-4"
+        [driverUID]="trip.driver"
+        [seatsfilled]="trip.seatsfilled()"
+        [totalseats]="trip.seats"
+        [departtime]="trip.startTime"
+        [departdest]="trip.startLocation"
+        [arrivetime]="trip.endTime"
+        [arrivedest]="trip.endLocation">
+    </app-ui-trip-card>
+</div>
+
+<h2>My Trips</h2>
+<h3>Confirmed</h3>
+<div class="container fluid">
+    <app-ui-trip-card
+        *ngFor="let trip of confirmedTrips" 
+        className="col-4"
+        [driverUID]="trip.driver"
+        [seatsfilled]="trip.seatsfilled()"
+        [totalseats]="trip.seats"
+        [departtime]="trip.startTime"
+        [departdest]="trip.startLocation"
+        [arrivetime]="trip.endTime"
+        [arrivedest]="trip.endLocation">
+    </app-ui-trip-card>
+    <p *ngIf="confirmedTrips.length == 0" class="muted">You have no confirmed trips.</p>
+</div>
+
+<h3>Pending</h3>
+<div class="container fluid">
+    <app-ui-trip-card
+        *ngFor="let trip of pendingTrips" 
+        className="col-4"
+        [driverUID]="trip.driver"
+        [seatsfilled]="trip.seatsfilled()"
+        [totalseats]="trip.seats"
+        [departtime]="trip.startTime"
+        [departdest]="trip.startLocation"
+        [arrivetime]="trip.endTime"
+        [arrivedest]="trip.endLocation">
+    </app-ui-trip-card>
+    <p *ngIf="pendingTrips.length == 0" class="muted">You have no pending trips.</p>
+</div>
+
+<h3>Posted</h3>
+<div class="container fluid">
+    <app-ui-trip-card
+        *ngFor="let trip of postedTrips" 
+        className="col-4"
+        [driverUID]="trip.driver"
+        [seatsfilled]="trip.seatsfilled()"
+        [totalseats]="trip.seats"
+        [departtime]="trip.startTime"
+        [departdest]="trip.startLocation"
+        [arrivetime]="trip.endTime"
+        [arrivedest]="trip.endLocation">
+    </app-ui-trip-card>
+    <p *ngIf="postedTrips.length == 0" class="muted">You have no posted trips.</p>
+</div>

@@ -27,13 +27,14 @@ describe('TripService', () => {
         const mockTrip = new Trip();
         const mockResponse = { message: 'response' };
 
+        mockUser.uid = '1';
         mockTrip.startTime = new Date();
 
         service.createTrip(mockUser, mockTrip).subscribe(data => {
             expect(data).toEqual(mockResponse);
         });
 
-        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/trip/*`);
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/1/trip`);
         
         expect(req.request.headers.get('Content-Type')).toBe('application/json');
         expect(req.request.method).toBe('POST');
@@ -48,7 +49,7 @@ describe('TripService', () => {
             expect(data).toEqual(mockResponse);
         });
 
-        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/trip/*`);
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/trip/current`);
 
         expect(req.request.method).toBe('GET');
         req.flush(mockResponse);

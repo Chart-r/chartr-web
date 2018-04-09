@@ -10,6 +10,9 @@ import { AuthenticationServiceStub } from '../../testing/authentication-service-
 import { AuthenticationService } from '../../service/authentication.service';
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
+import { UiMessageComponent } from '../ui/ui-message/ui-message.component';
+import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 
 describe('PostTripComponent', () => {
     let component: PostTripComponent;
@@ -31,7 +34,7 @@ describe('PostTripComponent', () => {
                 CalendarModule,
                 BrowserAnimationsModule
             ],
-            declarations: [ PostTripComponent ],
+            declarations: [ PostTripComponent, UiMessageComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [
                 { provide: TripService, useClass: TripServiceStub },
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub },
@@ -54,7 +57,7 @@ describe('PostTripComponent', () => {
 
     it('should display post trip form', () => {
         fixture.detectChanges();
-        const h1: HTMLElement = fixture.nativeElement.querySelector('h1');
+        const h1: HTMLElement = fixture.nativeElement.querySelector('.full-height-content h1');
         expect(h1.textContent).toBe('Post Trip');
     });
 

@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { RouterStub } from '../../testing/router-stubs';
 import { SignupServiceStub } from '../../testing/signup-service-stub';
 import { UiMessageComponent } from '../ui/ui-message/ui-message.component';
+import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 
 describe('SignupComponent', () => {
     let component: SignupComponent;
@@ -17,7 +19,7 @@ describe('SignupComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ FormsModule ],
-            declarations: [ SignupComponent, UiMessageComponent ],
+            declarations: [ SignupComponent, UiMessageComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [
                 { provide: SignupService, useClass: SignupServiceStub }
             ]

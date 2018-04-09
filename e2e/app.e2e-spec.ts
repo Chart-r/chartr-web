@@ -9,7 +9,7 @@ describe('chartr-web App', () => {
 
     it('should display login form', () => {
         browser.get('/login');
-        const headerText = element(by.css('.content h1')).getText();
+        const headerText = element(by.css('.full-height-content h1')).getText();
         expect(headerText).toBe('Log In');
     });
 
@@ -81,7 +81,7 @@ describe('chartr-web App', () => {
         const priceInput = element(by.name('price'));
         priceInput.submit();
 
-        errorMessage = element(by.css('.alert-danger')).getText();
+        errorMessage = element(by.css('.message.error .desc')).getText();
         expect(errorMessage).toBe('Please complete all fields.');
     });
 

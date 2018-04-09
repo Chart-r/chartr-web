@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TripsComponent } from './trips.component';
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
+import { GeoService } from '../../service/geo.service';
+import { GeoServiceStub } from '../../testing/geo-service-stub';
 
 describe('TripsComponent', () => {
     let component: TripsComponent;
@@ -13,8 +16,10 @@ describe('TripsComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ TripsComponent ],
             providers: [
-                { provide: TripService, useClass: TripServiceStub }
-            ]
+                { provide: TripService, useClass: TripServiceStub },
+                { provide: GeoService, useClass: GeoServiceStub }
+            ],
+            schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })
         .compileComponents();
     }));
@@ -31,6 +36,6 @@ describe('TripsComponent', () => {
     it('should load trips', () => {
         fixture.detectChanges();
         expect(component.trips.length).toBe(1);
-        expect(component.trips[0].driver).toBe('test@user.com');
+        expect(component.trips[0].driver).toBe('1111');
     });
 });

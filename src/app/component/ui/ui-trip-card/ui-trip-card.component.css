@@ -6,11 +6,22 @@
 	box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
 
+	.trip-card .user-meta p,
 	.trip-card .trip-meta p {
 		margin: 2px;
 		padding: 0;
 		line-height: 1em;
 	}
+
+	.trip-card .offset-top {
+		margin-top: 10px;
+	}
+
+		.trip-card .user-meta .avatar {
+			border-radius: 50%;
+			height: 30px;
+			margin-right: 10px;
+		}
 
 	.trip-card .trip-meta p {
 		text-align: right;
