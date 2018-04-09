@@ -17,6 +17,27 @@ export class SignupService {
     ) { }
 
     register(user: User, password: string, cb: (err: string, result: any) => void) {
+        const attributes = this.buildCognitoAttributes(user);        
+
+        this.cognitoService.getUserPool().signUp(user.email, password, attributes, null, (err, result) => {
+            if (err) {
+                cb(err.message, null);
+            }
+
+            else {
+                this.userService.createUser(user).subscribe(
+                    res => {
+                        cb(null, res);
+                    },
+                    err => {
+                        cb('Something went wrong. Please try again.', null);
+                    }
+                );
+            }
+        });
+    }
+
+    private buildCognitoAttributes(user: User) {
         const attributes = [];
 
         const dataEmail = {
@@ -41,21 +62,6 @@ export class SignupService {
         attributes.push(new CognitoUserAttribute(dataPhone));
         attributes.push(new CognitoUserAttribute(dataBirthdate));
 
-        this.cognitoService.getUserPool().signUp(user.email, password, attributes, null, (err, result) => {
-            if (err) {
-                cb(err.message, null);
-            }
-
-            else {
-                this.userService.createUser(user).subscribe(
-                    res => {
-                        cb(null, res);
-                    },
-                    err => {
-                        cb('Something went wrong. Please try again.', null);
-                    }
-                );
-            }
-        });
+        return attributes;
     }
 }
