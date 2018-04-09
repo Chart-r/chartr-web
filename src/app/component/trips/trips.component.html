@@ -7,9 +7,9 @@
         [seatsfilled]="trip.seatsfilled()"
         [totalseats]="trip.seats"
         [departtime]="trip.startTime"
-        [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+        [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+        [arrivedest]="trip.endLocation">
     </app-ui-trip-card>
 </div>
 
@@ -23,9 +23,9 @@
         [seatsfilled]="trip.seatsfilled()"
         [totalseats]="trip.seats"
         [departtime]="trip.startTime"
-        [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+        [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+        [arrivedest]="trip.endLocation">
     </app-ui-trip-card>
     <p *ngIf="confirmedTrips.length == 0" class="muted">You have no confirmed trips.</p>
 </div>
@@ -39,9 +39,9 @@
         [seatsfilled]="trip.seatsfilled()"
         [totalseats]="trip.seats"
         [departtime]="trip.startTime"
-        [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+        [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+        [arrivedest]="trip.endLocation">
     </app-ui-trip-card>
     <p *ngIf="pendingTrips.length == 0" class="muted">You have no pending trips.</p>
 </div>
@@ -55,9 +55,9 @@
         [seatsfilled]="trip.seatsfilled()"
         [totalseats]="trip.seats"
         [departtime]="trip.startTime"
-        [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+        [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+        [arrivedest]="trip.endLocation">
     </app-ui-trip-card>
     <p *ngIf="postedTrips.length == 0" class="muted">You have no posted trips.</p>
 </div>

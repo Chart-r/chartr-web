@@ -31,6 +31,7 @@ import { UiAppHeaderComponent } from './component/ui/ui-app-header/ui-app-header
 import { PostTripComponent } from './component/post-trip/post-trip.component';
 import { UserService } from './service/user.service';
 import { SearchComponent } from './component/search/search.component';
+import { GeoService } from './service/geo.service';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { SearchComponent } from './component/search/search.component';
         SignupService,
         AuthenticationService,
         TripService,
-        UserService
+        UserService,
+        GeoService
     ],
     bootstrap: [AppComponent]
 })

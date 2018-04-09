@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TripService } from '../../service/trip.service';
+import { GeoService } from '../../service/geo.service';
 import { Trip } from '../../model/trip';
 import { User } from '../../model/user';
 
@@ -16,7 +17,7 @@ export class TripsComponent implements OnInit {
 
     @Input() user: User;
 
-    constructor(private tripService: TripService) { }
+    constructor(private tripService: TripService, private geoService: GeoService) { }
 
     ngOnInit() {
         this.trips = [];
@@ -80,6 +81,14 @@ export class TripsComponent implements OnInit {
             jsTrip.seats = trip['seats'];
             jsTrip.smoking = trip['smoking'];
             jsTrip.price = trip['price'];
+
+            // location strings
+            jsTrip.startLocation = `${trip.startLat || '-'},${trip.startLong || '-'}`;
+            jsTrip.endLocation = `${trip.endLat || '-'},${trip.endLong || '-'}`;
+            const updateStart = function(err, res) { if (! err) { this.startLocation = res; } };
+            const updateEnd = function(err, res) { if (! err) { this.endLocation = res; } };
+            this.geoService.reverseGeocode(jsTrip.startLat, jsTrip.startLong, updateStart.bind(jsTrip));
+            this.geoService.reverseGeocode(jsTrip.endLat, jsTrip.endLong, updateEnd.bind(jsTrip));
 
             for (const uid in users) {
                 if (users[uid] === 'driving') {

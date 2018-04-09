@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication.service';
 import { User } from '../../model/user';
 import { TripService } from '../../service/trip.service';
+import { GeoService } from '../../service/geo.service';
 import { Trip } from '../../model/trip';
 import { NgForm } from '@angular/forms';
 
@@ -22,7 +23,11 @@ export class SearchComponent implements OnInit {
     public priceToFilter: string;
     public filtering = false;
 
-    constructor(private authenticationService: AuthenticationService, private router: Router, private tripService: TripService) { }
+    constructor(
+        private authenticationService: AuthenticationService,
+        private router: Router,
+        private tripService: TripService,
+        private geoService: GeoService) { }
 
     ngOnInit() {
         // authentication
@@ -63,10 +68,6 @@ export class SearchComponent implements OnInit {
         );
     }
 
-    reverseGeocode(lat, long) {
-        return 'Chicago, IL';
-    }
-
     filterTrips() {
         this.filtering = true;
         this.results = this.trips.filter((e) => {
@@ -74,12 +75,12 @@ export class SearchComponent implements OnInit {
 
             // filter by start location
             if (this.startLocationFilter) {
-                pass = pass && this.reverseGeocode(e.endLat, e.endLong).indexOf(this.startLocationFilter) > -1;
+                pass = pass && e['startLocation'].indexOf(this.startLocationFilter) > -1;
             }
 
             // filter by end location
             if (this.endLocationFilter) {
-                pass = pass && this.reverseGeocode(e.startLat, e.startLong).indexOf(this.endLocationFilter) > -1;
+                pass = pass && e['endLocation'].indexOf(this.endLocationFilter) > -1;
             }
 
             // filter email
@@ -121,6 +122,14 @@ export class SearchComponent implements OnInit {
             jsTrip.seats = trip['seats'];
             jsTrip.smoking = trip['smoking'];
             jsTrip.price = trip['price'];
+
+            // location strings
+            jsTrip.startLocation = `${trip.startLat || '-'},${trip.startLong || '-'}`;
+            jsTrip.endLocation = `${trip.endLat || '-'},${trip.endLong || '-'}`;
+            const updateStart = function(err, res) { if (! err) { this.startLocation = res; } };
+            const updateEnd = function(err, res) { if (! err) { this.endLocation = res; } };
+            this.geoService.reverseGeocode(jsTrip.startLat, jsTrip.startLong, updateStart.bind(jsTrip));
+            this.geoService.reverseGeocode(jsTrip.endLat, jsTrip.endLong, updateEnd.bind(jsTrip));
 
             for (const uid in users) {
                 if (users[uid] === 'driving') {

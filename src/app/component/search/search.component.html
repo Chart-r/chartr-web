@@ -39,9 +39,9 @@
             [seatsfilled]="trip.seatsfilled()"
             [totalseats]="trip.seats"
             [departtime]="trip.startTime"
-            [departdest]="reverseGeocode(trip.startLat, trip.startLong)"
+            [departdest]="trip.startLocation"
             [arrivetime]="trip.endTime"
-            [arrivedest]="reverseGeocode(trip.endLat, trip.endLong)">
+            [arrivedest]="trip.endLocation">
         </app-ui-trip-card>
         <p *ngIf="results.length == 0">No trips match your criteria.</p>
     </div>

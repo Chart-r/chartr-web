@@ -12,7 +12,8 @@ import { TripsComponent } from '../trips/trips.component';
 import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
 import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 import { TripService } from '../../service/trip.service';
-
+import { GeoService } from '../../service/geo.service';
+import { GeoServiceStub } from '../../testing/geo-service-stub';
 
 
 describe('HomeComponent', () => {
@@ -29,7 +30,8 @@ describe('HomeComponent', () => {
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
-                TripService
+                TripService,
+                { provide: GeoService, useClass: GeoServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })

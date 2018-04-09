@@ -14,6 +14,8 @@ import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.componen
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
 import { FormsModule, NgForm } from '@angular/forms';
+import { GeoService } from '../../service/geo.service';
+import { GeoServiceStub } from '../../testing/geo-service-stub';
 
 describe('SearchComponent', () => {
     let component: SearchComponent;
@@ -30,7 +32,8 @@ describe('SearchComponent', () => {
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
-                { provide: TripService, useClass: TripServiceStub }
+                { provide: TripService, useClass: TripServiceStub },
+                { provide: GeoService, useClass: GeoServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })
@@ -74,10 +77,6 @@ describe('SearchComponent', () => {
         authenticationService.isLoggedIn = false;
         fixture.detectChanges();
         expect(routerSpy.navigateByUrl.calls.count()).toBe(1);
-    });
-
-    it('should calculate reverse geocode', () => {
-        expect(component.reverseGeocode(41.876797, -87.629658)).toContain('Chicago, IL');
     });
 
     it('should load trips', () => {
