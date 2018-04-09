@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UiTripCardComponent } from './ui-trip-card.component';
+import { UserService } from '../../../service/user.service';
+import { UserServiceStub } from '../../../testing/user-service-stub';
 
 const TEST_CLASS_NAME = 'col-4';
 const TEST_DRIVER_NAME = 'NiceDriver123';
@@ -19,7 +21,10 @@ describe('UiTripCardComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ UiTripCardComponent ]
+            declarations: [ UiTripCardComponent ],
+            providers: [
+                { provide: UserService, useClass: UserServiceStub }
+            ]
         })
         .compileComponents();
     }));

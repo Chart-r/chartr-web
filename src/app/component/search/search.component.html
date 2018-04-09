@@ -4,7 +4,7 @@
     <app-ui-trip-card
         *ngFor="let trip of results" 
         className="col-4"
-        [driverName]="trip.driver"
+        [driverUID]="trip.driver"
         [seatsfilled]="trip.seatsfilled()"
         [totalseats]="trip.seats"
         [departtime]="trip.startTime"

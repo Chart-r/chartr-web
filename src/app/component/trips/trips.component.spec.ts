@@ -5,7 +5,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TripsComponent } from './trips.component';
 import { TripService } from '../../service/trip.service';
 import { TripServiceStub } from '../../testing/trip-service-stub';
-import { UiTripCardComponent } from '../ui/ui-trip-card/ui-trip-card.component';
 
 describe('TripsComponent', () => {
     let component: TripsComponent;
@@ -13,7 +12,7 @@ describe('TripsComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ TripsComponent, UiTripCardComponent ],
+            declarations: [ TripsComponent ],
             providers: [
                 { provide: TripService, useClass: TripServiceStub }
             ],
