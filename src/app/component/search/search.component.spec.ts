@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HomeComponent } from './home.component';
+import { SearchComponent } from './search.component';
 import { AuthenticationService } from '../../service/authentication.service';
 import { CognitoService } from '../../service/cognito.service';
 import { Router } from '@angular/router';
@@ -12,25 +12,27 @@ import { TripsComponent } from '../trips/trips.component';
 import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
 import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 import { TripService } from '../../service/trip.service';
+import { TripServiceStub } from '../../testing/trip-service-stub';
+import { FormsModule, NgForm } from '@angular/forms';
 import { GeoService } from '../../service/geo.service';
 import { GeoServiceStub } from '../../testing/geo-service-stub';
 
-
-describe('HomeComponent', () => {
-    let component: HomeComponent;
-    let fixture: ComponentFixture<HomeComponent>;
+describe('SearchComponent', () => {
+    let component: SearchComponent;
+    let fixture: ComponentFixture<SearchComponent>;
     let routerSpy: jasmine.SpyObj<Router>;
     let authenticationService: AuthenticationServiceStub;
 
     beforeEach(async(() => {
+
         routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
         TestBed.configureTestingModule({
-            imports: [ HttpClientTestingModule ],
-            declarations: [ HomeComponent, TripsComponent, UiAppFooterComponent, UiAppHeaderComponent ],
+            imports: [ HttpClientTestingModule, FormsModule ],
+            declarations: [ SearchComponent, TripsComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
-                TripService,
+                { provide: TripService, useClass: TripServiceStub },
                 { provide: GeoService, useClass: GeoServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
@@ -38,20 +40,16 @@ describe('HomeComponent', () => {
         .compileComponents();
     }));
 
+
+
     beforeEach(() => {
         authenticationService = TestBed.get(AuthenticationService);
-        fixture = TestBed.createComponent(HomeComponent);
+        fixture = TestBed.createComponent(SearchComponent);
         component = fixture.componentInstance;
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should welcome user', () => {
-        fixture.detectChanges();
-        const p: HTMLElement = fixture.nativeElement.querySelector('p.lead');
-        expect(p.textContent).toBe('Hello, Test User');
     });
 
     it('should redirect if user attributes cannot be fetched', () => {
@@ -79,5 +77,11 @@ describe('HomeComponent', () => {
         authenticationService.isLoggedIn = false;
         fixture.detectChanges();
         expect(routerSpy.navigateByUrl.calls.count()).toBe(1);
+    });
+
+    it('should load trips', () => {
+        fixture.detectChanges();
+        expect(component.trips.length).toBe(1);
+        expect(component.trips[0].driver).toBe('1111');
     });
 });

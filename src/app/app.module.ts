@@ -26,8 +26,12 @@ import { UiButtonComponent } from './component/ui/ui-button/ui-button.component'
 import { UiTripCardComponent } from './component/ui/ui-trip-card/ui-trip-card.component';
 import { UiTripDetailsComponent } from './component/ui/ui-trip-details/ui-trip-details.component';
 import { UiUserDetailsSmallComponent } from './component/ui/ui-user-details-small/ui-user-details-small.component';
+import { UiAppFooterComponent } from './component/ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from './component/ui/ui-app-header/ui-app-header.component';
 import { PostTripComponent } from './component/post-trip/post-trip.component';
 import { UserService } from './service/user.service';
+import { SearchComponent } from './component/search/search.component';
+import { GeoService } from './service/geo.service';
 
 
 @NgModule({
@@ -44,7 +48,10 @@ import { UserService } from './service/user.service';
         UiTripCardComponent,
         UiTripDetailsComponent,
         UiUserDetailsSmallComponent,
-        PostTripComponent
+        UiAppFooterComponent,
+        UiAppHeaderComponent,
+        PostTripComponent,
+        SearchComponent
     ],
     imports: [
         BrowserModule,
@@ -64,7 +71,8 @@ import { UserService } from './service/user.service';
         SignupService,
         AuthenticationService,
         TripService,
-        UserService
+        UserService,
+        GeoService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,0 +1,57 @@
+.header {
+	background-color: #262626;
+	color: #FFF;
+}
+
+	.header .site-title,
+	.header .navigation li p, 
+	.header .user-meta p {
+		margin: 0;
+		padding: 0;
+	}
+
+	.header .navigation li a {
+		padding: 5px 10px;
+		color: #CCC;
+	}
+
+.header {
+	line-height: 38px;
+	padding: 15px 0;
+}
+
+	.header .container {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	.header .site-title a {
+		text-decoration: none;
+	}
+
+	.header .search input {
+		height: 38px;
+		width: 100%;
+		margin: 0;
+	}
+
+	.header .navigation li a {
+		font-weight: bold;
+		color: #FFF;
+	}
+
+	.header .user-meta p {
+		display: inline-block;
+	}
+
+	.header .user-meta img.avatar {
+		height: 38px;
+		margin-right: 10px;
+		display: inline-block;
+		float: left;
+	}
+
+
+	.header .user-cta p {
+		margin: 0;
+	}

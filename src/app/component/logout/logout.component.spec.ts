@@ -4,6 +4,8 @@ import { LogoutComponent } from './logout.component';
 import { AuthenticationService } from '../../service/authentication.service';
 import { LoginService } from '../../service/login.service';
 import { CognitoService } from '../../service/cognito.service';
+import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
+import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 
 describe('LogoutComponent', () => {
     let component: LogoutComponent;
@@ -16,7 +18,7 @@ describe('LogoutComponent', () => {
         loginServiceSpy = jasmine.createSpyObj('LoginService', ['logout']);
 
         TestBed.configureTestingModule({
-            declarations: [ LogoutComponent ],
+            declarations: [ LogoutComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [
                 { provide: AuthenticationService, useValue: authenticationServiceSpy },
                 { provide: LoginService, useValue: loginServiceSpy }

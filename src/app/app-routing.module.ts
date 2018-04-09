@@ -8,6 +8,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { HomeComponent } from './component/home/home.component';
 import { TripsComponent } from './component/trips/trips.component';
 import { PostTripComponent } from './component/post-trip/post-trip.component';
+import { SearchComponent } from './component/search/search.component';
 
 const routes = [
     { path: '', component: IndexComponent },
@@ -15,7 +16,8 @@ const routes = [
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'post', component: PostTripComponent }
+    { path: 'post', component: PostTripComponent },
+    { path: 'search', component: SearchComponent }
 ];
 
 @NgModule({

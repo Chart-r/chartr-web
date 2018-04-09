@@ -1,0 +1,21 @@
+.footer {
+	background-color: #262626;
+	color: #FFF;
+	margin-top: -150px;
+}
+
+	.footer .site-title,
+	.footer .navigation li p {
+		margin: 0;
+		padding: 0;
+	}
+
+	.footer .navigation li a {
+		padding: 5px 10px;
+		color: #CCC;
+	}
+
+
+.footer {
+	padding: 25px 0 40px;
+}
