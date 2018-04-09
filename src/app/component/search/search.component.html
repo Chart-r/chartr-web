@@ -5,7 +5,7 @@
         *ngFor="let trip of results" 
         className="col-4"
         [driverName]="trip.driver"
-        [seatsfilled]="trip.seatstaken"
+        [seatsfilled]="trip.seatsfilled()"
         [totalseats]="trip.seats"
         [departtime]="trip.startTime"
         [departdest]="reverseGeocode(trip.startLat, trip.startLong)"

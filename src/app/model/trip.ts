@@ -37,4 +37,8 @@ export class Trip {
         
         return valid;
     }
+
+    seatsfilled() {
+        return Object.keys(this.users).length - 1;
+    }
 }
