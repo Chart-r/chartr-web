@@ -76,6 +76,10 @@ describe('SearchComponent', () => {
         expect(routerSpy.navigateByUrl.calls.count()).toBe(1);
     });
 
+    it('should calculate reverse geocode', () => {
+        expect(component.reverseGeocode(41.876797, -87.629658)).toContain('Chicago, IL');
+    });
+
     it('should load trips', () => {
         fixture.detectChanges();
         expect(component.trips.length).toBe(1);
