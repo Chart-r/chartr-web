@@ -1,19 +1,51 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../service/authentication.service';
+import { User } from '../../model/user';
 import { TripService } from '../../service/trip.service';
 import { Trip } from '../../model/trip';
 
 @Component({
-    selector: 'app-trips',
-    templateUrl: './trips.component.html',
-    styleUrls: ['./trips.component.css']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css']
 })
-export class TripsComponent implements OnInit {
+export class SearchComponent implements OnInit {
+    public user: User = null;
+    public results: Trip[];
     public trips: Trip[];
 
-    constructor(private tripService: TripService) { }
+    constructor(private authenticationService: AuthenticationService, private router: Router, private tripService: TripService) { }
 
     ngOnInit() {
+        // authentication
+        this.authenticationService.getAuthenticatedUser((err, cognitoUser) => {
+            if (err) {
+                console.error(err);
+                this.router.navigateByUrl('/');
+            }
+
+            else if (cognitoUser) {
+                this.authenticationService.getUserAttributes(cognitoUser, (err, user) => {
+                    if (err) {
+                        console.error(err);
+                        this.router.navigateByUrl('/');
+                    }
+
+                    else {
+                        this.user = user;
+                    }
+                });
+            }
+
+            else {
+                this.router.navigateByUrl('/');
+            }
+        });
+
+        // get trips
         this.trips = [];
+        this.results = [];
         this.tripService.getAllTrips().subscribe(
             trips => {
                 this.parseTrips(trips);
@@ -26,6 +58,10 @@ export class TripsComponent implements OnInit {
 
     reverseGeocode(lat, long) {
         return 'Chicago, IL';
+    }
+
+    filterTrips() {
+        this.results = this.trips.filter((e) => true);
     }
 
     parseTrips(trips) {

@@ -33,8 +33,10 @@ export class UiTripCardComponent implements OnInit {
     }
 
     formatDate(obj) {
-        if (! (obj instanceof Date) || isNaN(obj.getTime()))
+        if (! (obj instanceof Date) || isNaN(obj.getTime())) {
             return 'No Estimate Provided';
+        }
+
         return obj.toLocaleDateString('en-US', DATE_OPTIONS);
     }
 

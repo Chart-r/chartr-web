@@ -30,6 +30,7 @@ import { UiAppFooterComponent } from './component/ui/ui-app-footer/ui-app-footer
 import { UiAppHeaderComponent } from './component/ui/ui-app-header/ui-app-header.component';
 import { PostTripComponent } from './component/post-trip/post-trip.component';
 import { UserService } from './service/user.service';
+import { SearchComponent } from './component/search/search.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { UserService } from './service/user.service';
         UiUserDetailsSmallComponent,
         UiAppFooterComponent,
         UiAppHeaderComponent,
-        PostTripComponent
+        PostTripComponent,
+        SearchComponent
     ],
     imports: [
         BrowserModule,
