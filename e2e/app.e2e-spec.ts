@@ -39,14 +39,6 @@ describe('chartr-web App', () => {
 
         errorMessage = element(by.css('.message.error .desc'));
         expect(errorMessage.getText()).toBe('Please complete all fields.');
-
-        // both filled, invalid email address
-        passwordInput.clear();
-        emailInput.sendKeys('invalid-email');
-        passwordInput.sendKeys('password');
-
-        errorMessage = element(by.css('.message.error .desc')).getText();
-        expect(errorMessage).toBe('Please complete all fields.');
     });
 
     it('should redirect to home page on valid login', () => {
