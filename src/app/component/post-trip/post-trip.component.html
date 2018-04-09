@@ -1,4 +1,4 @@
-<app-ui-app-header></app-ui-app-header>
+<app-ui-app-header [user]="user"></app-ui-app-header>
 <div class="container full-height-content">
     <h1 class="display-4">Post Trip</h1>
     <app-ui-message *ngIf="error" [className]="'error'">
@@ -43,4 +43,4 @@
         <a class="btn btn-primary" routerLink="/home" role="button">Back</a>
     </form>
 </div>
-<app-ui-app-footer></app-ui-app-footer>
+<app-ui-app-footer [user]="user"></app-ui-app-footer>

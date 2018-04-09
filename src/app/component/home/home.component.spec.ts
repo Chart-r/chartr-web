@@ -46,7 +46,7 @@ describe('HomeComponent', () => {
 
     it('should welcome user', () => {
         fixture.detectChanges();
-        const p: HTMLElement = fixture.nativeElement.querySelector('p');
+        const p: HTMLElement = fixture.nativeElement.querySelector('p.lead');
         expect(p.textContent).toBe('Hello, Test User');
     });
 

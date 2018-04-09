@@ -10,9 +10,8 @@
 			<div class="navigation">
 				<ul class="inline">
 					<li><p><a routerLink="/">Home</a></p></li>
-					<li><p><a href="#">Nearby Trips</a></p></li>
-					<li><p><a href="#">My Trips</a></p></li>
-					<li><p><a href="#">Search Trips</a></p></li>
+					<li *ngIf="user"><p><a routerLink="/search">Search Trips</a></p></li>
+					<li *ngIf="user"><p><a routerLink="/logout">Logout</a></p></li>
 				</ul>
 			</div>
 			<div class="site-meta navigation muted">

@@ -9,7 +9,7 @@ describe('chartr-web App', () => {
 
     it('should display login form', () => {
         browser.get('/login');
-        const headerText = element(by.css('.content h1')).getText();
+        const headerText = element(by.css('.full-height-content h1')).getText();
         expect(headerText).toBe('Log In');
     });
 

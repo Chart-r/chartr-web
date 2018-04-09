@@ -7,8 +7,14 @@
 			<input type="text" placeholder="Find trips to ..." />
 		</div>
 		<div class="navigation col-3">
+			<ul class="inline" *ngIf="user">
+				<li><p><a routerLink="/search">Search</a></p></li>
+				<li><p><a routerLink="/logout">Logout</a></p></li>
+			</ul>
 		</div>
 		<div class="user-cta col-3 pull-right">
+			<!-- <img *ngIf="user" src="http://via.placeholder.com/50x50" class="avatar"> -->
+			<p *ngIf="user">{{ user.name }}</p>
 		</div>
 	</div>
 </div>
