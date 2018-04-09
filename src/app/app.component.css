@@ -1,6 +1,13 @@
+.app-wrapper {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 .header, .footer {
 	background-color: #262626;
 	color: #FFF;
+	flex-shrink: 0;
 }
 
 	.header .site-title,
@@ -61,4 +68,8 @@
 
 .footer {
 	padding: 25px 0 40px;
+}
+
+.full-height-content {
+	flex: 1 0 auto;
 }

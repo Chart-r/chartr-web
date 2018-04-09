@@ -1,47 +1,49 @@
-<div class="header inverted">
-	<div class="container">
-		<div class="brand col-2">
-			<h1 class="site-title"><a routerLink="/">Chartr</a></h1>
-		</div>
-		<div class="search col-4">
-			<input type="text" placeholder="Find trips to ..." />
-		</div>
-		<div class="navigation col-3">
-		</div>
-		<div class="user-cta col-3 pull-right">
-		</div>
-	</div>
-</div>
-
-<div class="content">
-	<div class="container">
-		<router-outlet></router-outlet>
-	</div>
-</div>
-
-<div class="footer inverted">
-	<div class="container">
-		<div class="col-6">
-			<div class="brand">
-				<h1 class="site-title">Chartr</h1>
-				<p class="muted mini">&copy; 2018 The Chartr Team. All rights reserved.</p>
+<div class="app-wrapper">
+	<div class="header inverted">
+		<div class="container">
+			<div class="brand col-2">
+				<h1 class="site-title"><a routerLink="/">Chartr</a></h1>
+			</div>
+			<div class="search col-4">
+				<input type="text" placeholder="Find trips to ..." />
+			</div>
+			<div class="navigation col-3">
+			</div>
+			<div class="user-cta col-3 pull-right">
 			</div>
 		</div>
-		<div class="col-6">
-			<div class="navigation">
-				<ul class="inline">
-					<li><p><a routerLink="/">Home</a></p></li>
-					<li><p><a href="#">Nearby Trips</a></p></li>
-					<li><p><a href="#">My Trips</a></p></li>
-					<li><p><a href="#">Search Trips</a></p></li>
-				</ul>
+	</div>
+
+	<div class="content full-height-content">
+		<div class="container">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+
+	<div class="footer inverted">
+		<div class="container">
+			<div class="col-6">
+				<div class="brand">
+					<h1 class="site-title">Chartr</h1>
+					<p class="muted mini">&copy; 2018 The Chartr Team. All rights reserved.</p>
+				</div>
 			</div>
-			<div class="site-meta navigation muted">
-				<ul class="inline">
-					<li><p><a href="#">Privacy Policy</a></p></li>
-					<li><p><a href="#">Terms of Service</a></p></li>
-					<li><p><a href="#">About Us</a></p></li>
-				</ul>
+			<div class="col-6">
+				<div class="navigation">
+					<ul class="inline">
+						<li><p><a routerLink="/">Home</a></p></li>
+						<li><p><a href="#">Nearby Trips</a></p></li>
+						<li><p><a href="#">My Trips</a></p></li>
+						<li><p><a href="#">Search Trips</a></p></li>
+					</ul>
+				</div>
+				<div class="site-meta navigation muted">
+					<ul class="inline">
+						<li><p><a href="#">Privacy Policy</a></p></li>
+						<li><p><a href="#">Terms of Service</a></p></li>
+						<li><p><a href="#">About Us</a></p></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
