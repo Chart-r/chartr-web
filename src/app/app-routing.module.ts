@@ -11,7 +11,7 @@ import { PostTripComponent } from './component/post-trip/post-trip.component';
 import { SearchComponent } from './component/search/search.component';
 
 const routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: IndexComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
