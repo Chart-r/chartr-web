@@ -9,7 +9,7 @@ import { User } from '../../model/user';
     styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-	public user: User = null;
+    public user: User = null;
     
     constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
