@@ -19,8 +19,8 @@ export class SearchComponent implements OnInit {
     public startLocationFilter: string;
     public endLocationFilter: string;
     public emailFilter: string;
-    public priceFromFilter: string;
-    public priceToFilter: string;
+    public priceFromFilter: number;
+    public priceToFilter: number;
     public filtering = false;
 
     constructor(
@@ -61,6 +61,7 @@ export class SearchComponent implements OnInit {
         this.tripService.getAllTrips().subscribe(
             trips => {
                 this.parseTrips(trips);
+                console.log(this.trips);
             },
             err => {
                 console.error(err);
@@ -89,12 +90,13 @@ export class SearchComponent implements OnInit {
             }
 
             // filter by price(s)
-            if (this.priceFromFilter) {
-                pass = pass && e.price >= parseFloat(this.priceFromFilter);
+            if (this.priceFromFilter !== undefined && this.priceFromFilter !== null) {
+                pass = pass && e.price >= this.priceFromFilter;
             }
 
-            if (this.priceToFilter) {
-                pass = pass && e.price <= parseFloat(this.priceToFilter);
+            if (this.priceToFilter !== undefined && this.priceToFilter !== null) {
+                console.log(e.price <= this.priceToFilter);
+                pass = pass && e.price <= this.priceToFilter;
             }
 
             return pass;

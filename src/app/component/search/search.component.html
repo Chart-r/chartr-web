@@ -1,6 +1,7 @@
 <app-ui-app-header [user]="user"></app-ui-app-header>
 <div class="container full-height-content">
     <h1 class="display-4">Search Trips</h1>
+    <p>All fields are optional.</p>
     <form #searchForm="ngForm" (ngSubmit)="filterTrips()">
         <div class="form-group">
             <label for="startLocFilter" class="caption">Start Location</label>
