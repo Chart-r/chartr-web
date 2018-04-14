@@ -37,10 +37,10 @@
             <label class="caption" for="birthdateInput">Birthdate</label>
             <input type="text" class="form-control" id="birthdateInput" 
                 [(ngModel)]="user.birthdate" name="birthdate"
-                required pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$">
+                required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
             <app-ui-message [className]="'info smaller'">
                 <p class="desc">
-                    Birthdate must be in the form YYYY-MM-DD.
+                    Birthdate must be in the form MM/DD/YYYY.
                 </p>
             </app-ui-message>
         </div>
