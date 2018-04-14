@@ -21,6 +21,10 @@ export class TripsComponent implements OnInit {
 
     ngOnInit() {
         this.trips = [];
+        this.confirmedTrips = [];
+        this.pendingTrips = [];
+        this.postedTrips = [];
+
         this.tripService.getAllTrips().subscribe(
             trips => {
                 this.parseTrips(trips);
@@ -29,14 +33,6 @@ export class TripsComponent implements OnInit {
                 console.error(err);
             }
         );
-
-        this.confirmedTrips = [];
-        this.pendingTrips = [];
-        this.postedTrips = [];
-    }
-
-    reverseGeocode(lat, long) {
-        return 'Chicago, IL';
     }
 
     categorizeTrips() {

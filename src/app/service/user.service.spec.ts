@@ -21,15 +21,30 @@ describe('UserService', () => {
         expect(service).toBeTruthy();
     }));
 
-    it('should GET a user', inject([UserService], (service: UserService) => {
+    it('should GET a user by email', inject([UserService], (service: UserService) => {
         const mockResponse = new User();
         mockResponse.email = 'test@user.com';
 
-        service.getUser('test@user.com').subscribe(user => {
+        service.getUserByEmail('test@user.com').subscribe(user => {
             expect(user).toEqual(mockResponse);
         });
 
         const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/test@user.com`);
+
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+        httpTestingController.verify();
+    }));
+
+    it('should GET a user by uid', inject([UserService], (service: UserService) => {
+        const mockResponse = new User();
+        mockResponse.uid = '1';
+
+        service.getUserByUid('1').subscribe(user => {
+            expect(user).toEqual(mockResponse);
+        });
+
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/uid/1`);
 
         expect(req.request.method).toBe('GET');
         req.flush(mockResponse);

@@ -72,7 +72,7 @@ export class AuthenticationService {
                     }
                 }
 
-                this.userService.getUser(user.email).subscribe(
+                this.userService.getUserByEmail(user.email).subscribe(
                     (data: User) => {
                         user.uid = data.uid;
                         cb(null, user);
