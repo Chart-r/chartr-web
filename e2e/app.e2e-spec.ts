@@ -74,7 +74,7 @@ describe('chartr-web App', () => {
         priceInput.submit();
 
         errorMessage = element(by.css('.message.error .desc')).getText();
-        expect(errorMessage).toBe('Please complete all fields.');
+        expect(errorMessage).toBe('Please complete all fields correctly.');
     });
 
     it('should log a user out', () => {

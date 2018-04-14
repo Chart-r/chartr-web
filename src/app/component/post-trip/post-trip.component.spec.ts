@@ -73,28 +73,42 @@ describe('PostTripComponent', () => {
         component.trip.startLong = 1;
         component.trip.endLat = 1;
         component.trip.endLong = 1;
-        expect(component.trip.validLocations()).toBeTruthy();
+        component.trip.price = 20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date();
+
+        expect(component.trip.valid()).toBeTruthy();
 
         component.onSubmit(mockForm);
         fixture.detectChanges();
 
-        expect(component.error).toBe('Please complete all fields.');
+        expect(component.error).toBe('Please complete all fields correctly.');
         expect(component.success).toBeNull();
         expect(component.submitting).toBeFalsy();
     });
 
-    it('should display error message for invalid locations', () => {
+    it('should display error message for invalid trips', () => {
         const mockForm = {
             form: { valid: true },
             reset: () => null
         } as NgForm;
 
         fixture.detectChanges();
+
+        component.trip.startLat = 1;
+        component.trip.startLong = 1;
+        component.trip.endLat = 1;
+        component.trip.endLong = 1;
+        component.trip.price = -20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date();
+
+        fixture.detectChanges();
         component.onSubmit(mockForm);
         fixture.detectChanges();
 
-        expect(component.trip.validLocations()).toBeFalsy();
-        expect(component.error).toBe('Please complete all fields.');
+        expect(component.trip.valid()).toBeFalsy();
+        expect(component.error).toBe('Please complete all fields correctly.');
         expect(component.success).toBeNull();
         expect(component.submitting).toBeFalsy();
     });
@@ -111,6 +125,9 @@ describe('PostTripComponent', () => {
         component.trip.startLong = 1;
         component.trip.endLat = 1;
         component.trip.endLong = 1;
+        component.trip.price = 20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date();
 
         component.onSubmit(mockForm);
 
@@ -133,6 +150,9 @@ describe('PostTripComponent', () => {
         component.trip.startLong = 1;
         component.trip.endLat = 1;
         component.trip.endLong = 1;
+        component.trip.price = 20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date();
 
         component.onSubmit(mockForm);
 
