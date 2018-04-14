@@ -77,11 +77,9 @@ describe('PostTripComponent', () => {
         component.trip.seats = 2;
         component.trip.startTime = new Date();
 
-        expect(component.trip.valid()).toBeTruthy();
-
         component.onSubmit(mockForm);
-        fixture.detectChanges();
 
+        expect(component.trip.valid()).toBeTruthy();
         expect(component.error).toBe('Please complete all fields correctly.');
         expect(component.success).toBeNull();
         expect(component.submitting).toBeFalsy();
@@ -103,9 +101,7 @@ describe('PostTripComponent', () => {
         component.trip.seats = 2;
         component.trip.startTime = new Date();
 
-        fixture.detectChanges();
         component.onSubmit(mockForm);
-        fixture.detectChanges();
 
         expect(component.trip.valid()).toBeFalsy();
         expect(component.error).toBe('Please complete all fields correctly.');
