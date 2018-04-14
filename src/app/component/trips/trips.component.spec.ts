@@ -34,8 +34,19 @@ describe('TripsComponent', () => {
     });
 
     it('should load trips', () => {
+        const mockUser = {
+            email: 'test@user.com',
+            name: 'Test User',
+            birthdate: '1996-01-01',
+            phone: '+19999999999',
+            uid: '1111'
+        };
+
+        component.user = mockUser;
+
         fixture.detectChanges();
         expect(component.trips.length).toBe(1);
         expect(component.trips[0].driver).toBe('1111');
+        expect(component.postedTrips.length).toBe(1);
     });
 });
