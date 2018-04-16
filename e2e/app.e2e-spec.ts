@@ -74,7 +74,7 @@ describe('chartr-web App', () => {
         priceInput.submit();
 
         errorMessage = element(by.css('.message.error .desc')).getText();
-        expect(errorMessage).toBe('Please complete all fields.');
+        expect(errorMessage).toBe('Please complete all fields correctly.');
     });
 
     it('should log a user out', () => {
@@ -113,7 +113,7 @@ describe('chartr-web App', () => {
         emailInput.sendKeys('test@user.com');
         nameInput.sendKeys('Test User');
         phoneInput.sendKeys('+19999999999');
-        birthdateInput.sendKeys('1996-01-01');
+        birthdateInput.sendKeys('01/01/1996');
         passwordInput.sendKeys('testUser123!');
 
         // invalid email
@@ -148,7 +148,7 @@ describe('chartr-web App', () => {
 
         // invalid password
         birthdateInput.clear();
-        birthdateInput.sendKeys('1996-01-01');
+        birthdateInput.sendKeys('01/01/1996');
         passwordInput.clear();
         passwordInput.sendKeys('password');
 

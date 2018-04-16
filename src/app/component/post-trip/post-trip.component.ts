@@ -38,6 +38,10 @@ export class PostTripComponent implements OnInit {
 
     ngOnInit() {
         this.trip = new Trip();
+        this.trip.startLat = 39.8282;
+        this.trip.startLong = -98.5795;
+        this.trip.endLat = 39.8282;
+        this.trip.endLong = -98.5795;
         this.authenticationService.getAuthenticatedUser((err, cognitoUser) => {
             if (err) {
                 console.error(err);
@@ -66,7 +70,7 @@ export class PostTripComponent implements OnInit {
 
     onSubmit(postTripForm: NgForm) {
         this.submitting = true;
-        if (this.trip.validLocations() && postTripForm.form.valid) {
+        if (this.trip.valid() && postTripForm.form.valid) {
             this.tripService.createTrip(this.user, this.trip).subscribe(
                 response => {
                     this.error = null;
@@ -84,7 +88,7 @@ export class PostTripComponent implements OnInit {
         }
 
         else {
-            this.error = 'Please complete all fields.';
+            this.error = 'Please complete all fields correctly.';
             this.success = null;
             this.submitting = false;
         }

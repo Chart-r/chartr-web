@@ -21,22 +21,19 @@ export class TripsComponent implements OnInit {
 
     ngOnInit() {
         this.trips = [];
+        this.confirmedTrips = [];
+        this.pendingTrips = [];
+        this.postedTrips = [];
+
         this.tripService.getAllTrips().subscribe(
             trips => {
                 this.parseTrips(trips);
+                this.categorizeTrips();
             },
             err => {
                 console.error(err);
             }
         );
-
-        this.confirmedTrips = [];
-        this.pendingTrips = [];
-        this.postedTrips = [];
-    }
-
-    reverseGeocode(lat, long) {
-        return 'Chicago, IL';
     }
 
     categorizeTrips() {
@@ -48,12 +45,17 @@ export class TripsComponent implements OnInit {
         // ignore if user does not have an email
         if (this.user && this.user.hasOwnProperty('uid')) {
             // pending trips not implemented in the backend yet
-            for (let i = this.trips.length - 1; i >= 0; i--) {
-                const trip = this.trips[i];
+            for (const trip of this.trips) {
                 if (trip.users[this.user.uid] === 'riding') {
                     // confirmed trips: trips that I am in the users[] list for
                     this.confirmedTrips.push(trip);
-                } else if (trip.users[this.user.uid] === 'driving') {
+                } 
+
+                else if (trip.users[this.user.uid] === 'pending') {
+                    this.pendingTrips.push(trip);
+                }
+                
+                else if (trip.users[this.user.uid] === 'driving') {
                     // posted trips: trips that I am the driver for
                     this.postedTrips.push(trip);
                 }
@@ -99,8 +101,5 @@ export class TripsComponent implements OnInit {
 
             this.trips.push(jsTrip);
         }
-
-        this.categorizeTrips();
     }
-
 }

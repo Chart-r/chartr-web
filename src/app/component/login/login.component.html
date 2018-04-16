@@ -10,7 +10,7 @@
             <label for="emailInput" class="caption">Email</label>
             <input type="email" class="form-control" id="emailInput" 
                 [(ngModel)]="email" name="email"
-                required email>
+                required pattern="^(([^<>()\[\]\\.,;:\s@'']+(\.[^<>()\[\]\\.,;:\s@'']+)*)|('.+''))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$">
         </div>
         <div class="form-group">
             <label for="passwordInput" class="caption">Password</label>

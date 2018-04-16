@@ -235,3 +235,7 @@ label {
 .ui-calendar {
     display: block;
 }
+
+agm-map {
+	height: 300px;
+}

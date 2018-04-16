@@ -52,6 +52,24 @@ describe('SearchComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should load trips', () => {
+        fixture.detectChanges();
+        expect(component.trips.length).toBe(1);
+        expect(component.trips[0].driver).toBe('1111');
+    });
+
+    it('should filter trips', () => {
+        fixture.detectChanges();
+        
+        component.priceToFilter = 20;
+        component.filterTrips();
+        expect(component.results.length).toBe(0);
+
+        component.priceToFilter = 50;
+        component.filterTrips();
+        expect(component.results.length).toBe(1);
+    });
+
     it('should redirect if user attributes cannot be fetched', () => {
         routerSpy.navigateByUrl.and.callFake(url => {
             expect(url).toBe('/');
@@ -77,11 +95,5 @@ describe('SearchComponent', () => {
         authenticationService.isLoggedIn = false;
         fixture.detectChanges();
         expect(routerSpy.navigateByUrl.calls.count()).toBe(1);
-    });
-
-    it('should load trips', () => {
-        fixture.detectChanges();
-        expect(component.trips.length).toBe(1);
-        expect(component.trips[0].driver).toBe('1111');
     });
 });

@@ -37,11 +37,9 @@ export class UiTripCardComponent implements OnInit {
         // get driver's name
         if (this.driverUID && !this.driverName) {
             this.driverName = '-';
-            this.userService.getUser(this.driverUID).subscribe(
-                res => {
-                    if (res.hasOwnProperty('name')) {
-                        this.driverName = res['name'];
-                    }
+            this.userService.getUserByUid(this.driverUID).subscribe(
+                (res: User) => {
+                    this.driverName = res.name;
                 },
                 err => {
                     console.error(err);
