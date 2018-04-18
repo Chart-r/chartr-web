@@ -66,4 +66,19 @@ describe('UserService', () => {
         req.flush(mockResponse);
         httpTestingController.verify();
     }));
+
+    it('should PUT pending user on trip', inject([UserService], (service: UserService) => {
+        const mockResponse = { message: 'response' };
+
+        service.addPendingUserToTrip('1', '1').subscribe(data => {
+            expect(data).toEqual(mockResponse);
+        });
+
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/1/trip/1/pending`);
+
+        expect(req.request.headers.get('Content-Type')).toBe('application/json');
+        expect(req.request.method).toBe('PUT');
+        req.flush(mockResponse);
+        httpTestingController.verify();
+    }));
 });

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UiTripCardComponent } from './ui-trip-card.component';
 import { UserService } from '../../../service/user.service';
 import { UserServiceStub } from '../../../testing/user-service-stub';
+import { Trip } from '../../../model/trip';
 
 const TEST_CLASS_NAME = 'col-4';
 const TEST_DRIVER_NAME = 'NiceDriver123';
@@ -14,10 +15,19 @@ const TEST_DEPART_TIME = 'Fri, Apr 27, 2018, 3:28 PM';
 const TEST_DEPART_LOC = 'Champaign, IL';
 const TEST_ARRIVE_TIME = 'Wed, Dec 31, 1969, 6:00 PM';
 const TEST_ARRIVE_LOC = 'Chicago, IL';
+const TEST_TRIP_ID = '1';
 
 describe('UiTripCardComponent', () => {
     let component: UiTripCardComponent;
     let fixture: ComponentFixture<UiTripCardComponent>;
+    const mockParent = {
+        otherTrips: [ { tripId: '1' }, { tripId: '2' }, { tripId: '3' } ],
+        pendingTrips: []
+    };
+
+    const mockTrip = {
+        tripId: '1'
+    } as Trip;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -42,6 +52,9 @@ describe('UiTripCardComponent', () => {
         component.arrivetime = new Date(TEST_ARRIVE_TIME);
         component.arrivedest = TEST_ARRIVE_LOC;
         component.avatar = TEST_DRIVER_AVATAR;
+        component.tripId = TEST_TRIP_ID;
+        component.trip = mockTrip;
+        component.parent = mockParent;
         fixture.detectChanges();
     });
 
@@ -85,5 +98,14 @@ describe('UiTripCardComponent', () => {
         expect(depart.querySelector('.time').innerHTML).toEqual(TEST_DEPART_TIME);
         expect(depart.querySelector('.location-short').innerHTML).toEqual(TEST_DEPART_LOC);
         expect(arrive.querySelector('.location-short').innerHTML).toEqual(TEST_ARRIVE_LOC);
+    });
+
+    it('should send request to join trip', () => {
+        component.requestToJoinTrip();
+        fixture.detectChanges();
+        
+        expect(component.parent.otherTrips.length).toBe(2);
+        expect(component.parent.pendingTrips.length).toBe(1);
+        expect(component.parent.pendingTrips[0].tripId).toBe('1');
     });
 });
