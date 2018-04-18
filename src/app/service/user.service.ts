@@ -20,6 +20,16 @@ export class UserService {
         return this.http.get(`${USER_URL}/uid/${uid}`);
     }
 
+    addPendingUserToTrip(uid: string, tid: string) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type':  'application/json',
+            })
+        };
+
+        return this.http.put(`${USER_URL}/${uid}/trip/${tid}/pending`, JSON.stringify({}), httpOptions);
+    }
+
     createUser(user: User) {
         const httpOptions = {
             headers: new HttpHeaders({

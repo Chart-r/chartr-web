@@ -10,20 +10,22 @@ import { User } from '../../model/user';
     styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
-    public trips: Trip[];
+    public allTrips: Trip[];
     public confirmedTrips: Trip[];
     public pendingTrips: Trip[];
     public postedTrips: Trip[];
+    public otherTrips: Trip[];
 
     @Input() user: User;
 
     constructor(private tripService: TripService, private geoService: GeoService) { }
 
     ngOnInit() {
-        this.trips = [];
+        this.allTrips = [];
         this.confirmedTrips = [];
         this.pendingTrips = [];
         this.postedTrips = [];
+        this.otherTrips = [];
 
         this.tripService.getAllTrips().subscribe(
             trips => {
@@ -37,15 +39,10 @@ export class TripsComponent implements OnInit {
     }
 
     categorizeTrips() {
-        // clear trips
-        this.confirmedTrips = [];
-        this.pendingTrips = [];
-        this.postedTrips = [];
-
         // ignore if user does not have an email
         if (this.user && this.user.hasOwnProperty('uid')) {
             // pending trips not implemented in the backend yet
-            for (const trip of this.trips) {
+            for (const trip of this.allTrips) {
                 if (trip.users[this.user.uid] === 'riding') {
                     // confirmed trips: trips that I am in the users[] list for
                     this.confirmedTrips.push(trip);
@@ -58,6 +55,10 @@ export class TripsComponent implements OnInit {
                 else if (trip.users[this.user.uid] === 'driving') {
                     // posted trips: trips that I am the driver for
                     this.postedTrips.push(trip);
+                }
+
+                else {
+                    this.otherTrips.push(trip);
                 }
             }
         }
@@ -99,7 +100,7 @@ export class TripsComponent implements OnInit {
                 }
             }
 
-            this.trips.push(jsTrip);
+            this.allTrips.push(jsTrip);
         }
     }
 }

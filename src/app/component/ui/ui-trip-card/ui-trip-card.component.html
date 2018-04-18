@@ -23,4 +23,7 @@
 			<p class="location-short">{{arrivedest}}</p>
 		</div>
 	</div>
+	<div *ngIf="showButton">
+		<button class="btn" [disabled]="submitting" (click)="requestToJoinTrip()">Join</button>
+	</div>
 </div>
