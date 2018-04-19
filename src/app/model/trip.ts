@@ -40,6 +40,14 @@ export class Trip {
     }
 
     seatsfilled() {
-        return Object.keys(this.users).length - 1;
+        let filled = 0;
+
+        for (const uid in this.users) {
+            if (this.users[uid] === 'riding') {
+                filled++;
+            }
+        }
+
+        return filled;
     }
 }

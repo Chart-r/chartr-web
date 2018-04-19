@@ -47,6 +47,48 @@ export class UserServiceStub {
         };
     }
 
+    addPendingUserToTrip(uid: string, tid: string) {
+        return {
+            subscribe: (scb, ecb) => {
+                if (this.shouldFail) {
+                    ecb('simulated failure');
+                }
+
+                else {
+                    scb('success');
+                }
+            }
+        };
+    }
+
+    acceptRiderForTrip(uid: string, tid: string) {
+        return {
+            subscribe: (scb, ecb) => {
+                if (this.shouldFail) {
+                    ecb('simulated failure');
+                }
+
+                else {
+                    scb('success');
+                }
+            }
+        };
+    }
+
+    rejectRiderForTrip(uid: string, tid: string) {
+        return {
+            subscribe: (scb, ecb) => {
+                if (this.shouldFail) {
+                    ecb('simulated failure');
+                }
+
+                else {
+                    scb('success');
+                }
+            }
+        };
+    }
+
     createUser(user: User) {
         return {
             subscribe: (scb, ecb) => {

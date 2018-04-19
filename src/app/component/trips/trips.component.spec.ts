@@ -45,8 +45,8 @@ describe('TripsComponent', () => {
         component.user = mockUser;
 
         fixture.detectChanges();
-        expect(component.trips.length).toBe(1);
-        expect(component.trips[0].driver).toBe('1111');
+        expect(component.allTrips.length).toBe(1);
+        expect(component.allTrips[0].driver).toBe('1111');
         expect(component.postedTrips.length).toBe(1);
     });
 });
