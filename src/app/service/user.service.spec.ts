@@ -81,4 +81,34 @@ describe('UserService', () => {
         req.flush(mockResponse);
         httpTestingController.verify();
     }));
+
+    it('should PUT accepted user on trip', inject([UserService], (service: UserService) => {
+        const mockResponse = { message: 'response' };
+
+        service.acceptRiderForTrip('1', '1').subscribe(data => {
+            expect(data).toEqual(mockResponse);
+        });
+
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/1/trip/1/riding`);
+
+        expect(req.request.headers.get('Content-Type')).toBe('application/json');
+        expect(req.request.method).toBe('PUT');
+        req.flush(mockResponse);
+        httpTestingController.verify();
+    }));
+
+    it('should PUT rejected user on trip', inject([UserService], (service: UserService) => {
+        const mockResponse = { message: 'response' };
+
+        service.rejectRiderForTrip('1', '1').subscribe(data => {
+            expect(data).toEqual(mockResponse);
+        });
+
+        const req = httpTestingController.expectOne(`${environment.apiGatewayUrl}/user/1/trip/1/rejected`);
+
+        expect(req.request.headers.get('Content-Type')).toBe('application/json');
+        expect(req.request.method).toBe('PUT');
+        req.flush(mockResponse);
+        httpTestingController.verify();
+    }));
 });

@@ -4,6 +4,7 @@ import { UiTripCardComponent } from './ui-trip-card.component';
 import { UserService } from '../../../service/user.service';
 import { UserServiceStub } from '../../../testing/user-service-stub';
 import { Trip } from '../../../model/trip';
+import { User } from '../../../model/user';
 
 const TEST_CLASS_NAME = 'col-4';
 const TEST_DRIVER_NAME = 'NiceDriver123';
@@ -107,5 +108,33 @@ describe('UiTripCardComponent', () => {
         expect(component.parent.otherTrips.length).toBe(2);
         expect(component.parent.pendingTrips.length).toBe(1);
         expect(component.parent.pendingTrips[0].tripId).toBe('1');
+    });
+
+    it('should accept a rider on a trip with space', () => {
+        component.interestedRiders = [ { uid: '1' }, { uid: '2'}, { uid: '3' } ] as User[];
+        component.acceptRider('1');
+        fixture.detectChanges();
+
+        expect(component.seatsfilled).toBe(3);
+        expect(component.interestedRiders.length).toBe(2);
+    });
+
+    it('should not accept a rider on a full trip', () => {
+        component.interestedRiders = [ { uid: '1' }, { uid: '2'}, { uid: '3' } ] as User[];
+        component.seatsfilled = TEST_SEATS;
+        component.acceptRider('1');
+        fixture.detectChanges();
+
+        expect(component.seatsfilled).toBe(TEST_SEATS);
+        expect(component.interestedRiders.length).toBe(3);
+    });
+
+    it('should reject a rider', () => {
+        component.interestedRiders = [ { uid: '1' }, { uid: '2'}, { uid: '3' } ] as User[];
+        component.rejectRider('1');
+        fixture.detectChanges();
+
+        expect(component.seatsfilled).toBe(2);
+        expect(component.interestedRiders.length).toBe(2);
     });
 });
