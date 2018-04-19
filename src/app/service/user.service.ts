@@ -30,6 +30,26 @@ export class UserService {
         return this.http.put(`${USER_URL}/${uid}/trip/${tid}/pending`, JSON.stringify({}), httpOptions);
     }
 
+    acceptRiderForTrip(uid: string, tid: string) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type':  'application/json',
+            })
+        };
+
+        return this.http.put(`${USER_URL}/${uid}/trip/${tid}/riding`, JSON.stringify({}), httpOptions);
+    }
+
+    rejectRiderForTrip(uid: string, tid: string) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type':  'application/json',
+            })
+        };
+
+        return this.http.put(`${USER_URL}/${uid}/trip/${tid}/rejected`, JSON.stringify({}), httpOptions);
+    }
+
     createUser(user: User) {
         const httpOptions = {
             headers: new HttpHeaders({

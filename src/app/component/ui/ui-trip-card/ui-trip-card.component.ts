@@ -34,13 +34,16 @@ export class UiTripCardComponent implements OnInit {
     @Input() loggedInUid: string;
     @Input() tripId: string;
     @Input() showButton: boolean;
+    @Input() showInterestedRiders: boolean;
     @Input() trip: Trip;
     @Input() parent: any;
     public submitting: boolean;
+    public interestedRiders: User[];
     constructor(private userService: UserService) { }
 
     ngOnInit() {
         this.submitting = false;
+        this.interestedRiders = [];
         // get driver's name
         if (this.driverUID && !this.driverName) {
             this.driverName = '-';
@@ -52,6 +55,21 @@ export class UiTripCardComponent implements OnInit {
                     console.error(err);
                 }
             );
+        }
+
+        if (this.showInterestedRiders) {
+            for (const uid in this.trip.users) {
+                if (this.trip.users[uid] === 'pending') {
+                    this.userService.getUserByUid(uid).subscribe(
+                        (res: User) => {
+                            this.interestedRiders.push(res);
+                        },
+                        err => {
+                            console.error(err);
+                        }
+                    );
+                }
+            }
         }
     }
 
@@ -77,12 +95,47 @@ export class UiTripCardComponent implements OnInit {
         );
     }
 
+    acceptRider(uid: string) {
+        if (this.seatsfilled < this.totalseats) {
+            this.userService.acceptRiderForTrip(uid, this.tripId).subscribe(
+                res => {
+                    this.seatsfilled++;
+                    this.removeInterestedRider(uid);
+                },
+                err => {
+                    console.error(err);
+                }
+            );
+        }
+
+        else {
+            window.alert('This ride is already full.');
+        }
+    }
+
+    rejectRider(uid: string) {
+        this.userService.rejectRiderForTrip(uid, this.tripId).subscribe(
+            res => {
+                this.removeInterestedRider(uid);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
     private updateParentTrips() {
         this.parent.otherTrips = this.parent.otherTrips.filter((trip: Trip) => {
             return trip.tripId !== this.tripId;
         });
 
         this.parent.pendingTrips.push(this.trip);
+    }
+
+    private removeInterestedRider(uid: string) {
+        this.interestedRiders = this.interestedRiders.filter((user: User) => {
+            return user.uid !== uid;
+        });
     }
 
 }

@@ -26,4 +26,13 @@
 	<div *ngIf="showButton">
 		<button class="btn" [disabled]="submitting" (click)="requestToJoinTrip()">Join</button>
 	</div>
+	<div *ngIf="showInterestedRiders">
+		<ul>
+			<li *ngFor="let rider of interestedRiders">
+				{{ rider.name }}
+				<button (click)="acceptRider(rider.uid)">Accept</button>
+				<button (click)="rejectRider(rider.uid)">Reject</button>
+			</li>
+		</ul>
+	</div>
 </div>

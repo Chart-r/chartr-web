@@ -57,7 +57,7 @@ export class TripsComponent implements OnInit {
                     this.postedTrips.push(trip);
                 }
 
-                else {
+                else if (trip.users[this.user.uid] !== 'rejected' && trip.seatsfilled() < trip.seats) {
                     this.otherTrips.push(trip);
                 }
             }
