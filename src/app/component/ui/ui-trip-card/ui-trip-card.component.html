@@ -30,8 +30,8 @@
 		<ul>
 			<li *ngFor="let rider of interestedRiders">
 				{{ rider.name }}
-				<button (click)="acceptRider(rider.uid)">Accept</button>
-				<button (click)="rejectRider(rider.uid)">Reject</button>
+				<button class="btn micro confirm" (click)="acceptRider(rider.uid)">Accept</button>
+				<button class="btn micro destructive" (click)="rejectRider(rider.uid)">Reject</button>
 			</li>
 		</ul>
 	</div>
