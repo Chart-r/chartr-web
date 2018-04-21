@@ -23,6 +23,10 @@ export class TripService {
         return this.http.post(createTripUrl, reqBody, httpOptions);
     }
 
+    getNonCurrentTrips() {        
+        return this.http.get(`${TRIP_URL}`);
+    }
+
     getAllTrips() {        
         return this.http.get(`${TRIP_URL}/current`);
     }
