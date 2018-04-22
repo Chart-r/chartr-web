@@ -74,4 +74,26 @@ describe('TripService', () => {
         req.flush(mockResponse);
         httpTestingController.verify();
     }));
+
+    it('should parse trips', inject([TripService], (service: TripService) => {
+        const mockTrip = {
+            'start_lat': 1,
+            'start_lng': 1,
+            'end_lat': 1,
+            'end_lng': 1,
+            'start_time': 1234,
+            'seats': 4,
+            'smoking': false,
+            'price': 30,
+            'users': {
+                '2222': 'riding',
+                '1111': 'driving'
+            }
+        };
+
+        const parsed = service.parseTrips([mockTrip]);
+
+        expect(parsed.length).toBe(1);
+        expect(parsed[0].startLat).toBe(1);
+    }));
 });
