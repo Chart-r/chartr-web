@@ -7,33 +7,53 @@
     <app-ui-message *ngIf="success" [className]="'success'">
         <p class="desc">{{ success }}</p>
     </app-ui-message>
+    <p>All fields are required. The submit button will be enabled when all fields are completed correctly.</p>
     <form #postTripForm="ngForm" (ngSubmit)="onSubmit(postTripForm)">
         <div class="form-group">
             <label for="startInput">Start</label>
             <input type="text" class="form-control" id="startInput" name="start"
                 required #start>
-            <agm-map [latitude]="startLat" [longitude]="startLong" [scrollwheel]="false" [zoom]="4"></agm-map>
+            <agm-map [latitude]="trip.startLat" [longitude]="trip.startLong" [scrollwheel]="false" [zoom]="4">
+                <agm-marker [latitude]="trip.startLat" [longitude]="trip.startLong"></agm-marker>
+            </agm-map>
         </div>
         <div class="form-group">
             <label for="endInput">End</label>
             <input type="text" class="form-control" id="endInput" name="end"
                 required #end>
-            <agm-map [latitude]="endLat" [longitude]="endLong" [scrollwheel]="false" [zoom]="4"></agm-map>
+            <agm-map [latitude]="trip.endLat" [longitude]="trip.endLong" [scrollwheel]="false" [zoom]="4">
+                <agm-marker [latitude]="trip.endLat" [longitude]="trip.endLong"></agm-marker>
+            </agm-map>
         </div>
         <div class="form-group">
             <label for="dateTimeInput">Date/Time</label>
             <p-calendar [(ngModel)]="trip.startTime" showTime="true" hourFormat="12" name="startTime"
                 inputId="dateTimeInput" inputStyleClass="form-control" required></p-calendar>
+            <app-ui-message [className]="'info smaller'">
+                <p class="desc">
+                    Date must be in the future.
+                </p>
+            </app-ui-message>
         </div>
         <div class="form-group">
             <label for="priceInput">Price</label>
             <input type="number" class="form-control" id="priceInput" name="price" [(ngModel)]="trip.price"
                 required>
+            <app-ui-message [className]="'info smaller'">
+                <p class="desc">
+                    Price must be positive.
+                </p>
+            </app-ui-message>
         </div>
         <div class="form-group">
             <label for="seatsInput">Seats</label>
             <input type="number" class="form-control" id="seatsInput" name="seats" [(ngModel)]="trip.seats"
                 required>
+            <app-ui-message [className]="'info smaller'">
+                <p class="desc">
+                    Number of seats must be positive.
+                </p>
+            </app-ui-message>
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="smokingInput" name="smoking" [(ngModel)]="trip.smoking">

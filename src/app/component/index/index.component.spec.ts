@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationServiceStub } from '../../testing/authentication-service-stub';
+import { Router } from '@angular/router';
+import { RouterStub } from '../../testing/router-stubs';
+
 import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
 import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 
@@ -11,7 +16,11 @@ describe('IndexComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ IndexComponent, UiAppFooterComponent, UiAppHeaderComponent ]
+            declarations: [ IndexComponent, UiAppFooterComponent, UiAppHeaderComponent ],
+            providers: [
+                { provide: AuthenticationService, useClass: AuthenticationServiceStub },
+                { provide: Router, useClass: RouterStub }
+            ]
         })
         .compileComponents();
     }));

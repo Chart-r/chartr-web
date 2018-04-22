@@ -10,97 +10,57 @@ import { User } from '../../model/user';
     styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
-    public trips: Trip[];
+    public allTrips: Trip[];
     public confirmedTrips: Trip[];
     public pendingTrips: Trip[];
     public postedTrips: Trip[];
+    public otherTrips: Trip[];
 
     @Input() user: User;
 
-    constructor(private tripService: TripService, private geoService: GeoService) { }
+    constructor(private tripService: TripService) { }
 
     ngOnInit() {
-        this.trips = [];
+        this.allTrips = [];
+        this.confirmedTrips = [];
+        this.pendingTrips = [];
+        this.postedTrips = [];
+        this.otherTrips = [];
+
         this.tripService.getAllTrips().subscribe(
             trips => {
-                this.parseTrips(trips);
+                this.allTrips = this.tripService.parseTrips(trips);
+                this.categorizeTrips();
             },
             err => {
                 console.error(err);
             }
         );
-
-        this.confirmedTrips = [];
-        this.pendingTrips = [];
-        this.postedTrips = [];
-    }
-
-    reverseGeocode(lat, long) {
-        return 'Chicago, IL';
     }
 
     categorizeTrips() {
-        // clear trips
-        this.confirmedTrips = [];
-        this.pendingTrips = [];
-        this.postedTrips = [];
-
         // ignore if user does not have an email
         if (this.user && this.user.hasOwnProperty('uid')) {
             // pending trips not implemented in the backend yet
-            for (let i = this.trips.length - 1; i >= 0; i--) {
-                const trip = this.trips[i];
+            for (const trip of this.allTrips) {
                 if (trip.users[this.user.uid] === 'riding') {
                     // confirmed trips: trips that I am in the users[] list for
                     this.confirmedTrips.push(trip);
-                } else if (trip.users[this.user.uid] === 'driving') {
+                } 
+
+                else if (trip.users[this.user.uid] === 'pending') {
+                    this.pendingTrips.push(trip);
+                }
+                
+                else if (trip.users[this.user.uid] === 'driving') {
                     // posted trips: trips that I am the driver for
                     this.postedTrips.push(trip);
                 }
-            }
-        }
-    }
 
-    parseTrips(trips) {
-        let jsTrip;
-        let users;
-        
-        for (const trip of trips) {
-            jsTrip = new Trip();
-
-            users = trip['users'];
-
-            jsTrip.users = users;
-            jsTrip.tripId = trip['tid'];
-            jsTrip.startLat = trip['start_lat'];
-            jsTrip.startLong = trip['start_lng'];
-            jsTrip.endLat = trip['end_lat'];
-            jsTrip.endLong = trip['end_lng'];
-            jsTrip.startTime = new Date(trip['start_time']);
-            jsTrip.endTime = new Date(trip['end_time']);
-            jsTrip.seats = trip['seats'];
-            jsTrip.smoking = trip['smoking'];
-            jsTrip.price = trip['price'];
-
-            // location strings
-            jsTrip.startLocation = `${trip.startLat || '-'},${trip.startLong || '-'}`;
-            jsTrip.endLocation = `${trip.endLat || '-'},${trip.endLong || '-'}`;
-            const updateStart = function(err, res) { if (! err) { this.startLocation = res; } };
-            const updateEnd = function(err, res) { if (! err) { this.endLocation = res; } };
-            this.geoService.reverseGeocode(jsTrip.startLat, jsTrip.startLong, updateStart.bind(jsTrip));
-            this.geoService.reverseGeocode(jsTrip.endLat, jsTrip.endLong, updateEnd.bind(jsTrip));
-
-            for (const uid in users) {
-                if (users[uid] === 'driving') {
-                    jsTrip.driver = uid.toString();
-                    break;
+                else if (trip.users[this.user.uid] !== 'rejected' && trip.seatsfilled() < trip.seats) {
+                    this.otherTrips.push(trip);
                 }
             }
-
-            this.trips.push(jsTrip);
         }
-
-        this.categorizeTrips();
     }
-
 }

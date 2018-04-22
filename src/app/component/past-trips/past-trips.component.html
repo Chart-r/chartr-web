@@ -1,0 +1,20 @@
+<app-ui-app-header [user]="user"></app-ui-app-header>
+<div class="container full-height-content">
+	<a class="btn btn-primary pull-right" routerLink="/post" role="button">Post a Trip</a>
+    <h1 class="display-4">Past Trips</h1>
+    <div class="container fluid">
+        <app-ui-trip-card
+            *ngFor="let trip of trips" 
+            className="col-4"
+            [driverUID]="trip.driver"
+            [seatsfilled]="trip.seatsfilled()"
+            [totalseats]="trip.seats"
+            [departtime]="trip.startTime"
+            [departdest]="trip.startLocation"
+            [arrivetime]="trip.endTime"
+            [arrivedest]="trip.endLocation">
+        </app-ui-trip-card>
+        <p *ngIf="trips.length == 0">You have no past trips.</p>
+    </div>
+</div>
+<app-ui-app-footer [user]="user"></app-ui-app-footer>

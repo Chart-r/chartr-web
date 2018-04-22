@@ -38,4 +38,11 @@ describe('GeoService', () => {
         req.flush(mockResponse);
         httpTestingController.verify();
     }));
+
+    it('should error given invalid lat/long', inject([GeoService], (service: GeoService) => {
+        service.reverseGeocode(null, 10, (err, res) => {
+            expect(err).toBe('Something went wrong. Please try again.');
+            expect(res).toBeNull();
+        });
+    }));
 });

@@ -176,8 +176,8 @@ input[type=tel]:focus {
 .btn, a.btn {
 	border: 2px solid #000;
 	border-radius: 5px;
-	padding: 10px;
-	margin: 5px;
+	padding: 5px 10px;
+	margin: 10px 5px;
 
 	background: #000;
 	box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
@@ -228,10 +228,31 @@ input[type=tel]:focus {
 	color: #000;
 }
 
+.btn.micro {
+	padding: 5px;
+	margin: 2px;
+	font-size: 0.8em;
+	line-height: 0.8em;
+}
+
+.btn.destructive {
+	background-color: #e91000;
+	border-color: #e91000;
+}
+
+.btn.confirm {
+	background-color: #afe900;
+	border-color: #afe900;
+}
+
 label {
 	display: block;
 }
 
 .ui-calendar {
     display: block;
+}
+
+agm-map {
+	height: 300px;
 }

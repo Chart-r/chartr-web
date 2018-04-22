@@ -23,4 +23,16 @@
 			<p class="location-short">{{arrivedest}}</p>
 		</div>
 	</div>
+	<div *ngIf="showButton">
+		<button class="btn" [disabled]="submitting" (click)="requestToJoinTrip()">Join</button>
+	</div>
+	<div *ngIf="showInterestedRiders">
+		<ul>
+			<li *ngFor="let rider of interestedRiders">
+				{{ rider.name }}
+				<button class="btn micro confirm" (click)="acceptRider(rider.uid)">Accept</button>
+				<button class="btn micro destructive" (click)="rejectRider(rider.uid)">Reject</button>
+			</li>
+		</ul>
+	</div>
 </div>

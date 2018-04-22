@@ -44,6 +44,9 @@ describe('SignupComponent', () => {
         } as NgForm;
 
         fixture.detectChanges();
+        component.user.birthdate = '01/01/1996';
+
+        fixture.detectChanges();
         component.onSubmit(mockForm);
         fixture.detectChanges();
 
@@ -59,6 +62,9 @@ describe('SignupComponent', () => {
         } as NgForm;
 
         signupService.signUpShouldFail = true;
+        
+        fixture.detectChanges();
+        component.user.birthdate = '01/01/1996';
 
         fixture.detectChanges();
         component.onSubmit(mockForm);

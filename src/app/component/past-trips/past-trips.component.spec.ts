@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { SearchComponent } from './search.component';
+import { PastTripsComponent } from './past-trips.component';
 import { AuthenticationService } from '../../service/authentication.service';
 import { CognitoService } from '../../service/cognito.service';
 import { Router } from '@angular/router';
@@ -12,23 +12,22 @@ import { TripsComponent } from '../trips/trips.component';
 import { UiAppFooterComponent } from '../ui/ui-app-footer/ui-app-footer.component';
 import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.component';
 import { TripService } from '../../service/trip.service';
-import { TripServiceStub } from '../../testing/trip-service-stub';
-import { FormsModule, NgForm } from '@angular/forms';
 import { GeoService } from '../../service/geo.service';
 import { GeoServiceStub } from '../../testing/geo-service-stub';
+import { TripServiceStub } from '../../testing/trip-service-stub';
 
-describe('SearchComponent', () => {
-    let component: SearchComponent;
-    let fixture: ComponentFixture<SearchComponent>;
+
+describe('PastTripsComponent', () => {
+    let component: PastTripsComponent;
+    let fixture: ComponentFixture<PastTripsComponent>;
     let routerSpy: jasmine.SpyObj<Router>;
     let authenticationService: AuthenticationServiceStub;
 
     beforeEach(async(() => {
-
         routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
         TestBed.configureTestingModule({
-            imports: [ HttpClientTestingModule, FormsModule ],
-            declarations: [ SearchComponent, TripsComponent, UiAppFooterComponent, UiAppHeaderComponent ],
+            imports: [ HttpClientTestingModule ],
+            declarations: [ PastTripsComponent, TripsComponent, UiAppFooterComponent, UiAppHeaderComponent ],
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
@@ -39,11 +38,9 @@ describe('SearchComponent', () => {
         .compileComponents();
     }));
 
-
-
     beforeEach(() => {
         authenticationService = TestBed.get(AuthenticationService);
-        fixture = TestBed.createComponent(SearchComponent);
+        fixture = TestBed.createComponent(PastTripsComponent);
         component = fixture.componentInstance;
     });
 
@@ -51,22 +48,9 @@ describe('SearchComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should load trips', () => {
+    it('should display past trips', () => {
         fixture.detectChanges();
         expect(component.trips.length).toBe(1);
-        expect(component.trips[0].driver).toBe('1111');
-    });
-
-    it('should filter trips', () => {
-        fixture.detectChanges();
-        
-        component.priceToFilter = 20;
-        component.filterTrips();
-        expect(component.results.length).toBe(0);
-
-        component.priceToFilter = 50;
-        component.filterTrips();
-        expect(component.results.length).toBe(1);
     });
 
     it('should redirect if user attributes cannot be fetched', () => {

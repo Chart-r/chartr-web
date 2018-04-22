@@ -67,34 +67,48 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         fixture.detectChanges();
 
         component.trip.startLat = 1;
         component.trip.startLong = 1;
         component.trip.endLat = 1;
         component.trip.endLong = 1;
-        expect(component.trip.validLocations()).toBeTruthy();
+        component.trip.price = 20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
-        fixture.detectChanges();
 
-        expect(component.error).toBe('Please complete all fields.');
+        expect(component.trip.valid()).toBeTruthy();
+        expect(component.error).toBe('Please complete all fields correctly.');
         expect(component.success).toBeNull();
         expect(component.submitting).toBeFalsy();
     });
 
-    it('should display error message for invalid locations', () => {
+    it('should display error message for invalid trips', () => {
         const mockForm = {
             form: { valid: true },
             reset: () => null
         } as NgForm;
 
-        fixture.detectChanges();
-        component.onSubmit(mockForm);
+        const now = new Date();
+
         fixture.detectChanges();
 
-        expect(component.trip.validLocations()).toBeFalsy();
-        expect(component.error).toBe('Please complete all fields.');
+        component.trip.startLat = 1;
+        component.trip.startLong = 1;
+        component.trip.endLat = 1;
+        component.trip.endLong = 1;
+        component.trip.price = -20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
+
+        component.onSubmit(mockForm);
+
+        expect(component.trip.valid()).toBeFalsy();
+        expect(component.error).toBe('Please complete all fields correctly.');
         expect(component.success).toBeNull();
         expect(component.submitting).toBeFalsy();
     });
@@ -105,12 +119,17 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         fixture.detectChanges();
 
         component.trip.startLat = 1;
         component.trip.startLong = 1;
         component.trip.endLat = 1;
         component.trip.endLong = 1;
+        component.trip.price = 20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
 
@@ -125,6 +144,8 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         tripService.shouldFail = true;
 
         fixture.detectChanges();
@@ -133,6 +154,9 @@ describe('PostTripComponent', () => {
         component.trip.startLong = 1;
         component.trip.endLat = 1;
         component.trip.endLong = 1;
+        component.trip.price = 20;
+        component.trip.seats = 2;
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
 

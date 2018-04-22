@@ -27,18 +27,27 @@ export class Trip {
         this.users = {};
     }
 
-    validLocations() {
+    valid() {
+        const currentDate = new Date();
         const valid = (
-            this.startLat !== null &&
-            this.startLong !== null &&
-            this.endLat !== null &&
-            this.endLong !== null
+            this.startTime !== null &&
+            this.startTime.getTime() >= currentDate.getTime() &&
+            this.seats > 0 &&
+            this.price > 0
         );
         
         return valid;
     }
 
     seatsfilled() {
-        return Object.keys(this.users).length - 1;
+        let filled = 0;
+
+        for (const uid in this.users) {
+            if (this.users[uid] === 'riding') {
+                filled++;
+            }
+        }
+
+        return filled;
     }
 }

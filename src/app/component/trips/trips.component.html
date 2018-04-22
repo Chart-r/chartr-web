@@ -1,7 +1,7 @@
 <h2>Nearby Trips</h2>
 <div class="container fluid">
     <app-ui-trip-card
-        *ngFor="let trip of trips" 
+        *ngFor="let trip of otherTrips" 
         className="col-4"
         [driverUID]="trip.driver"
         [seatsfilled]="trip.seatsfilled()"
@@ -9,7 +9,12 @@
         [departtime]="trip.startTime"
         [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation">
+        [arrivedest]="trip.endLocation"
+        [loggedInUid]="user.uid"
+        [tripId]="trip.tripId"
+        [showButton]="true"
+        [trip]="trip"
+        [parent]="this">
     </app-ui-trip-card>
 </div>
 
@@ -25,7 +30,12 @@
         [departtime]="trip.startTime"
         [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation">
+        [arrivedest]="trip.endLocation"
+        [loggedInUid]="user.uid"
+        [tripId]="trip.tripId"
+        [showButton]="false"
+        [trip]="trip"
+        [parent]="this">
     </app-ui-trip-card>
     <p *ngIf="confirmedTrips.length == 0" class="muted">You have no confirmed trips.</p>
 </div>
@@ -41,7 +51,12 @@
         [departtime]="trip.startTime"
         [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation">
+        [arrivedest]="trip.endLocation"
+        [loggedInUid]="user.uid"
+        [tripId]="trip.tripId"
+        [showButton]="false"
+        [trip]="trip"
+        [parent]="this">
     </app-ui-trip-card>
     <p *ngIf="pendingTrips.length == 0" class="muted">You have no pending trips.</p>
 </div>
@@ -57,7 +72,13 @@
         [departtime]="trip.startTime"
         [departdest]="trip.startLocation"
         [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation">
+        [arrivedest]="trip.endLocation"
+        [loggedInUid]="user.uid"
+        [tripId]="trip.tripId"
+        [showButton]="false"
+        [showInterestedRiders]="true"
+        [trip]="trip"
+        [parent]="this">
     </app-ui-trip-card>
     <p *ngIf="postedTrips.length == 0" class="muted">You have no posted trips.</p>
 </div>

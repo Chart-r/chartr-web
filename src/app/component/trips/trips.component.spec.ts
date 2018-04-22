@@ -16,8 +16,7 @@ describe('TripsComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ TripsComponent ],
             providers: [
-                { provide: TripService, useClass: TripServiceStub },
-                { provide: GeoService, useClass: GeoServiceStub }
+                { provide: TripService, useClass: TripServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })
@@ -34,8 +33,19 @@ describe('TripsComponent', () => {
     });
 
     it('should load trips', () => {
+        const mockUser = {
+            email: 'test@user.com',
+            name: 'Test User',
+            birthdate: '1996-01-01',
+            phone: '+19999999999',
+            uid: '1111'
+        };
+
+        component.user = mockUser;
+
         fixture.detectChanges();
-        expect(component.trips.length).toBe(1);
-        expect(component.trips[0].driver).toBe('1111');
+        expect(component.allTrips.length).toBe(1);
+        expect(component.allTrips[0].driver).toBe('1111');
+        expect(component.postedTrips.length).toBe(1);
     });
 });

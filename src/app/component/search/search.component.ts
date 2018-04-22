@@ -19,15 +19,14 @@ export class SearchComponent implements OnInit {
     public startLocationFilter: string;
     public endLocationFilter: string;
     public emailFilter: string;
-    public priceFromFilter: string;
-    public priceToFilter: string;
+    public priceFromFilter: number;
+    public priceToFilter: number;
     public filtering = false;
 
     constructor(
         private authenticationService: AuthenticationService,
         private router: Router,
-        private tripService: TripService,
-        private geoService: GeoService) { }
+        private tripService: TripService) { }
 
     ngOnInit() {
         // authentication
@@ -60,7 +59,7 @@ export class SearchComponent implements OnInit {
         this.results = [];
         this.tripService.getAllTrips().subscribe(
             trips => {
-                this.parseTrips(trips);
+                this.trips = this.tripService.parseTrips(trips);
             },
             err => {
                 console.error(err);
@@ -89,57 +88,17 @@ export class SearchComponent implements OnInit {
             }
 
             // filter by price(s)
-            if (this.priceFromFilter) {
-                pass = pass && e.price >= parseFloat(this.priceFromFilter);
+            if (this.priceFromFilter !== undefined && this.priceFromFilter !== null) {
+                pass = pass && e.price >= this.priceFromFilter;
             }
 
-            if (this.priceToFilter) {
-                pass = pass && e.price <= parseFloat(this.priceToFilter);
+            if (this.priceToFilter !== undefined && this.priceToFilter !== null) {
+                console.log(e.price <= this.priceToFilter);
+                pass = pass && e.price <= this.priceToFilter;
             }
 
             return pass;
         });
         this.filtering = false;
     }
-
-    parseTrips(trips) {
-        let jsTrip;
-        let users;
-        
-        for (const trip of trips) {
-            jsTrip = new Trip();
-
-            users = trip['users'];
-
-            jsTrip.users = users;
-            jsTrip.tripId = trip['tid'];
-            jsTrip.startLat = trip['start_lat'];
-            jsTrip.startLong = trip['start_lng'];
-            jsTrip.endLat = trip['end_lat'];
-            jsTrip.endLong = trip['end_lng'];
-            jsTrip.startTime = new Date(trip['start_time']);
-            jsTrip.endTime = new Date(trip['end_time']);
-            jsTrip.seats = trip['seats'];
-            jsTrip.smoking = trip['smoking'];
-            jsTrip.price = trip['price'];
-
-            // location strings
-            jsTrip.startLocation = `${trip.startLat || '-'},${trip.startLong || '-'}`;
-            jsTrip.endLocation = `${trip.endLat || '-'},${trip.endLong || '-'}`;
-            const updateStart = function(err, res) { if (! err) { this.startLocation = res; } };
-            const updateEnd = function(err, res) { if (! err) { this.endLocation = res; } };
-            this.geoService.reverseGeocode(jsTrip.startLat, jsTrip.startLong, updateStart.bind(jsTrip));
-            this.geoService.reverseGeocode(jsTrip.endLat, jsTrip.endLong, updateEnd.bind(jsTrip));
-
-            for (const uid in users) {
-                if (users[uid] === 'driving') {
-                    jsTrip.driver = uid.toString();
-                    break;
-                }
-            }
-
-            this.trips.push(jsTrip);
-        }
-    }
-
 }

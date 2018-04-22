@@ -19,6 +19,7 @@ import { AuthenticationService } from './service/authentication.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { HomeComponent } from './component/home/home.component';
 import { TripsComponent } from './component/trips/trips.component';
+import { PastTripsComponent } from './component/past-trips/past-trips.component';
 import { TripService } from './service/trip.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UiMessageComponent } from './component/ui/ui-message/ui-message.component';
@@ -43,6 +44,7 @@ import { GeoService } from './service/geo.service';
         LogoutComponent,
         HomeComponent,
         TripsComponent,
+        PastTripsComponent,
         UiMessageComponent,
         UiButtonComponent,
         UiTripCardComponent,

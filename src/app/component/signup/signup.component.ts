@@ -26,7 +26,17 @@ export class SignupComponent implements OnInit {
         this.submitting = true;
 
         if (signUpForm.form.valid) {
-            this.signUpService.register(this.user, this.password, (err, result) => {
+            const modifiedUser = new User();
+
+            modifiedUser.email = this.user.email;
+            modifiedUser.name = this.user.name;
+            modifiedUser.phone = this.user.phone;
+
+            const birthdate = this.user.birthdate;
+            const birthdateParts = birthdate.split('/');
+            modifiedUser.birthdate = `${birthdateParts[2]}-${birthdateParts[0]}-${birthdateParts[1]}`;
+
+            this.signUpService.register(modifiedUser, this.password, (err, result) => {
                 if (err) {
                     this.error = err;
                 }
@@ -38,7 +48,7 @@ export class SignupComponent implements OnInit {
                 }
     
                 this.submitting = false;
-            });  
+            });
         }
 
         else {

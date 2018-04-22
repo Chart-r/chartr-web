@@ -1,13 +1,14 @@
 <div class="header inverted">
 	<div class="container">
 		<div class="brand col-2">
-			<h1 class="site-title"><a routerLink="/">Chartr</a></h1>
+			<h1 class="site-title"><a routerLink="/home">Chartr</a></h1>
 		</div>
 		<div class="search col-4">
 			<!-- <input type="text" placeholder="Find trips to ..." /> -->
 		</div>
-		<div class="navigation col-3">
+		<div class="navigation col-6">
 			<ul class="inline" *ngIf="user">
+				<li><p><a routerLink="/past">Past Trips</a></p></li>
 				<li><p><a routerLink="/search">Search</a></p></li>
 				<li><p><a routerLink="/logout">Logout</a></p></li>
 			</ul>
