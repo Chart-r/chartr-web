@@ -5,6 +5,8 @@ import { TripService } from './trip.service';
 import { User } from '../model/user';
 import { Trip } from '../model/trip';
 import { environment } from '../../environments/environment';
+import { GeoService } from './geo.service';
+import { GeoServiceStub } from '../testing/geo-service-stub';
 
 describe('TripService', () => {
     let httpTestingController: HttpTestingController;
@@ -12,7 +14,10 @@ describe('TripService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ HttpClientTestingModule ],
-            providers: [ TripService ]
+            providers: [ 
+                TripService,
+                { provide: GeoService, useClass: GeoServiceStub }
+            ]
         });
 
         httpTestingController = TestBed.get(HttpTestingController);
@@ -68,5 +73,27 @@ describe('TripService', () => {
         expect(req.request.method).toBe('GET');
         req.flush(mockResponse);
         httpTestingController.verify();
+    }));
+
+    it('should parse trips', inject([TripService], (service: TripService) => {
+        const mockTrip = {
+            'start_lat': 1,
+            'start_lng': 1,
+            'end_lat': 1,
+            'end_lng': 1,
+            'start_time': 1234,
+            'seats': 4,
+            'smoking': false,
+            'price': 30,
+            'users': {
+                '2222': 'riding',
+                '1111': 'driving'
+            }
+        };
+
+        const parsed = service.parseTrips([mockTrip]);
+
+        expect(parsed.length).toBe(1);
+        expect(parsed[0].startLat).toBe(1);
     }));
 });

@@ -16,8 +16,7 @@ describe('TripsComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ TripsComponent ],
             providers: [
-                { provide: TripService, useClass: TripServiceStub },
-                { provide: GeoService, useClass: GeoServiceStub }
+                { provide: TripService, useClass: TripServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })

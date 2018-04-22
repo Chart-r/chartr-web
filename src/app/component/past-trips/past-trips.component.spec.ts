@@ -14,6 +14,7 @@ import { UiAppHeaderComponent } from '../ui/ui-app-header/ui-app-header.componen
 import { TripService } from '../../service/trip.service';
 import { GeoService } from '../../service/geo.service';
 import { GeoServiceStub } from '../../testing/geo-service-stub';
+import { TripServiceStub } from '../../testing/trip-service-stub';
 
 
 describe('PastTripsComponent', () => {
@@ -30,8 +31,7 @@ describe('PastTripsComponent', () => {
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
-                TripService,
-                { provide: GeoService, useClass: GeoServiceStub }
+                { provide: TripService, useClass: TripServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })
@@ -46,6 +46,11 @@ describe('PastTripsComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should display past trips', () => {
+        fixture.detectChanges();
+        expect(component.trips.length).toBe(1);
     });
 
     it('should redirect if user attributes cannot be fetched', () => {
