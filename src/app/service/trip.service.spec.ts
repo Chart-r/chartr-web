@@ -5,6 +5,8 @@ import { TripService } from './trip.service';
 import { User } from '../model/user';
 import { Trip } from '../model/trip';
 import { environment } from '../../environments/environment';
+import { GeoService } from './geo.service';
+import { GeoServiceStub } from '../testing/geo-service-stub';
 
 describe('TripService', () => {
     let httpTestingController: HttpTestingController;
@@ -12,7 +14,10 @@ describe('TripService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ HttpClientTestingModule ],
-            providers: [ TripService ]
+            providers: [ 
+                TripService,
+                { provide: GeoService, useClass: GeoServiceStub }
+            ]
         });
 
         httpTestingController = TestBed.get(HttpTestingController);

@@ -31,8 +31,7 @@ describe('PastTripsComponent', () => {
             providers: [ 
                 { provide: AuthenticationService, useClass: AuthenticationServiceStub }, 
                 { provide: Router, useValue: routerSpy },
-                { provide: TripService, useClass: TripServiceStub },
-                { provide: GeoService, useClass: GeoServiceStub }
+                { provide: TripService, useClass: TripServiceStub }
             ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         })

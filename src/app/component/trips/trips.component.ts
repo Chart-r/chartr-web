@@ -18,7 +18,7 @@ export class TripsComponent implements OnInit {
 
     @Input() user: User;
 
-    constructor(private tripService: TripService, private geoService: GeoService) { }
+    constructor(private tripService: TripService) { }
 
     ngOnInit() {
         this.allTrips = [];
@@ -29,7 +29,7 @@ export class TripsComponent implements OnInit {
 
         this.tripService.getAllTrips().subscribe(
             trips => {
-                this.parseTrips(trips);
+                this.allTrips = this.tripService.parseTrips(trips);
                 this.categorizeTrips();
             },
             err => {
@@ -61,46 +61,6 @@ export class TripsComponent implements OnInit {
                     this.otherTrips.push(trip);
                 }
             }
-        }
-    }
-
-    parseTrips(trips) {
-        let jsTrip;
-        let users;
-        
-        for (const trip of trips) {
-            jsTrip = new Trip();
-
-            users = trip['users'];
-
-            jsTrip.users = users;
-            jsTrip.tripId = trip['tid'];
-            jsTrip.startLat = trip['start_lat'];
-            jsTrip.startLong = trip['start_lng'];
-            jsTrip.endLat = trip['end_lat'];
-            jsTrip.endLong = trip['end_lng'];
-            jsTrip.startTime = new Date(trip['start_time']);
-            jsTrip.endTime = new Date(trip['end_time']);
-            jsTrip.seats = trip['seats'];
-            jsTrip.smoking = trip['smoking'];
-            jsTrip.price = trip['price'];
-
-            // location strings
-            jsTrip.startLocation = `${trip.startLat || '-'},${trip.startLong || '-'}`;
-            jsTrip.endLocation = `${trip.endLat || '-'},${trip.endLong || '-'}`;
-            const updateStart = function(err, res) { if (! err) { this.startLocation = res; } };
-            const updateEnd = function(err, res) { if (! err) { this.endLocation = res; } };
-            this.geoService.reverseGeocode(jsTrip.startLat, jsTrip.startLong, updateStart.bind(jsTrip));
-            this.geoService.reverseGeocode(jsTrip.endLat, jsTrip.endLong, updateEnd.bind(jsTrip));
-
-            for (const uid in users) {
-                if (users[uid] === 'driving') {
-                    jsTrip.driver = uid.toString();
-                    break;
-                }
-            }
-
-            this.allTrips.push(jsTrip);
         }
     }
 }

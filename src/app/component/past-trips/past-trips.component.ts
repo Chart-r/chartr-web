@@ -19,8 +19,7 @@ export class PastTripsComponent implements OnInit {
     constructor(
         private authenticationService: AuthenticationService,
         private router: Router,
-        private tripService: TripService,
-        private geoService: GeoService) { }
+        private tripService: TripService) { }
 
     ngOnInit() {
         this.authenticationService.getAuthenticatedUser((err, cognitoUser) => {
@@ -50,57 +49,15 @@ export class PastTripsComponent implements OnInit {
         this.trips = [];
         this.tripService.getNonCurrentTrips().subscribe(
             trips => {
-                this.parseTrips(trips);
+                this.trips = this.tripService.parseTrips(trips);
+                this.trips = this.trips.filter(trip => {
+                    const now = new Date();
+                    return trip.startTime <= now;
+                });
             },
             err => {
                 console.error(err);
             }
         );
     }
-
-    parseTrips(trips) {
-        let jsTrip;
-        let users;
-
-        const today = new Date(Date.now());
-
-        for (const trip of trips) {
-            jsTrip = new Trip();
-
-            users = trip['users'];
-
-            jsTrip.users = users;
-            jsTrip.tripId = trip['tid'];
-            jsTrip.startLat = trip['start_lat'];
-            jsTrip.startLong = trip['start_lng'];
-            jsTrip.endLat = trip['end_lat'];
-            jsTrip.endLong = trip['end_lng'];
-            jsTrip.startTime = new Date(trip['start_time']);
-            jsTrip.endTime = new Date(trip['end_time']);
-            jsTrip.seats = trip['seats'];
-            jsTrip.smoking = trip['smoking'];
-            jsTrip.price = trip['price'];
-
-            // location strings
-            jsTrip.startLocation = `${trip.startLat || '-'},${trip.startLong || '-'}`;
-            jsTrip.endLocation = `${trip.endLat || '-'},${trip.endLong || '-'}`;
-            const updateStart = function(err, res) { if (! err) { this.startLocation = res; } };
-            const updateEnd = function(err, res) { if (! err) { this.endLocation = res; } };
-            this.geoService.reverseGeocode(jsTrip.startLat, jsTrip.startLong, updateStart.bind(jsTrip));
-            this.geoService.reverseGeocode(jsTrip.endLat, jsTrip.endLong, updateEnd.bind(jsTrip));
-
-            for (const uid in users) {
-                if (users[uid] === 'driving') {
-                    jsTrip.driver = uid.toString();
-                    break;
-                }
-            }
-
-            
-            if (jsTrip.startTime <= today) {
-                this.trips.push(jsTrip);
-            }
-        }
-    }
-
 }
