@@ -67,6 +67,8 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         fixture.detectChanges();
 
         component.trip.startLat = 1;
@@ -75,7 +77,7 @@ describe('PostTripComponent', () => {
         component.trip.endLong = 1;
         component.trip.price = 20;
         component.trip.seats = 2;
-        component.trip.startTime = new Date();
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
 
@@ -91,6 +93,8 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         fixture.detectChanges();
 
         component.trip.startLat = 1;
@@ -99,7 +103,7 @@ describe('PostTripComponent', () => {
         component.trip.endLong = 1;
         component.trip.price = -20;
         component.trip.seats = 2;
-        component.trip.startTime = new Date();
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
 
@@ -115,6 +119,8 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         fixture.detectChanges();
 
         component.trip.startLat = 1;
@@ -123,7 +129,7 @@ describe('PostTripComponent', () => {
         component.trip.endLong = 1;
         component.trip.price = 20;
         component.trip.seats = 2;
-        component.trip.startTime = new Date();
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
 
@@ -138,6 +144,8 @@ describe('PostTripComponent', () => {
             reset: () => null
         } as NgForm;
 
+        const now = new Date();
+
         tripService.shouldFail = true;
 
         fixture.detectChanges();
@@ -148,7 +156,7 @@ describe('PostTripComponent', () => {
         component.trip.endLong = 1;
         component.trip.price = 20;
         component.trip.seats = 2;
-        component.trip.startTime = new Date();
+        component.trip.startTime = new Date(now.getTime() + 1000000000);
 
         component.onSubmit(mockForm);
 

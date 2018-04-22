@@ -98,8 +98,6 @@ export class PastTripsComponent implements OnInit {
 
             
             if (jsTrip.startTime <= today) {
-                console.log(jsTrip.startTime);
-                console.log(today);
                 this.trips.push(jsTrip);
             }
         }
