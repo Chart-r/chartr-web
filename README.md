@@ -1,32 +1,42 @@
-# ChartrWeb
+# Chatr Web
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+## Overview
 
-## Quick Start
-1. Install `npm` and `node` on your system.
-2. Run `npm i`
-3. Run `ng serve`
+This repository holds the web interface for Chartr. The web interface is built on the [Angular](https://angular.io/)
+framework. Currently, the web interface supports the following actions:
+* Creating new users
+* Posting new trips
+* Searching trips
+* Requesting to join trips
+* Accepting/rejecting interested riders from trips
+* Viewing past trips
 
-## Development server
+## Contributors
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* Brian Kurek
+* Alex Chang
 
-## Code scaffolding
+## Contributing
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The contribution guide can be found [here](CONTRIBUTING.md).
 
-## Build
+## Project Documentation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+The final project documentation can be found [here](project_documentation.pdf). In addition, API documentation can be generated
+by running `npm run docs` after completing the installation instructions found below.
 
-## Running unit tests
+## Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To install Chartr Web (for development or deployment), use the following instructions.
+1. Install `npm` and `node` on your system
+2. Install the [Angular CLI](https://github.com/angular/angular-cli) with `npm install -g @angular/cli`
+3. Clone the Chartr Web repository with git
+4. Run `npm install` from the root project directory
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Once you have completed the above steps, you can use the following commands:
+* `ng serve` starts a development server at `http://localhost:4200`. The app will automatically reload if any of the source
+  files change
+* `ng build` builds the project and stores the result in the `dist/` directory. The `-prod` flag can be used to generate
+  a production build
+* `ng test` runs the project unit tests. The `-cc` flag will generate a code coverage report in the `coverage/` directory.
+* `ng e2e` runs the end-to-end tests via [Protractor](http://www.protractortest.org/)
