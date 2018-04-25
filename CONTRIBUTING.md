@@ -4,6 +4,10 @@ When contributing to Chartr Web, please first discuss the change you wish to mak
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
+## Development Environment Set Up
+
+Please follow the installation instructions on the [README](README.md) to set up your development environment.
+
 ## Development Process
 
 All new features, bug fixes, and other contributions shall be made on a branch off of the "dev" branch. These changes can be then merged into dev following the pull request guidelines below. The dev branch will be merged into master for major releases,but all incremental development will be performed on dev. All classes must have 80% statement coverage, and all tests must be passing in order to merge a feature branch back into dev. All code must also proper TypeDoc comments to support generating API

@@ -38,5 +38,5 @@ Once you have completed the above steps, you can use the following commands:
   files change
 * `ng build` builds the project and stores the build artifacts in the `dist/` directory. The `-prod` flag can be used to
   generate a production build
-* `ng test` runs the project unit tests. The `-cc` flag will generate a code coverage report in the `coverage/` directory.
+* `ng test` runs the project unit tests. The `-cc` flag will generate a code coverage report in the `coverage/` directory
 * `ng e2e` runs the end-to-end tests via [Protractor](http://www.protractortest.org/)
