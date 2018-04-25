@@ -1,9 +1,17 @@
 import { User } from '../model/user';
 import { Trip } from '../model/trip';
 
+/** The fake trip service used in testing */
 export class TripServiceStub {
+    /** Flag indicating whether requests should fail */
     public shouldFail = false;
 
+    /**
+     * Create a new trip
+     * @param user The user creating the trip
+     * @param trip The new trip
+     * @returns The fake observable
+     */
     createTrip(user: User, trip: Trip) {
         return {
             subscribe: (scb, ecb) => {
@@ -18,6 +26,10 @@ export class TripServiceStub {
         };
     }
 
+    /**
+     * Get all non current trips
+     * @returns The fake observable
+     */
     getNonCurrentTrips() {
         return {
             subscribe: (scb, ecb) => {
@@ -47,6 +59,10 @@ export class TripServiceStub {
         }; 
     }
 
+    /**
+     * Get all current trips
+     * @returns The fake observable
+     */
     getAllTrips() {
         return {
             subscribe: (scb, ecb) => {
@@ -76,6 +92,11 @@ export class TripServiceStub {
         };
     }
 
+    /**
+     * Parse server trips to local trips
+     * @param trips The trips to parse
+     * @returns The parsed trips
+     */
     parseTrips(trips: any): Trip[] {
         let jsTrip;
         let users;
