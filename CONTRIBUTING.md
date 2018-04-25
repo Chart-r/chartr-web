@@ -6,7 +6,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 ## Development Environment Set Up
 
-Please follow the installation instructions on the [README](README.md) to set up your development environment.
+Please follow the installation instructions on the [README](README.md#installation) to set up your development environment.
 
 ## Development Process
 
