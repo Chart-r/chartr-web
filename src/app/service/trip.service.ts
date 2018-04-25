@@ -8,11 +8,22 @@ import { GeoService } from './geo.service';
 
 const TRIP_URL = `${environment.apiGatewayUrl}/trip`;
 
+/** Class representing the trip service */
 @Injectable()
 export class TripService {
-
+    /**
+     * Create a trip service
+     * @param http The Angular http client
+     * @param geoService The geo service
+     */
     constructor(private http: HttpClient, private geoService: GeoService) { }
 
+    /**
+     * Create a new trip
+     * @param user The user creating the trip
+     * @param trip The new trip
+     * @returns The request observable
+     */
     createTrip(user: User, trip: Trip) {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -24,14 +35,28 @@ export class TripService {
         return this.http.post(createTripUrl, reqBody, httpOptions);
     }
 
+    /**
+     * Get all non current trips
+     * @returns The request observable
+     */
     getNonCurrentTrips() {        
         return this.http.get(`${TRIP_URL}`);
     }
 
+    /**
+     * Get all current trips
+     * @returns The request observable
+     */
     getAllTrips() {        
         return this.http.get(`${TRIP_URL}/current`);
     }
 
+    /**
+     * Build the request body for creating a trip
+     * @param user The user creating the trip
+     * @param trip The trip being created
+     * @returns The JSON request body
+     */
     buildReqeustBody(user: User, trip: Trip) {
         const reqBody = {};
 
@@ -49,6 +74,11 @@ export class TripService {
         return JSON.stringify(reqBody);
     }
 
+    /**
+     * Parse the backend trips to the local trip model
+     * @param trips The trips to parse
+     * @returns The parsed trips
+     */
     parseTrips(trips: any): Trip[] {
         let jsTrip;
         let users;

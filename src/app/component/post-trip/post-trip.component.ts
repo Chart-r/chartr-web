@@ -8,26 +8,40 @@ import { Router } from '@angular/router';
 import { Trip } from '../../model/trip';
 import { TripService } from '../../service/trip.service';
 
+/** Class representing a PostTripComponent */
 @Component({
     selector: 'app-post-trip',
     templateUrl: './post-trip.component.html',
     styleUrls: ['./post-trip.component.css']
 })
 export class PostTripComponent implements OnInit {
+    /** The trip being posted */
     public trip: Trip;
+    /** The logged in user */
     public user: User;
-
+    /** Error message displayed to user */
     public error: string;
+    /** Success message dispalyed to user */
     public success: string;
+    /** Flag indicating whether the post trip form is submitting or not */
     public submitting = false;
 
-
+    /** Reference to the start location field */
     @ViewChild('start')
     public startRef: ElementRef;
 
+    /** Reference to the end location field */
     @ViewChild('end')
     public endRef: ElementRef;
 
+    /**
+     * Create a PostTripComponent
+     * @param mapsApiLoader The maps API loader
+     * @param ngZone The Angular ngZone
+     * @param authenticationService The authentication service
+     * @param tripService The trip service
+     * @param router The Angular router
+     */
     constructor(
         private mapsApiLoader: MapsAPILoader, 
         private ngZone: NgZone,
@@ -36,6 +50,10 @@ export class PostTripComponent implements OnInit {
         private router: Router
     ) { }
 
+    /**
+     * ngOnInit lifecycle hook for PostTripComponent.
+     * This function makes sure that a user is logged in.
+     */
     ngOnInit() {
         this.trip = new Trip();
         this.trip.startLat = 39.8282;
@@ -68,6 +86,10 @@ export class PostTripComponent implements OnInit {
         }); 
     }
 
+    /**
+     * Submit a post trip form
+     * @param postTripForm The post trip form to submit
+     */
     onSubmit(postTripForm: NgForm) {
         this.submitting = true;
         if (this.trip.valid() && postTripForm.form.valid) {
@@ -94,6 +116,9 @@ export class PostTripComponent implements OnInit {
         }
     }
 
+    /**
+     * Set up the location fields on the post trip form
+     */
     private setUpPostTripForm() {
         this.mapsApiLoader.load().then(() => {
             const startAutocomplete = new google.maps.places.Autocomplete(this.startRef.nativeElement, {

@@ -4,24 +4,41 @@ import { User } from '../../model/user';
 import { SignupService } from '../../service/signup.service';
 import { NgForm } from '@angular/forms';
 
+/** Class representing a SignupComponent */
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+    /** The user being created */
     public user: User;
+    /** The new user's password */
     public password: string;
+    /** Error message displayed to user */
     public error: string;
+    /** Flag indicating whether success message should be shown */
     public success = false;
+    /** Flag indicating whether the sign up form is currently submitting */
     public submitting = false;
 
+    /**
+     * Create a SignupComponent
+     * @param signUpService The sign up service
+     */
     constructor(private signUpService: SignupService) { }
 
+    /**
+     * ngOnInit lifecycle hook for SignupComponent
+     */
     ngOnInit() {
         this.user = new User();
     }
 
+    /**
+     * Submit a sign up form
+     * @param signUpForm The sign up form to submit
+     */
     onSubmit(signUpForm: NgForm) {
         this.submitting = true;
 

@@ -4,16 +4,28 @@ import { User } from '../model/user';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { UserService } from './user.service';
 
+/** Class representing the authentication service */
 @Injectable()
 export class AuthenticationService {
+    /** The current cognito user */
     private user: CognitoUser = null;
 
+    /**
+     * Create an authentication service
+     * @param cognitoService The cognito service
+     * @param userService The user service
+     */
     constructor(private cognitoService: CognitoService, private userService: UserService) { }
 
+    /** Clear the current authenticated user */
     clearAuthenticatedUser(): void {
         this.user = null;
     }
 
+    /**
+     * Get the current authenticated user if one exists
+     * @param cb The callback to call when the request is finished
+     */
     getAuthenticatedUser(cb: (err: string, user: CognitoUser) => void): void {
         if (this.user) {
             cb(null, this.user);
@@ -46,6 +58,11 @@ export class AuthenticationService {
         }  
     }
 
+    /**
+     * Get a cognito user's attributes
+     * @param cognitoUser The cognito user
+     * @param cb The callback to call when the request finishes
+     */
     getUserAttributes(cognitoUser: CognitoUser, cb: (err: string, user: User) => void): void {
         const user = new User();
         

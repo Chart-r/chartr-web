@@ -4,22 +4,37 @@ import { GeoService } from '../../service/geo.service';
 import { Trip } from '../../model/trip';
 import { User } from '../../model/user';
 
+/** Class representing a TripsComponent */
 @Component({
     selector: 'app-trips',
     templateUrl: './trips.component.html',
     styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
+    /** All current trips */
     public allTrips: Trip[];
+    /** Current user's confirmed trips */
     public confirmedTrips: Trip[];
+    /** Current user's pending trips */
     public pendingTrips: Trip[];
+    /** Current user's posted trips */
     public postedTrips: Trip[];
+    /** Current user's other trips */
     public otherTrips: Trip[];
 
+    /** The logged in user */
     @Input() user: User;
 
+    /**
+     * Create a TripsComponent
+     * @param tripService The trip service
+     */
     constructor(private tripService: TripService) { }
 
+    /**
+     * ngOnInit lifecycle hook for TripsComponent.
+     * This function gets all the current trips and categorizes them
+     */
     ngOnInit() {
         this.allTrips = [];
         this.confirmedTrips = [];
@@ -38,6 +53,9 @@ export class TripsComponent implements OnInit {
         );
     }
 
+    /**
+     * Categorize current trips into confirmed, pending, posted, and other
+     */
     categorizeTrips() {
         // ignore if user does not have an email
         if (this.user && this.user.hasOwnProperty('uid')) {
