@@ -10,7 +10,7 @@ Please follow the installation instructions on the [README](README.md#installati
 
 ## Development Process
 
-All new features, bug fixes, and other contributions shall be made on a branch off of the "dev" branch. These changes can be then merged into dev following the pull request guidelines below. The dev branch will be merged into master for major releases,but all incremental development will be performed on dev. All classes must have 80% statement coverage, and all tests must be passing in order to merge a feature branch back into dev. All code must also proper TypeDoc comments to support generating API
+All new features, bug fixes, and other contributions shall be made on a branch off of the "dev" branch. These changes can be then merged into dev following the pull request guidelines below. The dev branch will be merged into master for major releases, but all incremental development will be performed on dev. All classes must have 80% unit tests statement coverage, and all tests must be passing in order to merge a feature branch back into dev. All code must also have proper TypeDoc comments to support generating API
 documentation.
 
 ## Pull Request Process
