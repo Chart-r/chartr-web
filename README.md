@@ -27,7 +27,7 @@ by running `npm run docs` after completing the installation instructions found b
 
 ## Installation
 
-To install Chartr Web (for development or deployment), use the following instructions.
+To install Chartr Web (for development or deployment), use the following instructions:
 1. Install `npm` and `node` on your system
 2. Install the [Angular CLI](https://github.com/angular/angular-cli) with `npm install -g @angular/cli`
 3. Clone the Chartr Web repository with git
@@ -36,7 +36,7 @@ To install Chartr Web (for development or deployment), use the following instruc
 Once you have completed the above steps, you can use the following commands:
 * `ng serve` starts a development server at `http://localhost:4200`. The app will automatically reload if any of the source
   files change
-* `ng build` builds the project and stores the result in the `dist/` directory. The `-prod` flag can be used to generate
-  a production build
+* `ng build` builds the project and stores the build artifacts in the `dist/` directory. The `-prod` flag can be used to
+  generate a production build
 * `ng test` runs the project unit tests. The `-cc` flag will generate a code coverage report in the `coverage/` directory.
 * `ng e2e` runs the end-to-end tests via [Protractor](http://www.protractortest.org/)
