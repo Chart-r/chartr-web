@@ -19,7 +19,7 @@ framework. Currently, the web interface supports the following actions:
 
 ## Contributing
 
-The contribution guide can be found [here](CONTRIBUTING.md).
+The contributing guide can be found [here](CONTRIBUTING.md).
 
 ## Project Documentation
 
