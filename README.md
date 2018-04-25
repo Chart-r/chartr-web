@@ -10,6 +10,7 @@ framework. Currently, the web interface supports the following actions:
 * Requesting to join trips
 * Accepting/rejecting interested riders from trips
 * Viewing past trips
+* Viewing posted/pending/confirmed trips
 
 ## Contributors
 
