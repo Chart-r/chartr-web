@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UiTripCardComponent } from './ui-trip-card.component';
 import { UserService } from '../../../service/user.service';
 import { UserServiceStub } from '../../../testing/user-service-stub';
+import { EmailService } from '../../../service/email.service';
+import { EmailServiceStub } from '../../../testing/email-service-stub';
 import { Trip } from '../../../model/trip';
 import { User } from '../../../model/user';
 
@@ -34,7 +36,8 @@ describe('UiTripCardComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ UiTripCardComponent ],
             providers: [
-                { provide: UserService, useClass: UserServiceStub }
+                { provide: UserService, useClass: UserServiceStub },
+                { provide: EmailService, useClass: EmailServiceStub }
             ]
         })
         .compileComponents();
@@ -136,5 +139,12 @@ describe('UiTripCardComponent', () => {
 
         expect(component.seatsfilled).toBe(2);
         expect(component.interestedRiders.length).toBe(2);
+    });
+
+    it('should format a phone number', () => {
+        const input = '+12223334444';
+        const output = '+1-222-333-4444';
+
+        expect(component.formatPhone(input)).toBe(output);
     });
 });
