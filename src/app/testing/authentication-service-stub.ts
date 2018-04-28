@@ -66,7 +66,8 @@ export class AuthenticationServiceStub {
                             break;
                     }
                 }
-    
+
+                user.uid = '1111';
                 cb(null, user);  
             });
         }

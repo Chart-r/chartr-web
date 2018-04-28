@@ -48,19 +48,10 @@ describe('MyTripsComponent', () => {
     });
 
     it('should load trips', () => {
-        const mockUser = {
-            email: 'test@user.com',
-            name: 'Test User',
-            birthdate: '1996-01-01',
-            phone: '+19999999999',
-            uid: '1111'
-        };
-
-        component.user = mockUser;
-
         fixture.detectChanges();
         expect(component.allTrips.length).toBe(1);
         expect(component.allTrips[0].driver).toBe('1111');
+        expect(component.postedTrips.length).toBe(1);
     });
 
     it('should redirect if user attributes cannot be fetched', () => {

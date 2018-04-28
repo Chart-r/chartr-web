@@ -45,7 +45,7 @@ export class TripsComponent implements OnInit {
     }
 
     /**
-     * Categorize current trips into confirmed, pending, posted, and other
+     * Categorize current trips into trips that the user is not a part of
      */
     categorizeTrips() {
         // ignore if user does not have an email

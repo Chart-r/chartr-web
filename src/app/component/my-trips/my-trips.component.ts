@@ -28,12 +28,15 @@ export class MyTripsComponent implements OnInit {
     public user: User = null;
 
     /**
-     * Create a HomeComponent
+     * Create a MyTripsComponent
      * @param authenticationService The authentication service
      * @param router The Angular router
      * @param tripService The trip service
      */
-    constructor(private authenticationService: AuthenticationService, private router: Router, private tripService: TripService) { }
+    constructor(
+        private authenticationService: AuthenticationService, 
+        private router: Router, 
+        private tripService: TripService) { }
 
 
     /**
@@ -63,6 +66,16 @@ export class MyTripsComponent implements OnInit {
 
                     else {
                         this.user = user;
+                        // gets all the trips for this user
+                        this.tripService.getAllTrips().subscribe(
+                            trips => {
+                                this.allTrips = this.tripService.parseTrips(trips);
+                                this.categorizeTrips();
+                            },
+                            err => {
+                                console.error(err);
+                            }
+                        );
                     }
                 });
             }
@@ -70,18 +83,7 @@ export class MyTripsComponent implements OnInit {
             else {
                 this.router.navigateByUrl('/');
             }
-        });
-
-        // gets all the trips for this user
-        this.tripService.getAllTrips().subscribe(
-            trips => {
-                this.allTrips = this.tripService.parseTrips(trips);
-                this.categorizeTrips();
-            },
-            err => {
-                console.error(err);
-            }
-        );
+        });    
     }
 
     /**
