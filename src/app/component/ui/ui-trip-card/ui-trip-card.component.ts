@@ -61,6 +61,11 @@ export class UiTripCardComponent implements OnInit {
     /** This trip's interested riders */
     public interestedRiders: User[];
 
+    /**
+     * Create a Chartr trip card
+     * @param userService The user service
+     * @param emailService The email service
+     */
     constructor(private userService: UserService, private emailService: EmailService) { }
 
     /**
