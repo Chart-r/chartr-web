@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { UserService } from '../../../service/user.service';
+import { EmailService } from '../../../service/email.service';
 import { User } from '../../../model/user';
 import { Trip } from '../../../model/trip';
 
@@ -39,7 +40,7 @@ export class UiTripCardComponent implements OnInit {
     @Input() parent: any;
     public submitting: boolean;
     public interestedRiders: User[];
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private emailService: EmailService) { }
 
     ngOnInit() {
         this.submitting = false;
@@ -81,6 +82,16 @@ export class UiTripCardComponent implements OnInit {
         return obj.toLocaleDateString('en-US', DATE_OPTIONS);
     }
 
+    // Formats a stored phone number from the +12223334444 to the +1-222-333-4444 format.
+    formatPhone(str) {
+        return [
+            str.substring(0, 2),
+            str.substring(2, 5),
+            str.substring(5, 8),
+            str.substring(8)
+        ].join('-');
+    }
+
     requestToJoinTrip() {
         this.submitting = true;
         this.userService.addPendingUserToTrip(this.loggedInUid, this.tripId).subscribe(
@@ -101,6 +112,37 @@ export class UiTripCardComponent implements OnInit {
                 res => {
                     this.seatsfilled++;
                     this.removeInterestedRider(uid);
+
+                    // get driver details
+                    this.userService.getUserByUid(this.driverUID).subscribe(
+                        (driver: User) => {
+                            // get rider details
+                            this.userService.getUserByUid(uid).subscribe(
+                                (rider: User) => {
+                                    // send emails
+                                    this.emailService.sendMail({
+                                        driverName: driver.name,
+                                        riderName: rider.name,
+                                        driverPhone: this.formatPhone(driver.phone),
+                                        riderPhone: this.formatPhone(rider.phone),
+                                        driverEmail: driver.email,
+                                        riderEmail: rider.email,
+                                        tripTime: +this.arrivetime
+                                    }, (err, res) => {
+                                        if (err) {
+                                            console.error(err);
+                                        }
+                                    });
+                                },
+                                err => {
+                                    console.error(err);
+                                }
+                            );
+                        },
+                        err => {
+                            console.error(err);
+                        }
+                    );
                 },
                 err => {
                     console.error(err);
