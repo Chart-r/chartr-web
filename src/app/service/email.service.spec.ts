@@ -28,13 +28,13 @@ describe('EmailService', () => {
         };
 
         const mockRequest = {
-            'driverName': 'Christian',
-            'riderName': 'Matt',
-            'driverPhone': '+1-777-555-4444',
-            'riderPhone': '+1-666-222-1111',
-            'driverEmail': 'chris.cygnus@gmail.com',
-            'riderEmail': 'cygnus2@illinois.edu',
-            'tripTime': 1524681104383
+            'driverName': 'Test',
+            'riderName': 'User',
+            'driverPhone': '+1-222-333-4444',
+            'riderPhone': '+1-111-222-3333',
+            'driverEmail': 'test@gmail.com',
+            'riderEmail': 'test2@example.edu',
+            'tripTime': 1524631194373
         };
 
         service.sendMail(mockRequest, (err, res) => {
