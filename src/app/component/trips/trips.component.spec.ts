@@ -46,6 +46,5 @@ describe('TripsComponent', () => {
         fixture.detectChanges();
         expect(component.allTrips.length).toBe(1);
         expect(component.allTrips[0].driver).toBe('1111');
-        expect(component.postedTrips.length).toBe(1);
     });
 });

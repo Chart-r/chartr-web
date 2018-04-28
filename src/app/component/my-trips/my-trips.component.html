@@ -1,0 +1,72 @@
+<app-ui-app-header [user]="user"></app-ui-app-header>
+<div class="container full-height-content">
+    <a class="btn ghost pull-right" routerLink="/home" role="button">All Trips</a>
+    <a class="btn btn-primary pull-right" routerLink="/post" role="button">Post a Trip</a>
+    <h1 class="display-4">My Trips</h1>
+    <div *ngIf="user">
+        <h3>Confirmed</h3>
+        <div class="container fluid">
+            <app-ui-trip-card
+                *ngFor="let trip of confirmedTrips" 
+                className="col-4"
+                [driverUID]="trip.driver"
+                [seatsfilled]="trip.seatsfilled()"
+                [totalseats]="trip.seats"
+                [departtime]="trip.startTime"
+                [departdest]="trip.startLocation"
+                [arrivetime]="trip.endTime"
+                [arrivedest]="trip.endLocation"
+                [loggedInUid]="user.uid"
+                [tripId]="trip.tripId"
+                [showButton]="false"
+                [trip]="trip"
+                [parent]="this">
+            </app-ui-trip-card>
+            <p *ngIf="confirmedTrips.length == 0" class="muted">You have no confirmed trips.</p>
+        </div>
+
+        <h3>Pending</h3>
+        <div class="container fluid">
+            <app-ui-trip-card
+                *ngFor="let trip of pendingTrips" 
+                className="col-4"
+                [driverUID]="trip.driver"
+                [seatsfilled]="trip.seatsfilled()"
+                [totalseats]="trip.seats"
+                [departtime]="trip.startTime"
+                [departdest]="trip.startLocation"
+                [arrivetime]="trip.endTime"
+                [arrivedest]="trip.endLocation"
+                [loggedInUid]="user.uid"
+                [tripId]="trip.tripId"
+                [showButton]="false"
+                [trip]="trip"
+                [parent]="this">
+            </app-ui-trip-card>
+            <p *ngIf="pendingTrips.length == 0" class="muted">You have no pending trips.</p>
+        </div>
+
+        <h3>Posted</h3>
+        <div class="container fluid">
+            <app-ui-trip-card
+                *ngFor="let trip of postedTrips" 
+                className="col-4"
+                [driverUID]="trip.driver"
+                [seatsfilled]="trip.seatsfilled()"
+                [totalseats]="trip.seats"
+                [departtime]="trip.startTime"
+                [departdest]="trip.startLocation"
+                [arrivetime]="trip.endTime"
+                [arrivedest]="trip.endLocation"
+                [loggedInUid]="user.uid"
+                [tripId]="trip.tripId"
+                [showButton]="false"
+                [showInterestedRiders]="true"
+                [trip]="trip"
+                [parent]="this">
+            </app-ui-trip-card>
+            <p *ngIf="postedTrips.length == 0" class="muted">You have no posted trips.</p>
+        </div>
+    </div>
+</div>
+<app-ui-app-footer [user]="user"></app-ui-app-footer>

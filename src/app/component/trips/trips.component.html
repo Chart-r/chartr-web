@@ -1,4 +1,4 @@
-<h2>Nearby Trips</h2>
+<h2>All Trips</h2>
 <div class="container fluid">
     <app-ui-trip-card
         *ngFor="let trip of otherTrips" 
@@ -16,69 +16,4 @@
         [trip]="trip"
         [parent]="this">
     </app-ui-trip-card>
-</div>
-
-<h2>My Trips</h2>
-<h3>Confirmed</h3>
-<div class="container fluid">
-    <app-ui-trip-card
-        *ngFor="let trip of confirmedTrips" 
-        className="col-4"
-        [driverUID]="trip.driver"
-        [seatsfilled]="trip.seatsfilled()"
-        [totalseats]="trip.seats"
-        [departtime]="trip.startTime"
-        [departdest]="trip.startLocation"
-        [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation"
-        [loggedInUid]="user.uid"
-        [tripId]="trip.tripId"
-        [showButton]="false"
-        [trip]="trip"
-        [parent]="this">
-    </app-ui-trip-card>
-    <p *ngIf="confirmedTrips.length == 0" class="muted">You have no confirmed trips.</p>
-</div>
-
-<h3>Pending</h3>
-<div class="container fluid">
-    <app-ui-trip-card
-        *ngFor="let trip of pendingTrips" 
-        className="col-4"
-        [driverUID]="trip.driver"
-        [seatsfilled]="trip.seatsfilled()"
-        [totalseats]="trip.seats"
-        [departtime]="trip.startTime"
-        [departdest]="trip.startLocation"
-        [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation"
-        [loggedInUid]="user.uid"
-        [tripId]="trip.tripId"
-        [showButton]="false"
-        [trip]="trip"
-        [parent]="this">
-    </app-ui-trip-card>
-    <p *ngIf="pendingTrips.length == 0" class="muted">You have no pending trips.</p>
-</div>
-
-<h3>Posted</h3>
-<div class="container fluid">
-    <app-ui-trip-card
-        *ngFor="let trip of postedTrips" 
-        className="col-4"
-        [driverUID]="trip.driver"
-        [seatsfilled]="trip.seatsfilled()"
-        [totalseats]="trip.seats"
-        [departtime]="trip.startTime"
-        [departdest]="trip.startLocation"
-        [arrivetime]="trip.endTime"
-        [arrivedest]="trip.endLocation"
-        [loggedInUid]="user.uid"
-        [tripId]="trip.tripId"
-        [showButton]="false"
-        [showInterestedRiders]="true"
-        [trip]="trip"
-        [parent]="this">
-    </app-ui-trip-card>
-    <p *ngIf="postedTrips.length == 0" class="muted">You have no posted trips.</p>
 </div>

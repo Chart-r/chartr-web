@@ -19,6 +19,7 @@ import { AuthenticationService } from './service/authentication.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { HomeComponent } from './component/home/home.component';
 import { TripsComponent } from './component/trips/trips.component';
+import { MyTripsComponent } from './component/my-trips/my-trips.component';
 import { PastTripsComponent } from './component/past-trips/past-trips.component';
 import { TripService } from './service/trip.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -45,6 +46,7 @@ import { EmailService } from './service/email.service';
         LogoutComponent,
         HomeComponent,
         TripsComponent,
+        MyTripsComponent,
         PastTripsComponent,
         UiMessageComponent,
         UiButtonComponent,
