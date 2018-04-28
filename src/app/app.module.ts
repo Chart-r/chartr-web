@@ -33,6 +33,7 @@ import { PostTripComponent } from './component/post-trip/post-trip.component';
 import { UserService } from './service/user.service';
 import { SearchComponent } from './component/search/search.component';
 import { GeoService } from './service/geo.service';
+import { EmailService } from './service/email.service';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { GeoService } from './service/geo.service';
         AuthenticationService,
         TripService,
         UserService,
-        GeoService
+        GeoService,
+        EmailService
     ],
     bootstrap: [AppComponent]
 })

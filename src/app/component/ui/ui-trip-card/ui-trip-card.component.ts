@@ -111,7 +111,9 @@ export class UiTripCardComponent implements OnInit {
         return obj.toLocaleDateString('en-US', DATE_OPTIONS);
     }
 
-    // Formats a stored phone number from the +12223334444 to the +1-222-333-4444 format.
+    /**
+     * Formats a stored phone number from the +12223334444 to the +1-222-333-4444 format.
+     */
     formatPhone(str) {
         return [
             str.substring(0, 2),
@@ -148,37 +150,7 @@ export class UiTripCardComponent implements OnInit {
                 res => {
                     this.seatsfilled++;
                     this.removeInterestedRider(uid);
-
-                    // get driver details
-                    this.userService.getUserByUid(this.driverUID).subscribe(
-                        (driver: User) => {
-                            // get rider details
-                            this.userService.getUserByUid(uid).subscribe(
-                                (rider: User) => {
-                                    // send emails
-                                    this.emailService.sendMail({
-                                        driverName: driver.name,
-                                        riderName: rider.name,
-                                        driverPhone: this.formatPhone(driver.phone),
-                                        riderPhone: this.formatPhone(rider.phone),
-                                        driverEmail: driver.email,
-                                        riderEmail: rider.email,
-                                        tripTime: +this.arrivetime
-                                    }, (err, res) => {
-                                        if (err) {
-                                            console.error(err);
-                                        }
-                                    });
-                                },
-                                err => {
-                                    console.error(err);
-                                }
-                            );
-                        },
-                        err => {
-                            console.error(err);
-                        }
-                    );
+                    this.sendEmailNotification(uid);
                 },
                 err => {
                     console.error(err);
@@ -199,6 +171,42 @@ export class UiTripCardComponent implements OnInit {
         this.userService.rejectRiderForTrip(uid, this.tripId).subscribe(
             res => {
                 this.removeInterestedRider(uid);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    /**
+     * Send confirmation email to users
+     * @param riderUid The UID of the accepted rider
+     */
+    private sendEmailNotification(riderUid: string) {
+        this.userService.getUserByUid(this.driverUID).subscribe(
+            (driver: User) => {
+                this.userService.getUserByUid(riderUid).subscribe(
+                    (rider: User) => {
+                        const reqeustBody = {
+                            driverName: driver.name,
+                            riderName: rider.name,
+                            driverPhone: this.formatPhone(driver.phone),
+                            riderPhone: this.formatPhone(rider.phone),
+                            driverEmail: driver.email,
+                            riderEmail: rider.email,
+                            tripTime: this.departtime.getTime()
+                        };
+
+                        this.emailService.sendMail(reqeustBody, (err, res) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+                    },
+                    err => {
+                        console.error(err);
+                    }
+                );
             },
             err => {
                 console.error(err);

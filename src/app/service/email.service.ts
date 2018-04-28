@@ -4,13 +4,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 const SEND_EMAIL_API = `${environment.apiGatewayUrl}/email/confirmation`;
 
+/** Class representing the email service */
 @Injectable()
-export class EmailService {
+export class EmailService { 
+    /**
+     * Create an email service
+     * @param http The Angular http client
+     */
     constructor(private http: HttpClient) { }
 
-    sendMail(options: Object, cb: (err: string, result: string) => void): void {
-        if (!options) {
-            cb('Please specify email options.', null);
+    /**
+     * Send confirmation email to users
+     * @param body The request body to send
+     * @param cb The callback to call when the reqeust finishes
+     */
+    sendMail(body: Object, cb: (err: string, result: string) => void): void {
+        if (!body) {
+            cb('Please specify request body.', null);
             return;
         }
 
@@ -20,7 +30,7 @@ export class EmailService {
             })
         };
 
-        this.http.post(SEND_EMAIL_API, options, httpOptions).subscribe(
+        this.http.post(SEND_EMAIL_API, body, httpOptions).subscribe(
             res => {
                 cb(null, 'Success');
             },

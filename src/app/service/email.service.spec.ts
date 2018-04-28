@@ -50,7 +50,7 @@ describe('EmailService', () => {
 
     it('should error given no email params', inject([EmailService], (service: EmailService) => {
         service.sendMail(undefined, (err, res) => {
-            expect(err).toBe('Please specify email options.');
+            expect(err).toBe('Please specify request body.');
             expect(res).toBeNull();
         });
     }));
