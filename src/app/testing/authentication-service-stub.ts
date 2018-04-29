@@ -1,11 +1,19 @@
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { User } from '../model/user';
 
+/** Class representing the fake authentication service used in testing */
 export class AuthenticationServiceStub {
+    /** Flag indicating whether getting a user should fail */
     public getUserShouldFail = false;
+    /** Flag indicating whether get attributes should fail */
     public getAttributesShouldFail = false;
+    /** Flag indicating whether a user is logged in */
     public isLoggedIn = true;
 
+    /**
+     * Get the authenticated user
+     * @param cb The callback to call when the "request" finishes
+     */
     getAuthenticatedUser(cb: (err: string, user: CognitoUser) => void): void {
         if (!this.getUserShouldFail && this.isLoggedIn) {
             const mockUser = {
@@ -32,6 +40,11 @@ export class AuthenticationServiceStub {
         }
     }
 
+    /**
+     * Get a cognito user's attributes
+     * @param cognitoUser The cognito user to get attributes for
+     * @param cb The callback to call when the "request" finishes
+     */
     getUserAttributes(cognitoUser: CognitoUser, cb: (err: string, user: User) => void): void {
         if (!this.getAttributesShouldFail) {
             const user = new User();
@@ -53,7 +66,8 @@ export class AuthenticationServiceStub {
                             break;
                     }
                 }
-    
+
+                user.uid = '1111';
                 cb(null, user);  
             });
         }

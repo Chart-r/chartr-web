@@ -1,8 +1,9 @@
 <app-ui-app-header [user]="user"></app-ui-app-header>
 <div class="container full-height-content">
-    <h1 class="display-4">Trips</h1>
+	<a class="btn ghost pull-right" routerLink="/mytrips" role="button">My Trips</a>
+    <a class="btn btn-primary pull-right" routerLink="/post" role="button">Post a Trip</a>
+    <h1 class="display-4">All Trips</h1>
     <p class="lead" *ngIf="user">Hello, {{ user.name }}</p>
-    <a class="btn btn-primary" routerLink="/post" role="button">Post a Trip</a>
     <div *ngIf="user">
         <app-trips [user]="user"></app-trips>
     </div>

@@ -3,23 +3,20 @@
 		<div class="brand col-2">
 			<h1 class="site-title"><a routerLink="/home">Chartr</a></h1>
 		</div>
-		<div class="search col-4">
-			<!-- <input type="text" placeholder="Find trips to ..." /> -->
-		</div>
 		<div class="navigation col-6">
 			<ul class="inline" *ngIf="user">
+				<li><p><a routerLink="/home">All Trips</a></p></li>
+				<li><p><a routerLink="/mytrips">My Trips</a></p></li>
 				<li><p><a routerLink="/past">Past Trips</a></p></li>
 				<li><p><a routerLink="/search">Search</a></p></li>
-				<li><p><a routerLink="/logout">Logout</a></p></li>
 			</ul>
 			<ul class="inline" *ngIf="!user">
 				<li><p><a routerLink="/login">Login</a></p></li>
 				<li><p><a routerLink="/signup">Sign Up</a></p></li>
 			</ul>
 		</div>
-		<div class="user-cta col-3 pull-right">
-			<!-- <img *ngIf="user" src="http://via.placeholder.com/50x50" class="avatar"> -->
-			<p *ngIf="user">{{ user.name }}</p>
+		<div class="user-cta col-4 pull-right">
+			<p *ngIf="user">{{ user.name }} <a routerLink="/logout" class="btn micro">Logout</a></p>
 		</div>
 	</div>
 </div>

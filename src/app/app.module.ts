@@ -19,6 +19,7 @@ import { AuthenticationService } from './service/authentication.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { HomeComponent } from './component/home/home.component';
 import { TripsComponent } from './component/trips/trips.component';
+import { MyTripsComponent } from './component/my-trips/my-trips.component';
 import { PastTripsComponent } from './component/past-trips/past-trips.component';
 import { TripService } from './service/trip.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +34,7 @@ import { PostTripComponent } from './component/post-trip/post-trip.component';
 import { UserService } from './service/user.service';
 import { SearchComponent } from './component/search/search.component';
 import { GeoService } from './service/geo.service';
+import { EmailService } from './service/email.service';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { GeoService } from './service/geo.service';
         LogoutComponent,
         HomeComponent,
         TripsComponent,
+        MyTripsComponent,
         PastTripsComponent,
         UiMessageComponent,
         UiButtonComponent,
@@ -74,7 +77,8 @@ import { GeoService } from './service/geo.service';
         AuthenticationService,
         TripService,
         UserService,
-        GeoService
+        GeoService,
+        EmailService
     ],
     bootstrap: [AppComponent]
 })
